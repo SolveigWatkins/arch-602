@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Deconstructivism: ideas, texts, buildings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --ink-soft: #2e2e2e;
+    --ink-muted: #585858;
+    --paper: #ffffff;
+    --paper-warm: #f6f6f4;
+    --paper-off: #eeeeea;
+    --paper-tint: #f8f7f4;
+    --accent: #b8291f;
+    --accent-soft: rgba(184, 41, 31, 0.08);
+    --rule: #d8d8d4;
+    --rule-strong: #111111;
+    --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif: 'Newsreader', Georgia, serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+    --measure: 68ch;
+    --container: 1320px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-serif);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--accent); color: #fff; }
+  img { display: block; max-width: 100%; }
+  button { font: inherit; color: inherit; cursor: pointer; background: none; border: none; }
+  a { color: inherit; text-decoration: none; }
+
+  .progress-track {
+    position: fixed; top: 0; left: 0; right: 0; height: 3px;
+    background: transparent; z-index: 90; pointer-events: none;
+  }
+  .progress-bar {
+    height: 100%; width: 0%; background: var(--accent);
+    transition: width 80ms linear;
+  }
+
+  .nav-sidebar {
+    position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
+    background: #ffffff; border-right: 1.5px solid var(--rule-strong);
+    display: flex; flex-direction: column; justify-content: space-between;
+    z-index: 70; padding: 2rem 1.5rem; overflow-y: auto;
+  }
+  .sidebar-brand {
+    display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 2.5rem;
+  }
+  .sidebar-brand-title {
+    font-family: var(--font-display); font-weight: 700; font-size: 1.15rem;
+    letter-spacing: -0.02em; display: flex; align-items: center; gap: 0.6rem;
+  }
+  .brand-mark {
+    display: inline-block; width: 10px; height: 10px;
+    background: var(--accent); transform: rotate(14deg);
+  }
+  .brand-sub {
+    font-family: var(--font-mono); font-size: 0.72rem; font-weight: 400;
+    color: var(--ink-muted); letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex; flex-direction: column; gap: 1rem;
+    font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  .nav-links button {
+    text-align: left; padding: 0.5rem 0; border-left: 2px solid transparent;
+    padding-left: 0.75rem; color: var(--ink-soft); transition: all 140ms ease;
+    font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase;
+  }
+  .nav-links button:hover, .nav-links button.active {
+    color: var(--ink); border-left-color: var(--accent); background: var(--paper-warm);
+    font-weight: 600;
+  }
+  .main-wrapper {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+  }
+  .wrap {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 3vw, 2.5rem);
+  }
+  section.band {
+    padding: clamp(3rem, 6vw, 5rem) 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  section.band.alt { background: var(--paper-warm); }
+  .section-head {
+    display: grid; grid-template-columns: 220px 1fr; gap: 2rem;
+    align-items: start; margin-bottom: clamp(2rem, 3.5vw, 3rem);
+    padding-bottom: 1.25rem; border-bottom: 1px solid var(--rule-strong);
+  }
+  .section-num {
+    font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent); font-weight: 600;
+  }
+  .section-num span {
+    display: block; color: var(--ink-muted); font-weight: 400; margin-top: 0.25rem;
+  }
+  .section-title {
+    font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.5rem);
+    line-height: 1.1; letter-spacing: -0.025em; font-weight: 700; margin: 0 0 0.6rem 0;
+  }
+  .section-desc {
+    max-width: 64ch; margin: 0; color: var(--ink-soft); font-size: 1.05rem;
+  }
+  .tl-pill {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.45rem 0.85rem;
+    border: 1px solid var(--rule-strong);
+    background: #ffffff;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    transition: all 140ms ease;
+  }
+  .tl-pill:hover { background: var(--paper-off); }
+  .tl-pill.active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: #ffffff;
+  }
+  .site-footer {
+    background: var(--ink); color: #e8e8e6;
+    padding: 3rem clamp(1.25rem, 3vw, 2.5rem);
+  }
+  .footer-inner {
+    max-width: var(--container); margin: 0 auto;
+    display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 2rem; align-items: start;
+  }
+  .footer-title {
+    font-family: var(--font-display); font-size: 1.35rem; font-weight: 700;
+    margin: 0 0 0.6rem 0; color: #fff;
+  }
+  .footer-note {
+    font-size: 0.92rem; color: #b5b5b0; max-width: 60ch; margin: 0;
+  }
+  .footer-colophon {
+    font-family: var(--font-mono); font-size: 0.74rem; color: #9c9c96;
+    line-height: 1.7;
+  }
+  @media (max-width: 960px) {
+    .section-head, .footer-inner { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+<aside class="nav-sidebar">
+  <div>
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-title"><span class="brand-mark" aria-hidden="true"></span><span>DECONSTRUCTIVISM</span></div>
+      <span class="brand-sub">Archive &amp; Discourse</span>
+    </div>
+    <nav class="nav-links" aria-label="Primary sections">
+      <button onclick="scrollToSection('matrix')" class="active">01 Comparative Matrix</button>
+      <button onclick="scrollToSection('dossiers')">02 Author Dossiers</button>
+      <button onclick="scrollToSection('diagrams')">03 Transformation Diagrams</button>
+      <button onclick="scrollToSection('genealogy')">04 Genealogy &amp; Timeline</button>
+      <button onclick="scrollToSection('texts')">05 Texts &amp; Literature</button>
+    </nav>
+  </div>
+  <div style="font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-muted); border-top: 1px solid var(--rule); padding-top: 1rem;">CURATORIAL SCOPE: 1966&ndash;2023</div>
+</aside>
+<div class="main-wrapper">
+  <main id="top">
+    <section id="view-matrix" class="band">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-num">Section 01<span>Syntactic Matrix</span></div>
+          <div>
+            <h2 class="section-title">Logical Collapse and Spatial Contradiction</h2>
+            <p class="section-desc">Deconstructivism in architecture is grounded in Jacques Derrida’s philosophical post-structuralism. By applying <em style="font-family:var(--font-mono); color:var(--accent);">Différance</em> and textual deconstruction, architects challenge traditional rules of visual unity, symmetry, and predictability.</p>
+          </div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
+          <span style="color: var(--ink-muted); font-family: var(--font-mono); font-size: 0.72rem; margin-right: 0.5rem;">Filter Key Themes:</span>
+          <button class="matrix-filter-btn tl-pill active">All Concepts</button>
+          <button class="matrix-filter-btn tl-pill">Derrida</button>
+          <button class="matrix-filter-btn tl-pill">Hendrix</button>
+          <button class="matrix-filter-btn tl-pill">Tschumi / Càndito</button>
+          <button class="matrix-filter-btn tl-pill">Venturi</button>
+        </div>
+      </div>
+    </section>
+    <section id="view-dossiers" class="band alt">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-num">Section 02<span>Author Dossiers</span></div>
+          <div><h2 class="section-title">Critical Exegesis of Primary Theorists</h2><p class="section-desc">Chronological and thematic breakdown of key figures shaping architectural discourse from 1966 to 2023.</p></div>
+        </div>
+      </div>
+    </section>
+    <section id="view-diagrams" class="band" style="background: #0a0a0a; color: #ffffff;">
+      <div class="wrap">
+        <div style="border: 1.5px solid #333333; background: #111111; padding: 1.75rem 2rem; margin-bottom: 2rem;">
+          <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; background: #e53e3e; color: #000000; padding: 0.25rem 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; display: inline-block; margin-bottom: 0.75rem;">Geometric &amp; Syntactic Precedents</span>
+          <h2 style="font-family: var(--font-display); font-size: 2.1rem; font-weight: 700; color: #ffffff; margin: 0 0 0.5rem 0; letter-spacing: -0.02em;">Interactive Transformation &amp; Spatial Deconstruction</h2>
+        </div>
+      </div>
+    </section>
+    <section id="view-genealogy" class="band" style="background: var(--paper-warm);">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-num">Section 04<span>Genealogy &amp; Timeline</span></div>
+          <div><h2 class="section-title">Chronology, Syntactic Shifts &amp; Canonical Works</h2><p class="section-desc">Explore the historical evolution of Deconstructivism from 1967 post-structuralist critiques to 2007 topological and spatial works.</p></div>
+        </div>
+      </div>
+    </section>
+    <section id="view-texts" class="band">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-num">Section 05<span>Primary Literature</span></div>
+          <div><h2 class="section-title">Foundational Texts &amp; Collaborations</h2><p class="section-desc">Select a primary source to examine its key passage, theoretical argument, and spatial consequences.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <h2 class="footer-title">Deconstructivism: ideas, texts, buildings</h2>
+        <p class="footer-note">An interactive architectural study examining how post-structuralist critique and avant-garde formal experimentation reshaped late twentieth- and twenty-first-century spatial practice.</p>
+      </div>
+      <div class="footer-colophon"><div>CURATORIAL SCOPE: 1966&ndash;2023</div><div>KEY FIGURES: DERRIDA &bull; TSCHUMI &bull; EISENMAN &bull; VENTURI &bull; HENDRIX &bull; CÀNDITO &amp; MELONI</div></div>
+    </div>
+  </footer>
+</div>
+<script>
+function scrollToSection(id) {
+  const t = document.getElementById(`view-${id}`);
+  if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>
