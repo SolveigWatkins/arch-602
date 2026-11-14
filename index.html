@@ -26,6 +26,7 @@
     --font-mono: 'IBM Plex Mono', monospace;
     --measure: 68ch;
     --container: 1320px;
+    --sidebar-width: 64px;
   }
 
   * { box-sizing: border-box; }
@@ -66,49 +67,36 @@
     padding: 0.9rem clamp(1.25rem, 3vw, 2.5rem);
     display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
   }
-  .brand {
-    display: flex; align-items: baseline; gap: 0.7rem;
-    font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em;
-    font-size: 1.05rem;
-  }
-  .brand-mark {
-    display: inline-block; width: 10px; height: 10px;
-    background: var(--accent); transform: rotate(14deg);
-  }
-  .brand-sub {
-    font-family: var(--font-mono); font-size: 0.72rem; font-weight: 400;
-    color: var(--ink-muted); letter-spacing: 0.04em; text-transform: uppercase;
-  }
   .nav-sidebar {
-    position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
-    background: #ffffff; border-right: 1.5px solid var(--rule-strong);
-    display: flex; flex-direction: column; justify-content: space-between;
-    z-index: 70; padding: 2rem 1.5rem; overflow-y: auto;
-  }
-  .sidebar-brand {
-    display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 2.5rem;
-  }
-  .sidebar-brand-title {
-    font-family: var(--font-display); font-weight: 700; font-size: 1.15rem;
-    letter-spacing: -0.02em; display: flex; align-items: center; gap: 0.6rem;
+    position: fixed; top: 0; left: 0; width: var(--sidebar-width); height: 100vh;
+    background: #151819; border-right: 1px solid #414647; z-index: 70;
+    overflow: hidden;
   }
   .nav-links {
-    display: flex; flex-direction: column; gap: 1rem;
-    font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.03em;
-    text-transform: uppercase;
+    display: flex; flex-direction: column; height: 100%;
   }
   .nav-links button {
-    text-align: left; padding: 0.5rem 0; border-left: 2px solid transparent;
-    padding-left: 0.75rem; color: var(--ink-soft); transition: all 140ms ease;
-    font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase;
+    display: flex; flex: 1; align-items: center; justify-content: center;
+    min-height: 0; width: 100%; padding: 0.5rem 0.25rem;
+    border: 0; border-bottom: 1px solid #363b3d; border-right: 2px solid transparent;
+    background: transparent; color: #f3f1ed;
+    transition: background 140ms ease, border-color 140ms ease;
   }
-  .nav-links button:hover, .nav-links button.active {
-    color: var(--ink); border-left-color: var(--accent); background: var(--paper-warm);
-    font-weight: 600;
+  .nav-links button:last-child { border-bottom: 0; }
+  .nav-rail-label {
+    display: flex; align-items: center; gap: 0.45rem;
+    writing-mode: vertical-rl; transform: rotate(180deg);
+    white-space: nowrap; font: 600 0.62rem var(--font-mono);
+    letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .nav-rail-code { color: #ff8177; font-weight: 700; }
+  .nav-links button:hover,
+  .nav-links button.active {
+    background: #252a2c; border-right-color: var(--accent);
   }
   .main-wrapper {
-    margin-left: 260px;
-    width: calc(100% - 260px);
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
   }
 
   .wrap {
@@ -182,6 +170,127 @@
   .hero-plate:hover .hero-plate-frame img { transform: scale(1.02); }
   .hero-plate-overlay {
     position: absolute; inset: 0; pointer-events: none;
+  }
+  .intro-hero {
+    position: relative;
+    overflow: hidden;
+    color: #f7f5f1;
+    background-color: #111111;
+    background-image:
+      radial-gradient(circle at 78% 48%, rgba(184, 41, 31, 0.2), transparent 34%),
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: auto, 46px 46px, 46px 46px;
+    border-bottom: 1.5px solid var(--rule-strong);
+  }
+  .intro-hero-inner {
+    position: relative;
+    max-width: var(--container);
+    min-height: 490px;
+    margin: 0 auto;
+    padding: clamp(3rem, 6vw, 5rem) clamp(1.25rem, 3vw, 2.5rem);
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4.5rem);
+  }
+  .intro-kicker {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 0 0 1.35rem;
+    color: #ff8177;
+    font: 600 0.72rem var(--font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .intro-kicker::before {
+    content: "";
+    width: 1.75rem;
+    height: 1px;
+    background: currentColor;
+  }
+  .intro-title {
+    margin: 0 0 1.5rem;
+    color: #f7f5f1;
+    font: 700 clamp(3.1rem, 6.1vw, 6.2rem)/0.82 var(--font-display);
+    letter-spacing: -0.085em;
+    text-transform: uppercase;
+  }
+  .intro-title span {
+    display: block;
+    margin: 0.12em 0 0 0.46em;
+    color: #d83a30;
+  }
+  .intro-description {
+    max-width: 38ch;
+    margin: 0 0 1.75rem;
+    color: #c9c7c2;
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    line-height: 1.55;
+  }
+  .intro-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid #ff8177;
+    color: #ffffff;
+    font: 600 0.7rem var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: background 140ms ease, color 140ms ease;
+  }
+  .intro-cta:hover,
+  .intro-cta:focus-visible {
+    background: #d83a30;
+    border-color: #d83a30;
+    color: #ffffff;
+  }
+  .intro-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 1.5rem;
+    margin-top: 2rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    color: #aaa9a5;
+    font: 0.65rem var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .intro-visual {
+    position: relative;
+    isolation: isolate;
+    width: min(100%, 430px);
+    margin: 0 auto;
+    transform: rotate(3deg);
+  }
+  .intro-visual::before {
+    position: absolute;
+    z-index: -1;
+    inset: 16px -16px -16px 16px;
+    border: 1px solid #d83a30;
+    content: "";
+  }
+  .intro-visual img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    background: #000000;
+    object-fit: cover;
+  }
+  .intro-visual-label {
+    position: absolute;
+    top: 1rem;
+    left: -1rem;
+    padding: 0.4rem 0.55rem;
+    background: #d83a30;
+    color: #ffffff;
+    font: 600 0.62rem var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
   .hero-plate-caption {
     display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
@@ -449,6 +558,10 @@
   .tl-node-square.dimmed {
     opacity: 0.18;
   }
+  .tl-card.dimmed:hover,
+  .tl-card.dimmed:focus-visible {
+    opacity: 1;
+  }
   .tl-card.type-writing {
     background: #ffffff;
     border: 1.5px solid var(--rule-strong);
@@ -488,6 +601,18 @@
   }
   .tl-card.matrix-unlinked .tl-card-year {
     color: #ff9c94 !important;
+  }
+  .tl-card:hover,
+  .tl-card:focus-visible {
+    background: #ffffff !important;
+    border-color: var(--accent) !important;
+    color: var(--accent) !important;
+  }
+  .tl-card:hover .tl-card-year,
+  .tl-card:hover .tl-card-title,
+  .tl-card:focus-visible .tl-card-year,
+  .tl-card:focus-visible .tl-card-title {
+    color: var(--accent) !important;
   }
 
   .tl-card-year {
@@ -723,11 +848,16 @@
 
   @media (max-width: 960px) {
     .hero-grid, .essay-grid, .texts-layout, .footer-inner { grid-template-columns: 1fr; }
+    .intro-hero-inner { min-height: auto; grid-template-columns: 1fr; }
+    .intro-visual { width: min(70%, 390px); }
     .section-head { grid-template-columns: 1fr; gap: 0.5rem; }
   }
   @media (max-width: 600px) {
     .hero-meta-strip { grid-template-columns: 1fr; }
-    .nav-links { gap: 0.9rem; font-size: 0.72rem; }
+    .intro-hero-inner { gap: 2.25rem; padding-top: 3rem; padding-bottom: 3rem; }
+    .intro-title { font-size: clamp(3rem, 14vw, 5rem); }
+    .intro-visual { width: min(82%, 330px); }
+    .intro-visual-label { left: -0.65rem; }
   }
 </style>
 </head>
@@ -738,29 +868,48 @@
 </div>
 
 <aside class="nav-sidebar">
-  <div>
-    <div class="sidebar-brand">
-      <div class="sidebar-brand-title">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <span>DECONSTRUCTIVISM</span>
-      </div>
-      <span class="brand-sub">Archive &amp; Discourse</span>
-    </div>
-    <nav class="nav-links" aria-label="Primary sections">
-      <button onclick="scrollToSection('matrix')" id="nav-matrix" class="active">01 Comparative Matrix</button>
-      <button onclick="scrollToSection('dossiers')" id="nav-dossiers">02 Author Dossiers</button>
-      <button onclick="scrollToSection('diagrams')" id="nav-diagrams">03 Transformation Diagrams</button>
-      <button onclick="scrollToSection('genealogy')" id="nav-genealogy">04 Genealogy &amp; Timeline</button>
-      <button onclick="scrollToSection('texts')" id="nav-texts">05 Texts &amp; Literature</button>
-    </nav>
-  </div>
-  <div style="font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-muted); border-top: 1px solid var(--rule); padding-top: 1rem;">
-    CURATORIAL SCOPE: 1966&ndash;2023
-  </div>
+  <nav class="nav-links" aria-label="Primary sections">
+    <button onclick="scrollToSection('matrix')" id="nav-matrix" class="active" aria-label="Concept Matrix" title="Concept Matrix">
+      <span class="nav-rail-label"><span class="nav-rail-code">B1</span><span>Concepts</span></span>
+    </button>
+    <button onclick="scrollToSection('dossiers')" id="nav-dossiers" aria-label="Author Dossiers" title="Author Dossiers">
+      <span class="nav-rail-label"><span class="nav-rail-code">B2</span><span>Authors</span></span>
+    </button>
+    <button onclick="scrollToSection('diagrams')" id="nav-diagrams" aria-label="Transformation Diagrams" title="Transformation Diagrams">
+      <span class="nav-rail-label"><span class="nav-rail-code">B3</span><span>Diagrams</span></span>
+    </button>
+    <button onclick="scrollToSection('genealogy')" id="nav-genealogy" aria-label="Timeline" title="Timeline">
+      <span class="nav-rail-label"><span class="nav-rail-code">B4</span><span>Timeline</span></span>
+    </button>
+    <button onclick="scrollToSection('project-matrix')" id="nav-project-matrix" aria-label="Project and Spatial Matrix" title="Project and Spatial Matrix">
+      <span class="nav-rail-label"><span class="nav-rail-code">B5</span><span>Spatial Matrix</span></span>
+    </button>
+    <button onclick="scrollToSection('texts')" id="nav-texts" aria-label="Texts and Literature" title="Texts and Literature">
+      <span class="nav-rail-label"><span class="nav-rail-code">B6</span><span>Sources</span></span>
+    </button>
+  </nav>
 </aside>
 
 <div class="main-wrapper">
 <main id="top">
+  <section class="intro-hero" aria-labelledby="intro-title">
+    <div class="intro-hero-inner">
+      <div>
+        <p class="intro-kicker">ARCH 602 / Archive &amp; Discourse</p>
+        <h1 class="intro-title" id="intro-title" aria-label="Deconstructivism">DECONSTRUCT<span>IVISM</span></h1>
+        <p class="intro-description">A critical atlas of broken grids, spatial collisions, and architectural thought.</p>
+        <a class="intro-cta" href="#view-matrix">Explore the matrix <span aria-hidden="true">&darr;</span></a>
+        <div class="intro-meta">
+          <span>1966&ndash;2023</span>
+          <span>Ideas / Texts / Buildings</span>
+        </div>
+      </div>
+      <div class="intro-visual">
+        <img src="assets/images/house-iii.jpg" alt="House III axonometric grid transformation sequence">
+        <span class="intro-visual-label">Fig. 01 / House III</span>
+      </div>
+    </div>
+  </section>
   <section id="view-matrix" class="band">
     <div class="wrap">
       <div class="section-head">
@@ -866,7 +1015,7 @@
   <section id="view-genealogy" class="band timeline-band">
     <div class="wrap">
       <div class="section-head">
-        <div class="section-num">Section 04<span>Genealogy &amp; Timeline</span></div>
+        <div class="section-num">Section 04<span>Timeline</span></div>
         <div>
           <h2 class="section-title">Chronology, Syntactic Shifts &amp; Canonical Works</h2>
           <p class="section-desc">
@@ -888,7 +1037,18 @@
       <div class="tl-canvas-frame" style="margin-bottom: 2.5rem;">
         <div class="tl-stage" id="timelineStage"></div>
       </div>
+    </div>
+  </section>
 
+  <section id="view-project-matrix" class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-num">Section 05<span>Project &amp; Spatial Matrix</span></div>
+        <div>
+          <h2 class="section-title">Project &amp; Spatial Work Matrix</h2>
+          <p class="section-desc">Select a project to connect its timeline node to a focused spatial analysis.</p>
+        </div>
+      </div>
       <div class="matrix-wrap">
         <div class="matrix-status-bar">
           <div><strong style="color: var(--accent);">Project &amp; Spatial Matrix:</strong> Click any project to inspect its timeline node and spatial analysis.</div>
@@ -911,7 +1071,7 @@
   <section id="view-texts" class="band">
     <div class="wrap">
       <div class="section-head">
-        <div class="section-num">Section 05<span>Primary Literature</span></div>
+        <div class="section-num">Section 06<span>Primary Literature</span></div>
         <div>
           <h2 class="section-title">Foundational Texts &amp; Collaborations</h2>
           <p class="section-desc">
@@ -1175,7 +1335,9 @@ const PROJECT_MATRIX_DATA = [
       { url: 'assets/images/gehry-house-elevation.jpg', caption: 'Gehry House - Elevation drawing showing the offset roof and volumes.' },
       { url: 'assets/images/gehry-house-interior.jpg', caption: 'Gehry House - Interior view of the intersecting additions.' },
       { url: 'assets/images/gehry-house-exterior.jpg', caption: 'Gehry House - Exterior view of the metal-clad addition.' },
-      { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Shigeru_Ban_architecture.jpg/1280px-Shigeru_Ban_architecture.jpg', caption: 'Shigeru Ban - Naked House Translucent Envelope & Movable Rooms.' }
+      { url: 'assets/images/naked-house-mobile-partition.jpg', caption: 'Naked House - Movable translucent partition.' },
+      { url: 'assets/images/naked-house-interior.jpg', caption: 'Naked House - Interior showing mobile room volumes.' },
+      { url: 'assets/images/naked-house-sliding-walls.jpg', caption: 'Naked House - Sliding partitions open to the exterior.' }
     ]
   },
   {
@@ -1216,7 +1378,7 @@ function renderProjectMatrix() {
     tr.id = `matrix-row-${p.id}`;
     tr.innerHTML = `
       <td>
-        <button type="button" class="matrix-chip" onclick="toggleProjectExpansion('${p.id}')" style="font-weight: 700; width: 100%; justify-content: flex-start; border: none; background: transparent; padding: 0; cursor: pointer;">
+        <button type="button" class="matrix-chip" onclick="toggleProjectExpansion('${p.id}')" style="font-weight: 700; width: 100%; justify-content: flex-start; border: none; padding: 0; cursor: pointer;">
           <span class="chip-dot project"></span>
           <span>${p.name} <i class="fa-solid fa-chevron-down ml-1 text-xs" id="chevron-${p.id}" style="transition: transform 200ms ease;"></i></span>
         </button>
@@ -1928,7 +2090,7 @@ function initTexts() {
 }
 
 function initScrollSpy() {
-  const sections = ['matrix', 'dossiers', 'diagrams', 'genealogy', 'texts'];
+  const sections = ['matrix', 'dossiers', 'diagrams', 'genealogy', 'project-matrix', 'texts'];
   const observerOptions = { root: null, rootMargin: '-20% 0px -60% 0px', threshold: 0 };
 
   const observer = new IntersectionObserver((entries) => {
