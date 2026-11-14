@@ -1,7 +1,7 @@
 (function () {
   const stage = document.getElementById('stage');
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color('#f5f1e7');
+  scene.background = new THREE.Color('#ffffff');
   const camera = new THREE.OrthographicCamera(-12, 12, 8, -8, 0.1, 100);
   let renderer, fallback = false;
   try {
@@ -31,10 +31,10 @@
   scene.add(key);
   scene.add(new THREE.AmbientLight(0xffffff, 0.4));
 
-  const grid = new THREE.GridHelper(34, 34, 0xb5b4ad, 0xd3d2cc);
+  const grid = new THREE.GridHelper(34, 34, 0x31558f, 0xd8e2f0);
   grid.position.y = 0.005;
   grid.material.transparent = true;
-  grid.material.opacity = 0.48;
+  grid.material.opacity = 0.3;
   scene.add(grid);
   const model = new THREE.Group();
   const markers = new THREE.Group();
@@ -57,9 +57,9 @@
       ctx.fillStyle = fill; ctx.fill(); if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lineWidth || 1; ctx.stroke(); }
     }
     function line(points, color, width, dash) { ctx.beginPath(); points.forEach(function (p, i) { const q = project(p[0], p[1], p[2]); if (i) ctx.lineTo(q[0], q[1]); else ctx.moveTo(q[0], q[1]); }); ctx.strokeStyle = color; ctx.lineWidth = width || 1; ctx.setLineDash(dash || []); ctx.stroke(); ctx.setLineDash([]); }    function transformIntersectPanel(points,key){if(!state.behaviors.includes('intersect'))return points;const type=String(key||''),xs=points.map(function(p){return p[0];}),zs=points.map(function(p){return p[2];}),cx=xs.reduce(function(a,b){return a+b/xs.length;},0),cz=zs.reduce(function(a,b){return a+b/zs.length;},0),axis=(Math.max.apply(null,xs)-Math.min.apply(null,xs))<(Math.max.apply(null,zs)-Math.min.apply(null,zs))?'x':'z',plane=axis==='x'?cx:cz,rate=type.indexOf('fallback-partition')>=0?1:.68,extent=axis==='x'?config[state.building].w/2:config[state.building].d/2,distance=extent*rate*state.intensity/100,direction=plane>=0?-1:1;return points.map(function(p){return axis==='x'?[p[0]+direction*distance,p[1],p[2]]:[p[0],p[1],p[2]+direction*distance];});}
-    ctx.clearRect(0, 0, width, height); ctx.fillStyle = '#f5f1e7'; ctx.fillRect(0, 0, width, height);
+    ctx.clearRect(0, 0, width, height); ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, width, height);
     // Fixed drafting grid, projected in the current view.
-    for (let i = -18; i <= 18; i++) { line([[-18, 0, i], [18, 0, i]], '#d2ccbf', .65); line([[i, 0, -18], [i, 0, 18]], '#d2ccbf', .65); }
+    for (let i = -18; i <= 18; i++) { line([[-18, 0, i], [18, 0, i]], '#d8e2f0', .65); line([[i, 0, -18], [i, 0, 18]], '#d8e2f0', .65); }
     const x0 = -b.w/2, x1 = b.w/2, z0 = -b.d/2, z1 = b.d/2, h = b.h;
     polygon([[x0,0,z0],[x1,0,z0],[x1,0,z1],[x0,0,z1]], '#f2f0e9', '#343530', 1.5);
     function wall(axis, plane, a0, a1, sign) {
@@ -156,8 +156,8 @@
     tile.add(mesh);
     if (edge) {
       linePoints.push(linePoints[0].clone());
-      tile.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(linePoints), new THREE.LineBasicMaterial({ color: 0x222320, transparent: true, opacity: 0.94 })));
-      if(offsetFn&&offsetFn.centerPivot){const xs=points.map(function(p){return p[0];}),ys=points.map(function(p){return p[1];}),line=offsetFn.centerAxis==='horizontal'?[new THREE.Vector3(Math.min.apply(null,xs),0,0),new THREE.Vector3(Math.max.apply(null,xs),0,0)]:[new THREE.Vector3(0,Math.min.apply(null,ys),0),new THREE.Vector3(0,Math.max.apply(null,ys),0)];tile.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(line),new THREE.LineBasicMaterial({color:0x222320,transparent:true,opacity:.8})));}
+      tile.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(linePoints), new THREE.LineBasicMaterial({ color: 0x203d6b, transparent: true, opacity: 0.94 })));
+      if(offsetFn&&offsetFn.centerPivot){const xs=points.map(function(p){return p[0];}),ys=points.map(function(p){return p[1];}),line=offsetFn.centerAxis==='horizontal'?[new THREE.Vector3(Math.min.apply(null,xs),0,0),new THREE.Vector3(Math.max.apply(null,xs),0,0)]:[new THREE.Vector3(0,Math.min.apply(null,ys),0),new THREE.Vector3(0,Math.max.apply(null,ys),0)];tile.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(line),new THREE.LineBasicMaterial({color:0x203d6b,transparent:true,opacity:.8})));}
     }
     group.add(tile);
     return { tile: tile, center: center, points: points };
@@ -189,7 +189,7 @@
   function wallSlab(group, axis, plane, len, height, opacity, displacement, face) {
     const baseCount=face==='exterior'?3:1,selected=state.activeOperation==='fragmentation'&&state.selectedBasePanel&&state.selectedBasePanel.axis===axis&&state.selectedBasePanel.plane===plane&&state.selectedBasePanel.face===face?state.selectedBasePanel.panelIndex:-1;
     const segmentLen=len/baseCount,u=displacement?displacement.u:0,v=displacement?displacement.v:0,n=displacement?displacement.n:0;
-    function addEdge(mesh,geo,isSelected,highlightColor){const edge=new THREE.LineSegments(new THREE.EdgesGeometry(geo),new THREE.LineBasicMaterial({color:isSelected?(highlightColor||0xd93232):0x31322e,transparent:true,opacity:isSelected?.82:.48}));edge.position.copy(mesh.position);edge.rotation.copy(mesh.rotation);edge.raycast=function(){};group.add(edge);}
+    function addEdge(mesh,geo,isSelected,highlightColor){const edge=new THREE.LineSegments(new THREE.EdgesGeometry(geo),new THREE.LineBasicMaterial({color:isSelected?(highlightColor||0xd93232):0x31558f,transparent:true,opacity:isSelected?.82:.48}));edge.position.copy(mesh.position);edge.rotation.copy(mesh.rotation);edge.raycast=function(){};group.add(edge);}
     for(let panelIndex=0;panelIndex<baseCount;panelIndex++){
       const x0=-len/2+segmentLen*panelIndex,x1=x0+segmentLen,basePanelSurface={axis:axis,plane:plane,len:segmentLen,height:height,face:face,panelIndex:panelIndex,panelCount:baseCount},intersectionTransform=intersectTransformFor(basePanelSurface);
       if(state.behaviors.includes('intersect')||face==='interior'&&state.behaviors.includes('folding')){const originalQuad=axis==='z'?[new THREE.Vector3(x0,0,plane),new THREE.Vector3(x1,0,plane),new THREE.Vector3(x1,height,plane),new THREE.Vector3(x0,height,plane)]:[new THREE.Vector3(plane,0,x0),new THREE.Vector3(plane,0,x1),new THREE.Vector3(plane,height,x1),new THREE.Vector3(plane,height,x0)],movedQuad=originalQuad.map(function(p){return p.clone().add(new THREE.Vector3(intersectionTransform.x,intersectionTransform.y,intersectionTransform.z));});addStickyBridge(originalQuad,movedQuad,face+':'+axis+':'+plane+':'+panelIndex);}
@@ -198,12 +198,12 @@
         for(let row=0;row<pieces.length;row++){
           const poly=pieces[row],shape=new THREE.Shape();shape.moveTo(poly[0].x,poly[0].y);for(let j=1;j<poly.length;j++)shape.lineTo(poly[j].x,poly[j].y);shape.closePath();
           const geo=new THREE.ExtrudeGeometry(shape,{depth:.13,bevelEnabled:false,steps:1});geo.translate(0,0,-.065);
-          const active=state.selectedFragmentPanel&&state.selectedFragmentPanel.index===row,mesh=new THREE.Mesh(geo,material('#f4f2eb',opacity));
+          const active=state.selectedFragmentPanel&&state.selectedFragmentPanel.index===row,mesh=new THREE.Mesh(geo,material('#ffffff',opacity));
           mesh.position.set(axis==='z'?0:plane,height/2,axis==='z'?plane:0);mesh.position.add(new THREE.Vector3(intersectionTransform.x,intersectionTransform.y,intersectionTransform.z));if(axis==='x')mesh.rotation.y=-Math.PI/2;mesh.rotation.y+=intersectionTransform.yaw;
           mesh.userData.basePanelSurface=basePanelSurface;if(state.fragmentLevel>0)mesh.userData.fragmentPanel={axis:axis,plane:plane,face:face,basePanelIndex:panelIndex,index:row,count:pieces.length};mesh.castShadow=true;mesh.receiveShadow=true;group.add(mesh);addEdge(mesh,geo,active);
         }
       } else {
-        const geo=new THREE.BoxGeometry(axis==='z'?segmentLen:.13,height,axis==='x'?segmentLen:.13),mesh=new THREE.Mesh(geo,material('#f4f2eb',opacity));
+        const geo=new THREE.BoxGeometry(axis==='z'?segmentLen:.13,height,axis==='x'?segmentLen:.13),mesh=new THREE.Mesh(geo,material('#ffffff',opacity));
         mesh.position.copy(transformPoint(axis,plane,(x0+x1)/2+u,height/2+v,n));mesh.position.add(new THREE.Vector3(intersectionTransform.x,intersectionTransform.y,intersectionTransform.z));if(displacement){mesh.position.add(new THREE.Vector3(displacement.dx||0,displacement.dy||0,displacement.dz||0));mesh.rotation.set(displacement.rx||0,displacement.ry||0,displacement.rz||0);}mesh.rotation.y+=intersectionTransform.yaw;
         mesh.userData.basePanelSurface=basePanelSurface;mesh.castShadow=true;mesh.receiveShadow=true;group.add(mesh);addEdge(mesh,geo,false);
       }
@@ -230,8 +230,8 @@
         }
         world=transformIntersectPoints(world,{axis:axis,plane:plane,len:segmentLen,height:height,face:face,panelIndex:entry.panelIndex,panelCount:baseCount});if(shouldFold||state.behaviors.includes('intersect'))addStickyBridge(originalWorld,world,entry.id);
         const positions=[],centerPoint=world.reduce(function(sum,point){return sum.add(point.clone().multiplyScalar(1/world.length));},new THREE.Vector3());for(let i=0;i<world.length;i++)positions.push(centerPoint.x,centerPoint.y,centerPoint.z,world[i].x,world[i].y,world[i].z,world[(i+1)%world.length].x,world[(i+1)%world.length].y,world[(i+1)%world.length].z);
-        const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geo.computeVertexNormals();const selected=state.selectedFragment===entry.id,mesh=new THREE.Mesh(geo,material(shouldFold?'#d93232':'#f4f2eb',shouldFold?.82:.42));mesh.userData.fragmentId=entry.id;mesh.userData.isFragment=true;mesh.userData.basePanelSurface={axis:axis,plane:plane,len:segmentLen,height:height,face:face,panelIndex:entry.panelIndex,panelCount:baseCount};if(entry.isFragmented&&entry.level>0)mesh.userData.fragmentPanel={axis:axis,plane:plane,face:face,basePanelIndex:entry.panelIndex,index:entry.pieceIndex,count:entries.filter(function(item){return item.panelIndex===entry.panelIndex;}).length};mesh.castShadow=true;mesh.receiveShadow=true;model.add(mesh);
-        const outline=world.concat([world[0]]),line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(outline),new THREE.LineBasicMaterial({color:selected?0xd93232:0x31322e,transparent:true,opacity:shouldFold?.9:.52}));line.raycast=function(){};model.add(line);
+        const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geo.computeVertexNormals();const selected=state.selectedFragment===entry.id,mesh=new THREE.Mesh(geo,material(shouldFold?'#d93232':'#ffffff',shouldFold?.82:.42));mesh.userData.fragmentId=entry.id;mesh.userData.isFragment=true;mesh.userData.basePanelSurface={axis:axis,plane:plane,len:segmentLen,height:height,face:face,panelIndex:entry.panelIndex,panelCount:baseCount};if(entry.isFragmented&&entry.level>0)mesh.userData.fragmentPanel={axis:axis,plane:plane,face:face,basePanelIndex:entry.panelIndex,index:entry.pieceIndex,count:entries.filter(function(item){return item.panelIndex===entry.panelIndex;}).length};mesh.castShadow=true;mesh.receiveShadow=true;model.add(mesh);
+        const outline=world.concat([world[0]]),line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(outline),new THREE.LineBasicMaterial({color:selected?0xd93232:0x31558f,transparent:true,opacity:shouldFold?.9:.52}));line.raycast=function(){};model.add(line);
       });
       return;
     }
@@ -277,7 +277,7 @@
   function build() {
     const b=config[state.building];
     clear(model); clear(markers);
-    const floor=new THREE.Mesh(new THREE.BoxGeometry(b.w,.12,b.d),material('#dedbd2',.92));
+    const floor=new THREE.Mesh(new THREE.BoxGeometry(b.w,.12,b.d),material('#f1f5fb',.92));
     floor.position.set(0,-.07,0);floor.receiveShadow=true;model.add(floor);
     facade('z',-b.d/2,b.w,b.h,'exterior');
     facade('x',-b.w/2,b.d,b.h,'exterior');

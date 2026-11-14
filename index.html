@@ -10,17 +10,18 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
   :root {
-    --ink: #0f0f0f;
-    --ink-soft: #2e2e2e;
-    --ink-muted: #585858;
+    --ink: #17345f;
+    --ink-soft: #334968;
+    --ink-muted: #64748b;
     --paper: #ffffff;
-    --paper-warm: #f6f6f4;
-    --paper-off: #eeeeea;
-    --paper-tint: #f8f7f4;
-    --accent: #b8291f;
-    --accent-soft: rgba(184, 41, 31, 0.08);
-    --rule: #d8d8d4;
-    --rule-strong: #111111;
+    --paper-warm: #f4f7fc;
+    --paper-off: #e9eef7;
+    --paper-tint: #fbfcff;
+    --accent: #df2935;
+    --accent-soft: rgba(223, 41, 53, 0.08);
+    --blueprint: #31558f;
+    --rule: #cbd5e1;
+    --rule-strong: #203d6b;
     --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-serif: 'Newsreader', Georgia, serif;
     --font-mono: 'IBM Plex Mono', monospace;
@@ -69,7 +70,7 @@
   }
   .nav-sidebar {
     position: fixed; top: 0; left: 0; width: var(--sidebar-width); height: 100vh;
-    background: #151819; border-right: 1px solid #414647; z-index: 70;
+    background: var(--paper); border-right: 1px solid var(--rule-strong); z-index: 70;
     overflow: hidden;
   }
   .nav-links {
@@ -78,8 +79,8 @@
   .nav-links button {
     display: flex; flex: 1; align-items: center; justify-content: center;
     min-height: 0; width: 100%; padding: 0.5rem 0.25rem;
-    border: 0; border-bottom: 1px solid #363b3d; border-right: 2px solid transparent;
-    background: transparent; color: #f3f1ed;
+    border: 0; border-bottom: 1px solid var(--rule); border-right: 2px solid transparent;
+    background: transparent; color: var(--ink);
     transition: background 140ms ease, border-color 140ms ease;
   }
   .nav-links button:last-child { border-bottom: 0; }
@@ -89,10 +90,10 @@
     white-space: nowrap; font: 600 0.62rem var(--font-mono);
     letter-spacing: 0.12em; text-transform: uppercase;
   }
-  .nav-rail-code { color: #ff8177; font-weight: 700; }
+  .nav-rail-code { color: var(--accent); font-weight: 700; }
   .nav-links button:hover,
   .nav-links button.active {
-    background: #252a2c; border-right-color: var(--accent);
+    background: var(--paper-warm); border-right-color: var(--accent);
   }
   .main-wrapper {
     margin-left: var(--sidebar-width);
@@ -174,13 +175,13 @@
   .intro-hero {
     position: relative;
     overflow: hidden;
-    color: #f7f5f1;
-    background-color: #111111;
+    color: var(--ink);
+    background-color: var(--paper);
     background-image:
-      radial-gradient(circle at 78% 48%, rgba(184, 41, 31, 0.2), transparent 34%),
-      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-    background-size: auto, 46px 46px, 46px 46px;
+      radial-gradient(circle at 78% 48%, rgba(223, 41, 53, 0.05), transparent 34%),
+      linear-gradient(rgba(32, 61, 107, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(32, 61, 107, 0.045) 1px, transparent 1px);
+    background-size: auto, 42px 42px, 42px 42px;
     border-bottom: 1.5px solid var(--rule-strong);
   }
   .intro-hero-inner {
@@ -199,7 +200,7 @@
     align-items: center;
     gap: 0.65rem;
     margin: 0 0 1.35rem;
-    color: #ff8177;
+    color: var(--accent);
     font: 600 0.72rem var(--font-mono);
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -212,7 +213,7 @@
   }
   .intro-title {
     margin: 0 0 1.5rem;
-    color: #f7f5f1;
+    color: var(--ink);
     font: 700 clamp(3.1rem, 6.1vw, 6.2rem)/0.82 var(--font-display);
     letter-spacing: -0.085em;
     text-transform: uppercase;
@@ -220,12 +221,12 @@
   .intro-title span {
     display: block;
     margin: 0.12em 0 0 0.46em;
-    color: #d83a30;
+    color: var(--accent);
   }
   .intro-description {
     max-width: 38ch;
     margin: 0 0 1.75rem;
-    color: #c9c7c2;
+    color: var(--ink-soft);
     font-size: clamp(1rem, 1.4vw, 1.15rem);
     line-height: 1.55;
   }
@@ -234,8 +235,8 @@
     align-items: center;
     gap: 0.85rem;
     padding: 0.75rem 0.9rem;
-    border: 1px solid #ff8177;
-    color: #ffffff;
+    border: 1px solid var(--accent);
+    color: var(--ink);
     font: 600 0.7rem var(--font-mono);
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -243,8 +244,8 @@
   }
   .intro-cta:hover,
   .intro-cta:focus-visible {
-    background: #d83a30;
-    border-color: #d83a30;
+    background: var(--accent);
+    border-color: var(--accent);
     color: #ffffff;
   }
   .intro-meta {
@@ -253,8 +254,8 @@
     gap: 0.55rem 1.5rem;
     margin-top: 2rem;
     padding-top: 0.85rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.25);
-    color: #aaa9a5;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-muted);
     font: 0.65rem var(--font-mono);
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -264,29 +265,30 @@
     isolation: isolate;
     width: min(100%, 430px);
     margin: 0 auto;
-    transform: rotate(3deg);
+    transform: rotate(1deg);
   }
   .intro-visual::before {
     position: absolute;
     z-index: -1;
     inset: 16px -16px -16px 16px;
-    border: 1px solid #d83a30;
+    border: 1px dashed var(--accent);
     content: "";
   }
   .intro-visual img {
     display: block;
     width: 100%;
     aspect-ratio: 1;
-    border: 1px solid rgba(255, 255, 255, 0.55);
-    background: #000000;
-    object-fit: cover;
+    border: 1px solid var(--rule-strong);
+    background: #ffffff;
+    object-fit: contain;
+    filter: invert(1) hue-rotate(180deg);
   }
   .intro-visual-label {
     position: absolute;
     top: 1rem;
     left: -1rem;
     padding: 0.4rem 0.55rem;
-    background: #d83a30;
+    background: var(--accent);
     color: #ffffff;
     font: 600 0.62rem var(--font-mono);
     letter-spacing: 0.06em;
@@ -434,8 +436,8 @@
   }
   .tl-pill:hover { background: var(--paper-off); }
   .tl-pill.active {
-    background: var(--ink);
-    border-color: var(--ink);
+    background: var(--accent);
+    border-color: var(--accent);
     color: #ffffff;
   }
   .tl-swatch {
@@ -450,7 +452,7 @@
   }
   .tl-pill.active .tl-swatch.writing {
     border-color: #ffffff;
-    background: var(--ink);
+    background: var(--accent);
   }
   .tl-swatch.event {
     border: 1.5px dashed var(--ink);
@@ -458,7 +460,7 @@
   }
   .tl-pill.active .tl-swatch.event {
     border-color: #ffffff;
-    background: var(--ink);
+    background: var(--accent);
   }
   .tl-swatch.project {
     border: 1.5px solid var(--accent);
@@ -476,8 +478,8 @@
     border: 1.5px solid var(--rule-strong);
     background-color: #ffffff;
     background-image:
-      linear-gradient(to right, rgba(15, 15, 15, 0.045) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(15, 15, 15, 0.045) 1px, transparent 1px);
+      linear-gradient(to right, rgba(32, 61, 107, 0.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(32, 61, 107, 0.07) 1px, transparent 1px);
     background-size: 40px 40px;
     overflow-x: visible;
     position: relative;
@@ -635,6 +637,49 @@
     border: 1.5px solid var(--rule-strong);
     background: #ffffff;
     box-shadow: 8px 8px 0 var(--paper-off), 8px 8px 0 1px var(--rule-strong);
+  }
+  .diagram-band {
+    color: var(--ink);
+    background-color: var(--paper);
+    background-image:
+      linear-gradient(rgba(49, 85, 143, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(49, 85, 143, 0.035) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .diagram-canvas-surface {
+    border: 1px solid var(--rule);
+    background-color: var(--paper);
+    background-image:
+      linear-gradient(rgba(49, 85, 143, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(49, 85, 143, 0.045) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .diagram-canvas-surface canvas {
+    filter: invert(1) hue-rotate(180deg);
+  }
+  .diagram-controls {
+    border-top: 1px solid var(--rule);
+    color: var(--ink-muted);
+  }
+  .diagram-explanation { color: var(--ink-soft); }
+  .diagram-step-card {
+    padding: 1rem;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+  }
+  .diagram-step-card h4 {
+    margin: 0 0 0.4rem;
+    color: var(--accent);
+    font: 700 0.76rem var(--font-mono);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .diagram-step-card p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
   .collision-field-app {
     display: grid;
@@ -836,7 +881,7 @@
     min-height: 420px;
     overflow: hidden;
     border: 1.5px solid var(--rule-strong);
-    background: #f5f1e7;
+    background: var(--paper);
   }
   .collision-field-app .canvas #stage {
     width: 100%;
@@ -876,7 +921,7 @@
     border-radius: 50%;
   }
   .collision-field-app .dot.blue {
-    background: var(--accent);
+    background: var(--blueprint);
   }
   .collision-field-app .dot.green {
     background: #77766f;
@@ -908,10 +953,85 @@
     background: #000000;
     padding: 0.5rem;
   }
-  .matrix-image-frame--black { border-color: var(--ink); }
+  .matrix-image-frame--black { border-color: #000000; }
   .matrix-image-frame--red {
     border-color: var(--accent);
     background: var(--accent);
+  }
+  .matrix-analysis-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .matrix-analysis-images--masonry {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    aspect-ratio: 1;
+  }
+  .matrix-analysis-images--masonry .matrix-image-frame:first-child {
+    grid-row: 1 / span 2;
+  }
+  .matrix-analysis-images--masonry .matrix-image-frame img {
+    display: block;
+    height: 100% !important;
+  }
+  .matrix-analysis-images--nemausus-gallery {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  .matrix-analysis-images--nemausus-gallery .matrix-image-frame,
+  .matrix-analysis-images--nemausus-section .matrix-image-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .matrix-analysis-images--nemausus-gallery .matrix-image-frame {
+    height: 300px;
+  }
+  .matrix-analysis-images--nemausus-gallery img,
+  .matrix-analysis-images--nemausus-section img {
+    height: 100% !important;
+    object-fit: contain !important;
+  }
+  .matrix-analysis-images--nemausus-section {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .matrix-analysis-images--nemausus-section .matrix-image-frame {
+    height: 360px;
+  }
+  .matrix-analysis-group--image-aside {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(140px, 30%);
+    align-items: start;
+    gap: 1rem;
+  }
+  .matrix-analysis-group--image-aside > p {
+    margin: 0 !important;
+  }
+  .matrix-analysis-group--image-aside .matrix-analysis-images {
+    grid-column: 2;
+    grid-row: 1;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  @media (max-width: 640px) {
+    .matrix-analysis-group--image-aside {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .matrix-analysis-group--image-aside .matrix-analysis-images {
+      grid-column: 1;
+      grid-row: auto;
+      max-width: 280px;
+    }
+  }
+  @media (max-width: 480px) {
+    .matrix-analysis-images--nemausus-gallery {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .matrix-analysis-images--nemausus-gallery .matrix-image-frame {
+      height: 260px;
+    }
+    .matrix-analysis-images--nemausus-section .matrix-image-frame {
+      height: 300px;
+    }
   }
   .matrix-status-bar {
     display: flex;
@@ -1058,7 +1178,7 @@
   }
   .text-tab:last-child { border-bottom: none; }
   .text-tab:hover { background: var(--paper-warm); }
-  .text-tab.active { background: var(--ink); color: #fff; }
+  .text-tab.active { background: var(--accent); color: #fff; }
   .text-tab.active .text-tab-meta { color: #d0d0d0; }
   .text-tab-meta {
     font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase;
@@ -1097,15 +1217,82 @@
     letter-spacing: 0.08em; color: var(--ink-muted); margin: 0 0 0.5rem 0;
   }
   .reader-analysis p { margin: 0 0 1.25rem 0; max-width: 66ch; }
+  .reader-figure {
+    margin: 1.5rem 0;
+    padding: 0.6rem;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .reader-figure img { display: block; width: 100%; height: auto; }
+  .reader-figure figcaption {
+    margin-top: 0.55rem;
+    color: var(--ink-muted);
+    font: 0.68rem/1.5 var(--font-mono);
+  }
   .concept-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
   .concept-tag {
     font-family: var(--font-mono); font-size: 0.72rem; padding: 0.28rem 0.6rem;
     background: var(--accent-soft); color: var(--accent); border: 1px solid rgba(184, 41, 31, 0.25);
   }
+  .reference-list {
+    margin-top: 2rem;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border: 1.5px solid var(--rule-strong);
+    background: var(--paper);
+  }
+  .reference-list-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .reference-list-title {
+    margin: 0;
+    font: 700 clamp(1.35rem, 2vw, 1.8rem)/1.2 var(--font-display);
+  }
+  .reference-list-style {
+    margin: 0;
+    color: var(--ink-muted);
+    font: 0.68rem var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .reference-columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+    padding-top: 1.25rem;
+  }
+  .reference-group h4 {
+    margin: 0 0 0.75rem;
+    color: var(--accent);
+    font: 700 0.75rem var(--font-mono);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+  .reference-entries {
+    display: grid;
+    gap: 0.8rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .reference-entries li {
+    padding-left: 1.2rem;
+    color: var(--ink);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    text-indent: -1.2rem;
+    overflow-wrap: anywhere;
+  }
+  .reference-entries a { color: var(--ink); }
 
   .site-footer {
-    background: var(--ink); color: #e8e8e6;
+    background: var(--paper-warm); color: var(--ink);
     padding: 3rem clamp(1.25rem, 3vw, 2.5rem);
+    border-top: 1.5px solid var(--rule-strong);
   }
   .footer-inner {
     max-width: var(--container); margin: 0 auto;
@@ -1113,21 +1300,23 @@
   }
   .footer-title {
     font-family: var(--font-display); font-size: 1.35rem; font-weight: 700;
-    margin: 0 0 0.6rem 0; color: #fff;
+    margin: 0 0 0.6rem 0; color: var(--ink);
   }
   .footer-note {
-    font-size: 0.92rem; color: #b5b5b0; max-width: 60ch; margin: 0;
+    font-size: 0.92rem; color: var(--ink-soft); max-width: 60ch; margin: 0;
   }
   .footer-colophon {
-    font-family: var(--font-mono); font-size: 0.74rem; color: #9c9c96;
+    font-family: var(--font-mono); font-size: 0.74rem; color: var(--ink-muted);
     line-height: 1.7;
   }
 
   @media (max-width: 960px) {
     .hero-grid, .essay-grid, .texts-layout, .footer-inner { grid-template-columns: 1fr; }
+    .reference-columns { grid-template-columns: 1fr; gap: 1.5rem; }
     .intro-hero-inner { min-height: auto; grid-template-columns: 1fr; }
     .intro-visual { width: min(70%, 390px); }
     .section-head { grid-template-columns: 1fr; gap: 0.5rem; }
+    .reference-list-head { align-items: flex-start; flex-direction: column; }
   }
   @media (max-width: 600px) {
     .hero-meta-strip { grid-template-columns: 1fr; }
@@ -1263,52 +1452,52 @@
     </div>
   </section>
 
-  <section id="view-diagrams" class="band" style="background: #0a0a0a; color: #ffffff;">
+  <section id="view-diagrams" class="band diagram-band">
     <div class="wrap">
-      <div style="border: 1.5px solid #333333; background: #111111; padding: 1.75rem 2rem; margin-bottom: 2rem; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; gap: 1.5rem;">
+      <div style="border: 1.5px solid var(--rule-strong); background: var(--paper-warm); padding: 1.75rem 2rem; margin-bottom: 2rem; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; gap: 1.5rem;">
         <div>
-          <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; background: #e53e3e; color: #000000; padding: 0.25rem 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; display: inline-block; margin-bottom: 0.75rem;">Geometric &amp; Syntactic Precedents</span>
-          <h2 style="font-family: var(--font-display); font-size: 2.1rem; font-weight: 700; color: #ffffff; margin: 0 0 0.5rem 0; letter-spacing: -0.02em;">Interactive Transformation &amp; Spatial Deconstruction</h2>
-          <p style="font-size: 0.98rem; color: #a1a1aa; margin: 0; max-width: 62ch; line-height: 1.5;">
+          <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; background: var(--accent); color: #ffffff; padding: 0.25rem 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; display: inline-block; margin-bottom: 0.75rem;">Geometric &amp; Syntactic Precedents</span>
+          <h2 style="font-family: var(--font-display); font-size: 2.1rem; font-weight: 700; color: var(--ink); margin: 0 0 0.5rem 0; letter-spacing: -0.02em;">Interactive Transformation &amp; Spatial Deconstruction</h2>
+          <p style="font-size: 0.98rem; color: var(--ink-soft); margin: 0; max-width: 62ch; line-height: 1.5;">
             Visualizing geometric transformation rules (Càndito &amp; Meloni 2023 / Tschumi 1987) and syntactic unloading (Eisenman 1975).
           </p>
         </div>
         <div class="flex flex-wrap gap-2 font-mono text-xs">
-          <button onclick="setDiagramMode('tschumiN7')" id="mode-tschumiN7-btn" class="tl-pill active" style="background: #e53e3e; color: #000000; border-color: #e53e3e; font-weight: 700; padding: 0.5rem 0.9rem; text-transform: uppercase;">Folie N7</button>
-          <button onclick="setDiagramMode('tschumiL6')" id="mode-tschumiL6-btn" class="tl-pill" style="background: #18181b; color: #a1a1aa; border-color: #333333; padding: 0.5rem 0.9rem; text-transform: uppercase;">Folie L6</button>
-          <button onclick="setDiagramMode('eisenman')" id="mode-eisenman-btn" class="tl-pill" style="background: #18181b; color: #a1a1aa; border-color: #333333; padding: 0.5rem 0.9rem; text-transform: uppercase;">Eisenman Axonometric</button>
+          <button onclick="setDiagramMode('tschumiN7')" id="mode-tschumiN7-btn" class="tl-pill active" style="font-weight: 700; padding: 0.5rem 0.9rem; text-transform: uppercase;">Folie N7</button>
+          <button onclick="setDiagramMode('tschumiL6')" id="mode-tschumiL6-btn" class="tl-pill" style="padding: 0.5rem 0.9rem; text-transform: uppercase;">Folie L6</button>
+          <button onclick="setDiagramMode('eisenman')" id="mode-eisenman-btn" class="tl-pill" style="padding: 0.5rem 0.9rem; text-transform: uppercase;">Eisenman Axonometric</button>
         </div>
       </div>
 
       <div style="display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 1.5rem; align-items: stretch;">
-        <div style="border: 1.5px solid #27272a; background: #000000; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+        <div style="border: 1.5px solid var(--rule-strong); background: var(--paper-warm); padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
           <div>
-            <div class="w-full flex justify-between items-center mb-3 font-mono text-xs" style="color: #a1a1aa;">
-              <span id="canvas-title"><i class="fa-solid fa-shapes mr-1.5" style="color: #e53e3e;"></i>Folie N7: Axonometric Rotational Transformation (Tschumi / Càndito)</span>
+            <div class="w-full flex justify-between items-center mb-3 font-mono text-xs" style="color: var(--ink-muted);">
+              <span id="canvas-title"><i class="fa-solid fa-shapes mr-1.5" style="color: var(--accent);"></i>Folie N7: Axonometric Rotational Transformation (Tschumi / Càndito)</span>
               <span id="canvas-status">Step: 1 / 5</span>
             </div>
-            <div class="w-full flex items-center justify-center bg-[#000000] border border-[#27272a] relative overflow-hidden" style="min-height: 400px; display: flex; align-items: center; justify-content: center;">
+            <div class="w-full flex items-center justify-center relative overflow-hidden diagram-canvas-surface" style="min-height: 400px; display: flex; align-items: center; justify-content: center;">
               <canvas id="deconCanvas" width="600" height="420" style="display: block; margin: auto; max-width: 100%; height: auto; object-fit: contain;"></canvas>
             </div>
           </div>
-          <div class="w-full flex justify-between items-center mt-4 pt-3 border-t border-[#27272a] font-mono text-xs">
+          <div class="w-full flex justify-between items-center mt-4 pt-3 font-mono text-xs diagram-controls">
             <div class="flex space-x-2">
-              <button onclick="stepDiagram(-1)" class="tl-pill" style="background: #18181b; color: #ffffff; border-color: #3f3f46; padding: 0.45rem 0.85rem;"><i class="fa-solid fa-backward mr-1"></i> Prev Step</button>
-              <button onclick="stepDiagram(1)" class="tl-pill active" style="background: #e53e3e; color: #000000; border-color: #e53e3e; font-weight: 700; padding: 0.45rem 0.85rem;">Next Step <i class="fa-solid fa-forward ml-1"></i></button>
+              <button onclick="stepDiagram(-1)" class="tl-pill" style="padding: 0.45rem 0.85rem;"><i class="fa-solid fa-backward mr-1"></i> Prev Step</button>
+              <button onclick="stepDiagram(1)" class="tl-pill active" style="font-weight: 700; padding: 0.45rem 0.85rem;">Next Step <i class="fa-solid fa-forward ml-1"></i></button>
             </div>
-            <button onclick="toggleAnimation()" id="anim-btn" class="tl-pill" style="background: #18181b; color: #ffffff; border-color: #3f3f46; padding: 0.45rem 0.85rem;"><i class="fa-solid fa-play mr-1"></i> Auto Play</button>
+            <button onclick="toggleAnimation()" id="anim-btn" class="tl-pill" style="padding: 0.45rem 0.85rem;"><i class="fa-solid fa-play mr-1"></i> Auto Play</button>
           </div>
         </div>
 
-        <div style="border: 1.5px solid #27272a; background: #111111; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;">
+        <div style="border: 1.5px solid var(--rule-strong); background: var(--paper-warm); padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;">
           <div>
-            <h3 style="font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; color: #ffffff; margin-top: 0; margin-bottom: 1.25rem; border-bottom: 1px solid #27272a; padding-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
-              <i class="fa-solid fa-magnifying-glass-chart" style="color: #e53e3e;"></i> Geometric Transformation Logic
+            <h3 style="font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; color: var(--ink); margin-top: 0; margin-bottom: 1.25rem; border-bottom: 1px solid var(--rule); padding-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+              <i class="fa-solid fa-magnifying-glass-chart" style="color: var(--accent);"></i> Geometric Transformation Logic
             </h3>
-            <div id="diagram-explanation" class="text-sm text-[#d4d4d8] space-y-3 leading-relaxed"></div>
+            <div id="diagram-explanation" class="text-sm space-y-3 leading-relaxed diagram-explanation"></div>
           </div>
-          <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px dashed #27272a; font-family: var(--font-mono); font-size: 0.74rem; color: #a1a1aa;">
-            <p style="font-weight: 600; color: #ffffff; margin-bottom: 0.25rem;"><i class="fa-solid fa-triangle-exclamation" style="color: #e53e3e;"></i> Deconstructivist Paradox:</p>
+          <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px dashed var(--rule); font-family: var(--font-mono); font-size: 0.74rem; color: var(--ink-muted);">
+            <p style="font-weight: 600; color: var(--ink); margin-bottom: 0.25rem;"><i class="fa-solid fa-triangle-exclamation" style="color: var(--accent);"></i> Deconstructivist Paradox:</p>
             <p id="diagram-relevance" style="margin: 0;">Demonstrates how isometric transformations disrupt the standard 3x3x3 grid, severing form from single-purpose functional expectation.</p>
           </div>
         </div>
@@ -1474,7 +1663,7 @@
         <div>
           <h2 class="section-title">Foundational Texts &amp; Collaborations</h2>
           <p class="section-desc">
-            Select a primary source to examine its key passage, theoretical argument, and spatial consequences.
+            Select a source to examine a key passage, theoretical argument, and spatial consequences.
           </p>
         </div>
       </div>
@@ -1483,6 +1672,36 @@
         <div class="text-index" id="textIndex" role="tablist" aria-label="Foundational texts"></div>
         <article class="text-reader" id="textReader" aria-live="polite"></article>
       </div>
+
+      <section class="reference-list" aria-labelledby="reference-list-title">
+        <div class="reference-list-head">
+          <h3 class="reference-list-title" id="reference-list-title">References</h3>
+          <p class="reference-list-style">Chicago-style bibliography</p>
+        </div>
+        <div class="reference-columns">
+          <section class="reference-group" aria-labelledby="primary-references-title">
+            <h4 id="primary-references-title">Primary Sources</h4>
+            <ul class="reference-entries">
+              <li>Derrida, Jacques. <i>Positions</i>. Translated by Alan Bass. Chicago: University of Chicago Press, 1981.</li>
+              <li>Derrida, Jacques. <i>Writing and Difference</i>. Translated by Alan Bass. Chicago: University of Chicago Press, 1978. Originally published in 1967.</li>
+              <li>Johnson, Philip, and Mark Wigley. <i>Deconstructivist Architecture</i>. New York: The Museum of Modern Art, distributed by New York Graphic Society Books, Little, Brown and Company, 1988. Exhibition catalog. <a href="https://www.moma.org/calendar/exhibitions/1813">https://www.moma.org/calendar/exhibitions/1813</a>.</li>
+              <li>Krauss, Rosalind. “Sculpture in the Expanded Field.” <i>October</i> 8 (Spring 1979): 30&ndash;44. <a href="https://www.jstor.org/stable/778224">https://www.jstor.org/stable/778224</a>.</li>
+              <li>Tafuri, Manfredo. “Toward a Critique of Architectural Ideology.” Translated by Barbara Luigia La Penta. In <i>Architecture Theory since 1968</i>, edited by K. Michael Hays, 2&ndash;35. Cambridge, MA: MIT Press, 1998. Originally published in 1969.</li>
+              <li>Tschumi, Bernard. <i>Architecture and Disjunction</i>. 1st MIT Press paperback ed. Cambridge, MA: MIT Press, 1996.</li>
+              <li>Venturi, Robert. <i>Complexity and Contradiction in Architecture</i>. 2nd ed. New York: Museum of Modern Art, 1977.</li>
+            </ul>
+          </section>
+          <section class="reference-group" aria-labelledby="secondary-references-title">
+            <h4 id="secondary-references-title">Secondary Sources</h4>
+            <ul class="reference-entries">
+              <li>Barsoum, John. “Deconstructivism in Philosophy, Architecture, and Reusability Contribution.” <i>International Journal of Emerging Science and Engineering</i> 6, no. 12 (2021): 1&ndash;5. <a href="https://doi.org/10.35940/ijese.I2490.0261221">https://doi.org/10.35940/ijese.I2490.0261221</a>.</li>
+              <li>Càndito, Cristina, and Alessandro Meloni. “Revelations of Folies through Geometric Transformations.” <i>Nexus Network Journal</i> 25, suppl. 1 (2023): 269&ndash;276. <a href="https://doi.org/10.1007/s00004-023-00717-0">https://doi.org/10.1007/s00004-023-00717-0</a>.</li>
+              <li>Hendrix, John Shannon. <i>The Contradiction Between Form and Function in Architecture</i>. London: Routledge, 2013.</li>
+              <li>Mattie, Erik, Sophie Roulet, Bert de Muynck, and Cees de Jong. <i>The Colours of . . .: Frank O. Gehry, Jean Nouvel, Wang Shu, and Other Architects</i>. Translated by Textcase. 1st ed. Basel: Birkhäuser, 2015.</li>
+            </ul>
+          </section>
+        </div>
+      </section>
     </div>
   </section>
 </main>
@@ -1524,8 +1743,8 @@ const matrixData = [
     title: 'Différance (Foundational Poststructuralism)',
     subtitle: 'Production of Traces, Deferral & Spacing',
     dichotomy: 'Presence vs. Absence / Foundational Deconstruction',
-    summary: 'Derrida’s concept of différance forms the foundation of Deconstructivism in architecture. Différance posits that meaning is never fully present in a single spatial moment or sign; it is perpetually deferred through relational traces. Applied to space, architecture is liberated from logocentric origin and functional absolutism.',
-    keyPoint: 'Architectural forms operate through traces of absent structures, establishing the theoretical bedrock for Deconstructivism.'
+    summary: 'Différance holds that meaning is never fully present but continually deferred through traces and relations.',
+    keyPoint: 'In architecture, space emerges through absences and shifting connections rather than a fixed origin or function.'
   },
   {
     id: 'arbitrary-signification',
@@ -1533,8 +1752,8 @@ const matrixData = [
     title: 'Arbitrary Signification & Dysfunction',
     subtitle: 'Dissociation of Signifier from Signified',
     dichotomy: 'Symbol vs. Reality / Sign vs. Being / Thought vs. Language',
-    summary: 'Hendrix demonstrates that deconstructivism exposes an arbitrary relationship between architectural form and function through the dissociation of the signifier from the signified. By challenging traditional rules of visual unity and symmetry, elements become pure syntactic signs. Form operates as a contradiction of function, generating intentional syntactic dysfunction rather than functional determinism.',
-    keyPoint: 'Severing signifier from signified turns form into a contradiction of function, exposing underlying logical collapse.'
+    summary: 'Hendrix treats architectural form as a sign whose meaning can detach from its intended function, unsettling conventional unity and symmetry.',
+    keyPoint: 'That disjunction makes form a deliberate contradiction of use.'
   },
   {
     id: 'geometric-transformation',
@@ -1542,8 +1761,8 @@ const matrixData = [
     title: 'Geometric Transformation & Déviance',
     subtitle: 'Combinatorial Grid & Axonometric Distortion',
     dichotomy: 'Normalité (3x3x3 Grid) vs. Déviance (Transformation)',
-    summary: 'Càndito & Meloni analyze how Tschumi and Derrida destabilize the ideal 27-cube grid (3x3x3) of the Parc de la Villette Folies. Through rotation, translation, and grid shear, geometric transformations distort static form into an ambiguous, evolving combinatorial process.',
-    keyPoint: 'Isometric transformations induce deliberate geometric irregularity and spatial disjunction within pure form.'
+    summary: 'Càndito and Meloni show how rotations, translations, and shears destabilize Parc de la Villette’s ideal 3×3×3 grid.',
+    keyPoint: 'The result is shifting, irregular geometry rather than a fixed composition.'
   },
   {
     id: 'pyramid-labyrinth',
@@ -1551,8 +1770,8 @@ const matrixData = [
     title: 'The Architectural Paradox & Imagination',
     subtitle: 'Pyramid (Concept) vs. Labyrinth (Sensory Praxis)',
     dichotomy: 'Abstract Spatial Theory vs. Practical Experience',
-    summary: 'Tschumi outlines an architectural paradox in which one cannot simultaneously question the abstract geometry of space and experience spatial praxis. Imagination serves as perhaps the only means of transcending this paradox through spatial contradiction.',
-    keyPoint: 'Imagination transcends the pyramid-labyrinth divide, and deconstructivism imagines that step beyond through contradiction.'
+    summary: 'Tschumi frames architecture as a paradox between abstract spatial concepts and lived, sensory experience.',
+    keyPoint: 'Imagination holds these incompatible conditions together through spatial contradiction.'
   },
   {
     id: 'non-necessity',
@@ -1560,8 +1779,8 @@ const matrixData = [
     title: 'Architecture as Non-Necessity',
     subtitle: 'Resisting Utility and Art-for-Art’s Sake',
     dichotomy: 'Negation of Expectations vs. Social Utility',
-    summary: 'Architecture as non-necessity resists both mundane social utility and pure art-for-art’s sake. As Tschumi argues, architecture saves its nature by negating the form that society expects of it—a principle central to deconstructivism’s refusal of predictable formal conventions.',
-    keyPoint: 'Architecture preserves its authentic nature by actively negating the conventional forms society expects of it.'
+    summary: 'Tschumi rejects both architecture reduced to social utility and architecture detached as art for art’s sake.',
+    keyPoint: 'By negating expected forms, architecture resists either extreme.'
   },
   {
     id: 'both-and',
@@ -1569,8 +1788,8 @@ const matrixData = [
     title: 'Complexity, Contradiction & Both-And',
     subtitle: 'Inclusive Dualities Extended by Deconstructivism',
     dichotomy: 'Either-Or Exclusion vs. Both-And Inclusion',
-    summary: 'Venturi criticized modernist simplicity in favor of ambiguity, contradiction, and “both-and” dualities. Deconstructivism takes his critique further by dismantling traditional rules of symmetry and visual unity altogether.',
-    keyPoint: 'Deconstructivism extends Venturi’s “both-and” rejection of modernist simplicity by dismantling symmetry and visual unity.'
+    summary: 'Venturi’s both-and approach embraces ambiguity and contradiction over modernist either-or simplicity.',
+    keyPoint: 'Deconstructivism extends that critique by disrupting symmetry and visual unity.'
   }
 ];
 
@@ -1600,7 +1819,10 @@ const TEXTS = [
     pub: 'October, Vol. 8',
     excerpt: 'Sculpture had previously been historically tied to the monument ... but by 1970, sculpture had entered the expanded field through a Klein group of negations.',
     analysis: 'Krauss maps how spatial practices transcend the binary opposition of architecture and landscape into a dynamic structural matrix. Deconstructivist practices frequently inhabit this expanded field, operating simultaneously as building, landscape, and critical installation.',
-    concepts: ['Expanded Field', 'Klein Group', 'Not-Architecture', 'Site-Specificity']
+    concepts: ['Expanded Field', 'Klein Group', 'Not-Architecture', 'Site-Specificity'],
+    figure: 'assets/images/krauss-expanded-field.png',
+    figureAlt: 'Diagram of the expanded field, relating landscape, architecture, not-landscape, not-architecture, sculpture, site-construction, marked sites, axiomatic structures, the complex, and the neuter.',
+    figureCaption: "Rosalind Krauss's expanded-field diagram, “Sculpture in the Expanded Field,” October 8 (Spring 1979), p. 38. Reproduced from the supplied JSTOR reading."
   },
   {
     author: 'Bernard Tschumi',
@@ -1714,12 +1936,29 @@ const PROJECT_MATRIX_DATA = [
     architect: 'Peter Eisenman',
     year: '1971–1976',
     summaryTitle: 'Grid Interactions & Planar Shifts',
-    combinedText: '<strong>Grid Interactions:</strong><br><br><strong>House III (1971):</strong> Operates on an orthogonal nine-square grid interlocked with a second volumetric grid subjected to a 45-degree rotation. This geometric collision generates an accentuated central void and subverts traditional interior spatial hierarchy. <br><br><strong>House VI (1975):</strong> Developed through serial transformations of a basic grid, acting as a built record of its own evolutionary history where multiple transformational states exist simultaneously. <br><br><strong>House X (1976):</strong> Deconstructs the traditional axial grid and center into a non-vertebrate configuration of four quadrant volumes.',
     expandedDetails: 'The set demonstrates how deconstructivism can operate through geometric misalignment, not just distortion of surface language.',
-    images: [
-      { url: 'assets/images/house-iii.jpg', frameColor: 'black', caption: 'House III (1971) - 9-step axonometric grid transformation.' },
-      { url: 'assets/images/house-vi.jpg', frameColor: 'black', caption: 'House VI (1975) - Axonometric transformation and volumetric planar study.' },
-      { url: 'assets/images/house-x.jpg', frameColor: 'black', caption: 'House X (1976) - Non-vertebrate quadrant spatial analysis.' }
+    analysisGroups: [
+      {
+        text: '<strong>Grid Interactions:</strong><br><br><strong>House III (1971):</strong> Operates on an orthogonal nine-square grid interlocked with a second volumetric grid subjected to a 45-degree rotation. This geometric collision generates an accentuated central void and subverts traditional interior spatial hierarchy.',
+        imageLayout: 'beside-text',
+        images: [
+          { url: 'assets/images/house-iii.jpg', frameColor: 'black', caption: 'House III (1971) - 9-step axonometric grid transformation.' }
+        ]
+      },
+      {
+        text: '<strong>House VI (1975):</strong> Developed through serial transformations of a basic grid, acting as a built record of its own evolutionary history where multiple transformational states exist simultaneously.',
+        imageLayout: 'beside-text',
+        images: [
+          { url: 'assets/images/house-vi.jpg', frameColor: 'black', caption: 'House VI (1975) - Axonometric transformation and volumetric planar study.' }
+        ]
+      },
+      {
+        text: '<strong>House X (1976):</strong> Deconstructs the traditional axial grid and center into a non-vertebrate configuration of four quadrant volumes.',
+        imageLayout: 'beside-text',
+        images: [
+          { url: 'assets/images/house-x.jpg', frameColor: 'black', caption: 'House X (1976) - Non-vertebrate quadrant spatial analysis.' }
+        ]
+      }
     ]
   },
   {
@@ -1728,15 +1967,26 @@ const PROJECT_MATRIX_DATA = [
     architect: 'Frank Gehry & Shigeru Ban',
     year: '1978 / 2000',
     summaryTitle: 'Analysis & Comparison of Offset Placement of Internal Spaces',
-    combinedText: '<strong>Gehry House (1978):</strong> Frank Gehry wraps an original Dutch Colonial suburban house in a skewed, offset exoskeleton and volumetric additions placed at an angle. <br><br><strong>Naked House (2000):</strong> Shigeru Ban explores a similar spatial arrangement through movable, offset rooms within a single large translucent shed. Rather than fixed walls, independent room boxes can be repositioned to dissolve boundaries between interior and exterior.',
     expandedDetails: 'Both projects dismantle traditional domestic compartmentalization through offset placement of internal spaces. Gehry achieves this through rigid geometric skewness and material collision, whereas Ban achieves programmatic fluidity through movable room units.',
-    images: [
-      { url: 'assets/images/gehry-house-elevation.jpg', frameColor: 'black', caption: 'Gehry House - Elevation drawing showing the offset roof and volumes.' },
-      { url: 'assets/images/gehry-house-interior.jpg', frameColor: 'black', caption: 'Gehry House - Interior view of the intersecting additions.' },
-      { url: 'assets/images/gehry-house-exterior.jpg', frameColor: 'black', caption: 'Gehry House - Exterior view of the metal-clad addition.' },
-      { url: 'assets/images/naked-house-mobile-partition.jpg', frameColor: 'red', caption: 'Naked House - Movable translucent partition.' },
-      { url: 'assets/images/naked-house-interior.jpg', frameColor: 'red', caption: 'Naked House - Interior showing mobile room volumes.' },
-      { url: 'assets/images/naked-house-sliding-walls.jpg', frameColor: 'red', caption: 'Naked House - Sliding partitions open to the exterior.' }
+    analysisGroups: [
+      {
+        text: '<strong>Gehry House (1978):</strong> Frank Gehry wraps an original Dutch Colonial suburban house in a skewed, offset exoskeleton and volumetric additions placed at an angle.',
+        imageLayout: 'masonry',
+        images: [
+          { url: 'assets/images/gehry-house-interior.jpg', frameColor: 'black', caption: 'Gehry House - Interior view of the intersecting additions.' },
+          { url: 'assets/images/gehry-house-elevation.jpg', frameColor: 'black', caption: 'Gehry House - Elevation drawing showing the offset roof and volumes.' },
+          { url: 'assets/images/gehry-house-exterior.jpg', frameColor: 'black', caption: 'Gehry House - Exterior view of the metal-clad addition.' }
+        ]
+      },
+      {
+        text: '<strong>Naked House (2000):</strong> Shigeru Ban explores a similar spatial arrangement through movable, offset rooms within a single large translucent shed. Rather than fixed walls, independent room boxes can be repositioned to dissolve boundaries between interior and exterior.',
+        imageLayout: 'masonry',
+        images: [
+          { url: 'assets/images/naked-house-mobile-partition.jpg', frameColor: 'red', caption: 'Naked House - Movable translucent partition.' },
+          { url: 'assets/images/naked-house-interior.jpg', frameColor: 'red', caption: 'Naked House - Interior showing mobile room volumes.' },
+          { url: 'assets/images/naked-house-sliding-walls.jpg', frameColor: 'red', caption: 'Naked House - Sliding partitions open to the exterior.' }
+        ]
+      }
     ]
   },
   {
@@ -1745,11 +1995,26 @@ const PROJECT_MATRIX_DATA = [
     architect: 'Daniel Libeskind & Masaharu Takasaki',
     year: '2007 / 1996',
     summaryTitle: 'Arrangement of Fractured Spaces & Spaces Between',
-    combinedText: '<strong>The Crystal, Royal Ontario Museum (2007):</strong> The project begins as a juxtaposing addition of large overlapping volumes intersecting existing historic masonry. <br><br><strong>Kihoku Astronomical Museum (1996):</strong> Its form responds to two dominant cylindrical volumes, creating intricate interstitial spaces within, under, and between them. Because of the compact interior area, structure becomes an expressive feature rather than a normative condition.',
     expandedDetails: 'Both projects examine fractured geometries and interstitial spaces created between overlapping volumes. In both cases, structure becomes an active, expressive feature that dictates spatial experience.',
-    images: [
-      { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Juedisches_Museum_Berlin_Libeskind_2.jpg/1280px-Juedisches_Museum_Berlin_Libeskind_2.jpg', frameColor: 'black', caption: 'Daniel Libeskind - Crystalline Geometries and Interstitial Voids.' },
-      { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Kagoshima_observatory.jpg/1280px-Kagoshima_observatory.jpg', frameColor: 'red', caption: 'Masaharu Takasaki - Kihoku Astronomical Museum Cylindrical Intersections.' }
+    analysisGroups: [
+      {
+        text: '<strong>The Crystal, Royal Ontario Museum (2007):</strong> The project begins as a juxtaposing addition of large overlapping volumes intersecting existing historic masonry.',
+        imageLayout: 'masonry',
+        images: [
+          { url: 'assets/images/crystal-rom-interior.png', frameColor: 'black', caption: 'The Crystal, Royal Ontario Museum - Interior stair.' },
+          { url: 'assets/images/crystal-rom-exterior-1.jpg', frameColor: 'black', caption: 'The Crystal, Royal Ontario Museum - Exterior view.' },
+          { url: 'assets/images/crystal-rom-exterior-2.jpg', frameColor: 'black', caption: 'The Crystal, Royal Ontario Museum - Facade and historic context.' }
+        ]
+      },
+      {
+        text: '<strong>Kihoku Astronomical Museum (1996):</strong> Its form responds to two dominant cylindrical volumes, creating intricate interstitial spaces within, under, and between them. Because of the compact interior area, structure becomes an expressive feature rather than a normative condition.',
+        imageLayout: 'masonry',
+        images: [
+          { url: 'assets/images/kihoku-museum-axonometric.jpg', frameColor: 'red', caption: 'Kihoku Astronomical Museum - Axonometric drawing.' },
+          { url: 'assets/images/kihoku-museum-exterior.jpg', frameColor: 'red', caption: 'Kihoku Astronomical Museum - Exterior view.' },
+          { url: 'assets/images/kihoku-museum-interior.jpg', frameColor: 'red', caption: 'Kihoku Astronomical Museum - Interior view.' }
+        ]
+      }
     ]
   },
   {
@@ -1757,12 +2022,24 @@ const PROJECT_MATRIX_DATA = [
     name: 'Nemausus I',
     architect: 'Jean Nouvel',
     year: '1988',
-    summaryTitle: 'Collision & Flexible Interior Details',
-    combinedText: '<strong>Collision:</strong> Features a flexible plan due to interior structure and industrial detailing, allowing for dynamic spatial reconfiguration.<br><br><strong>Spatial Analysis:</strong> Isolation of flexible interior details like stairs and mezzanine railings, facilitating shifting interior performance.',
-    expandedDetails: 'Nemausus I in Nîmes applies industrial shipbuilding and warehouse detailing to social housing. Exposed steel frames and corrugated panels provide unprecedented programmatic flexibility.',
-    images: [
-      { url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Nemausus_Nimes.jpg/1280px-Nemausus_Nimes.jpg', frameColor: 'red', caption: 'Jean Nouvel - Nemausus I Industrial Housing Façade.' },
-      { url: 'https://placehold.co/600x400/111111/e53e3e?text=Nemausus+Section', frameColor: 'red', caption: 'Nemausus I - Section drawings showing double-height loft volumes and circulation.' }
+    summaryTitle: 'Flexible Plans Due to Interior Structure',
+    expandedDetails: '<strong>Comparison with MoMA:</strong> The 1988 Deconstructivist Architecture exhibition foregrounded challenges to conventional geometry and formal order. Nemausus shares that impulse to question architectural norms, but directs it toward housing’s social and programmatic conventions rather than a visibly fragmented form.',
+    analysisGroups: [
+      {
+        text: 'Designed as affordable housing, Nemausus uses unconventional, cost-conscious materials and fixtures to create large, open-plan lofts. Residents can choose a layout suited to individual needs instead of receiving one of a set of identical apartments. The project also aims to bring daylight into every unit.',
+        imageLayout: 'nemausus-gallery',
+        images: [
+          { url: 'assets/images/nemausus-interior.png', frameColor: 'red', caption: 'Nemausus I - Interior view of the flexible living space.' },
+          { url: 'assets/images/nemausus-exterior.png', frameColor: 'red', caption: 'Nemausus I - Exterior view of the housing complex.' }
+        ]
+      },
+      {
+        text: 'Each dwelling is treated as a customizable loft: spaces are not rigidly assigned, units are not repetitive, and openings loosen the boundary between indoors and outdoors. Rather than visually distorting the building, the project challenges expectations of apartment living by rethinking dwelling size and organization around spaciousness, choice, and cost efficiency.<br><br><strong>Spatial placement:</strong> Unlike the Gehry House’s offset, intersecting volumes or the Naked House’s movable room boxes within a shared envelope, Nemausus offers open lofts with resident-selected layouts. All three unsettle fixed spatial expectations; Nemausus does so at the scale of affordable everyday housing.',
+        imageLayout: 'nemausus-section',
+        images: [
+          { url: 'assets/images/nemausus-sections.png', frameColor: 'red', caption: 'Nemausus I - Section drawings showing the building layouts.' }
+        ]
+      }
     ]
   }
 ];
@@ -1789,16 +2066,19 @@ function renderProjectMatrix() {
       <td style="font-size: 0.88rem; color: var(--ink-soft); line-height: 1.5;">
         <div id="summary-text-${p.id}" style="font-weight: 600; color: var(--ink);">${p.summaryTitle}</div>
         <div id="expanded-panel-${p.id}" style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--rule); background: var(--paper-warm); padding: 1rem; border-radius: 4px;">
-          <p style="margin: 0 0 1rem 0; font-size: 0.9rem; color: var(--ink);">${p.combinedText}</p>
-          <p style="margin: 0 0 1rem 0; font-size: 0.9rem; color: var(--ink-soft);">${p.expandedDetails}</p>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-            ${p.images.map(img => `
-              <div class="matrix-image-frame matrix-image-frame--${img.frameColor}">
-                <img src="${img.url}" alt="${img.caption}" style="width: 100%; height: 140px; object-fit: contain; background: #fff;" onerror="this.src='https://placehold.co/600x400/111111/e53e3e?text=Architectural+Drawing'">
-                <p style="font-family: var(--font-mono); font-size: 0.68rem; color: #a1a1aa; margin: 0.35rem 0 0 0;">${img.caption}</p>
+          ${p.analysisGroups.map(group => `
+            <div class="matrix-analysis-group${group.imageLayout === 'beside-text' ? ' matrix-analysis-group--image-aside' : ''}" style="margin-bottom: 1rem;">
+              <p style="margin: 0 0 1rem 0; font-size: 0.9rem; color: var(--ink);">${group.text}</p>
+              <div class="matrix-analysis-images${group.imageLayout === 'masonry' ? ' matrix-analysis-images--masonry' : ''}${group.imageLayout === 'nemausus-gallery' ? ' matrix-analysis-images--nemausus-gallery' : ''}${group.imageLayout === 'nemausus-section' ? ' matrix-analysis-images--nemausus-section' : ''}">
+                ${group.images.map(img => `
+                  <div class="matrix-image-frame matrix-image-frame--${img.frameColor}">
+                    <img src="${img.url}" alt="${img.caption}" style="width: 100%; height: 140px; object-fit: cover; background: #fff;" onerror="this.src='https://placehold.co/600x400/111111/e53e3e?text=Architectural+Drawing'">
+                  </div>
+                `).join('')}
               </div>
-            `).join('')}
-          </div>
+            </div>
+          `).join('')}
+          <p style="margin: 0 0 1rem 0; font-size: 0.9rem; color: var(--ink-soft);">${p.expandedDetails}</p>
         </div>
       </td>
     `;
@@ -2052,7 +2332,7 @@ function drawFolieN7Step(cx, cy, step) {
     for (let x = 0; x < 3; x++) {
       for (let y = 0; y < 3; y++) {
         for (let z = 0; z < 3; z++) {
-          drawIsoBox(off + x * u, off + y * u, z * u, u, u, u, { wireframeOnly: true, stroke: '#ff4d4d', lineWidth: 1.5 });
+          drawIsoBox(off + x * u, off + y * u, z * u, u, u, u, { wireframeOnly: true, stroke: '#31558f', lineWidth: 1.5 });
         }
       }
     }
@@ -2065,7 +2345,7 @@ function drawFolieN7Step(cx, cy, step) {
     for (let x = 0; x < 3; x++) {
       for (let y = 0; y < 2; y++) {
         for (let z = 2; z < 3; z++) {
-          drawIsoBox(off + x * u, off + y * u, z * u, u, u, u, { wireframeOnly: true, stroke: '#ff4d4d', lineWidth: 2.0 });
+          drawIsoBox(off + x * u, off + y * u, z * u, u, u, u, { wireframeOnly: true, stroke: '#31558f', lineWidth: 2.0 });
         }
       }
     }
@@ -2084,7 +2364,7 @@ function drawFolieN7Step(cx, cy, step) {
         }
       }
     }
-    drawIsoBox(off + 2 * u, off + 2 * u, u, u, u, u, { wireframeOnly: true, stroke: '#ff4d4d', lineWidth: 2.5 });
+    drawIsoBox(off + 2 * u, off + 2 * u, u, u, u, u, { wireframeOnly: true, stroke: '#31558f', lineWidth: 2.5 });
   } else if (step === 3) {
     for (let x = 0; x < 2; x++) {
       for (let y = 0; y < 2; y++) {
@@ -2115,7 +2395,7 @@ function drawFolieN7Step(cx, cy, step) {
     for (let x = 0; x < 3; x++) {
       for (let y = 0; y < 3; y++) {
         for (let z = 2; z < 3; z++) {
-          drawIsoBox(off + x * u, off + y * u, z * u, u, u, u, { wireframeOnly: true, stroke: '#ff4d4d', lineWidth: 1.8 });
+          drawIsoBox(off + x * u, off + y * u, z * u, u, u, u, { wireframeOnly: true, stroke: '#31558f', lineWidth: 1.8 });
         }
       }
     }
@@ -2172,7 +2452,7 @@ function drawFolieL6Step(cx, cy, step) {
       }
     }
     for (let i = 0; i < 3; i++) {
-      drawIsoBox(off + 2.2 * u + i * u, off + 2 * u, 0, u, 0.7 * u, 0.7 * u, { wireframeOnly: true, stroke: '#ff4d4d', lineWidth: 2.2 });
+      drawIsoBox(off + 2.2 * u + i * u, off + 2 * u, 0, u, 0.7 * u, 0.7 * u, { wireframeOnly: true, stroke: '#31558f', lineWidth: 2.2 });
     }
   }
   ctx.restore();
@@ -2294,9 +2574,9 @@ function drawDiagram() {
   const expEl = document.getElementById('diagram-explanation');
   if (expEl && stepData) {
     expEl.innerHTML = `
-      <div style="padding: 1rem; background: #18181b; border: 1px solid #27272a; border-left: 3px solid #e53e3e;">
-        <h4 style="font-family: var(--font-mono); font-weight: 700; color: #ff4d4d; font-size: 0.76rem; text-transform: uppercase; margin: 0 0 0.4rem 0; letter-spacing: 0.05em;">${stepData.title}</h4>
-        <p style="margin: 0; font-size: 0.9rem; color: #e4e4e7; line-height: 1.5;">${stepData.explanation}</p>
+      <div class="diagram-step-card">
+        <h4>${stepData.title}</h4>
+        <p>${stepData.explanation}</p>
       </div>
     `;
   }
@@ -2470,6 +2750,7 @@ function initTexts() {
       <div class="reader-analysis">
         <h4>Architectural &amp; Philosophical Reading</h4>
         <p>${t.analysis}</p>
+        ${t.figure ? `<figure class="reader-figure"><img src="${t.figure}" alt="${t.figureAlt}" loading="lazy"><figcaption>${t.figureCaption}</figcaption></figure>` : ''}
         <div class="concept-tags">
           ${t.concepts.map(c => `<span class="concept-tag">${c}</span>`).join('')}
         </div>
