@@ -511,6 +511,273 @@
     background: #ffffff;
     box-shadow: 8px 8px 0 var(--paper-off), 8px 8px 0 1px var(--rule-strong);
   }
+  .collision-field-app {
+    display: grid;
+    grid-template-columns: minmax(230px, 280px) minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+    border: 1.5px solid var(--rule-strong);
+    background: var(--paper-off);
+    box-shadow: 8px 8px 0 var(--paper-off), 8px 8px 0 1px var(--rule-strong);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  .collision-field-app button {
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+  }
+  .collision-field-app .rail {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-width: 0;
+  }
+  .collision-field-app .card {
+    padding: 0.9rem;
+    border: 1px solid var(--rule-strong);
+    background: #ffffff;
+  }
+  .collision-field-app .card-head,
+  .collision-field-app .drawing-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 0.75rem;
+    margin-bottom: 0.7rem;
+  }
+  .collision-field-app .card-head h3 {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .collision-field-app .step,
+  .collision-field-app .drawing-meta {
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-align: right;
+  }
+  .collision-field-app .segmented {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--rule-strong);
+  }
+  .collision-field-app .view-button,
+  .collision-field-app .choice {
+    min-height: 2.25rem;
+    padding: 0.45rem 0.6rem;
+    border: 0;
+    background: transparent;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+  }
+  .collision-field-app .view-button + .view-button {
+    border-left: 1px solid var(--rule-strong);
+  }
+  .collision-field-app .view-button.active,
+  .collision-field-app .choice.active {
+    background: var(--ink);
+    color: #ffffff;
+  }
+  .collision-field-app .mode-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.35rem;
+  }
+  .collision-field-app .mode {
+    display: grid;
+    justify-items: center;
+    gap: 0.4rem;
+    min-height: 4.3rem;
+    padding: 0.5rem 0.2rem;
+    border: 1px solid var(--rule-strong);
+    background: var(--paper-warm);
+    font-family: var(--font-mono);
+    font-size: 0.61rem;
+    text-transform: uppercase;
+  }
+  .collision-field-app .mode i {
+    position: relative;
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid currentColor;
+  }
+  .collision-field-app .mode[data-mode="folding"] i {
+    transform: skewY(-22deg);
+    border-left: 3px solid var(--accent);
+  }
+  .collision-field-app .mode[data-mode="intersect"] i::before {
+    position: absolute;
+    top: -2px;
+    left: 6px;
+    height: 19px;
+    border-left: 2px solid var(--accent);
+    content: "";
+    transform: rotate(35deg);
+  }
+  .collision-field-app .mode[data-mode="fragmentation"] i {
+    background: linear-gradient(135deg, transparent 44%, var(--accent) 46%, var(--accent) 51%, transparent 53%);
+    clip-path: polygon(0 0, 74% 0, 100% 36%, 76% 100%, 18% 82%);
+  }
+  .collision-field-app .mode.active {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: #ffffff;
+  }
+  .collision-field-app .mode.active i {
+    color: #ffffff;
+  }
+  .collision-field-app .mode-note,
+  .collision-field-app .range-note,
+  .collision-field-app .instructions {
+    color: var(--ink-muted);
+    font-size: 0.74rem;
+  }
+  .collision-field-app .mode-note {
+    min-height: 2.2rem;
+    margin: 0.6rem 0 0;
+  }
+  .collision-field-app .range-label {
+    display: block;
+    margin-top: 0.65rem;
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+  }
+  .collision-field-app .range-label output {
+    float: right;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .collision-field-app .range-label input {
+    display: block;
+    width: 100%;
+    height: 1rem;
+    margin: 0.35rem 0 0;
+    accent-color: var(--accent);
+  }
+  .collision-field-app .choice-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.35rem;
+  }
+  .collision-field-app .choice {
+    border: 1px solid var(--rule-strong);
+  }
+  .collision-field-app .choice:not(.active) {
+    background: var(--paper-warm);
+  }
+  .collision-field-app .range-note {
+    margin: 0.5rem 0;
+    line-height: 1.45;
+  }
+  .collision-field-app .action {
+    padding: 0.45rem 0.6rem;
+    border: 1px solid var(--rule-strong);
+    background: var(--paper-warm);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    text-transform: uppercase;
+  }
+  .collision-field-app .action:hover {
+    background: var(--ink);
+    color: #ffffff;
+  }
+  .collision-field-app .workspace-main {
+    min-width: 0;
+  }
+  .collision-field-app .drawing-head {
+    margin: 0;
+    padding: 0.2rem 0.15rem 0.65rem;
+  }
+  .collision-field-app .drawing-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .collision-field-app .canvas {
+    position: relative;
+    height: min(66vh, 620px);
+    min-height: 420px;
+    overflow: hidden;
+    border: 1.5px solid var(--rule-strong);
+    background: #f5f1e7;
+  }
+  .collision-field-app .canvas #stage {
+    width: 100%;
+    height: 100%;
+  }
+  .collision-field-app .canvas canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+  .collision-field-app .canvas-foot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.6rem 1rem;
+    padding: 0.65rem 0.1rem;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+  }
+  .collision-field-app .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.8rem;
+  }
+  .collision-field-app .legend span {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .collision-field-app .dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    display: inline-block;
+    border-radius: 50%;
+  }
+  .collision-field-app .dot.blue {
+    background: var(--accent);
+  }
+  .collision-field-app .dot.green {
+    background: #77766f;
+  }
+  .collision-field-app .question {
+    margin-top: 0.8rem;
+    padding: 0.75rem 0.9rem;
+    border-left: 3px solid var(--accent);
+    background: #ffffff;
+    color: var(--ink-soft);
+    font-family: var(--font-serif);
+    font-size: 0.88rem;
+  }
+  .collision-field-app .question strong {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .collision-field-app :focus-visible {
+    outline: 2px dashed var(--accent);
+    outline-offset: 2px;
+  }
+  .collision-field-app [hidden] {
+    display: none !important;
+  }
   .matrix-status-bar {
     display: flex;
     flex-wrap: wrap;
@@ -729,6 +996,30 @@
     .hero-meta-strip { grid-template-columns: 1fr; }
     .nav-links { gap: 0.9rem; font-size: 0.72rem; }
   }
+  @media (max-width: 1100px) {
+    .collision-field-app {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 720px) {
+    .collision-field-app {
+      grid-template-columns: 1fr;
+    }
+    .collision-field-app .rail {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: start;
+    }
+    .collision-field-app .canvas {
+      height: 62vh;
+      min-height: 380px;
+    }
+  }
+  @media (max-width: 460px) {
+    .collision-field-app .rail {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
 </head>
 <body>
@@ -752,6 +1043,7 @@
       <button onclick="scrollToSection('diagrams')" id="nav-diagrams">03 Transformation Diagrams</button>
       <button onclick="scrollToSection('genealogy')" id="nav-genealogy">04 Genealogy &amp; Timeline</button>
       <button onclick="scrollToSection('texts')" id="nav-texts">05 Texts &amp; Literature</button>
+      <button onclick="scrollToSection('collision-field')" id="nav-collision-field">06 Spatial Collision</button>
     </nav>
   </div>
   <div style="font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-muted); border-top: 1px solid var(--rule); padding-top: 1rem;">
@@ -923,6 +1215,101 @@
       <div class="texts-layout">
         <div class="text-index" id="textIndex" role="tablist" aria-label="Foundational texts"></div>
         <article class="text-reader" id="textReader" aria-live="polite"></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-collision-field" class="band alt">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-num">Section 06<span>Spatial Collision</span></div>
+        <div>
+          <h2 class="section-title">Collision Field</h2>
+          <p class="section-desc">Explore how folding, intersection, and fragmentation transform the relationship between a building’s interior and exterior.</p>
+        </div>
+      </div>
+      <div class="collision-field-app" id="collision-field-app">
+        <aside class="rail" aria-label="Simulation controls">
+          <section class="card">
+            <header class="card-head">
+              <h3>View · Museum</h3>
+              <span class="step">01</span>
+            </header>
+            <div class="segmented" role="group" aria-label="Model view">
+              <button type="button" class="view-button" data-view="plan">Plan</button>
+              <button type="button" class="view-button active" data-view="iso">Isometric</button>
+            </div>
+          </section>
+          <section class="card">
+            <header class="card-head">
+              <h3>Spatial operation</h3>
+              <span class="step">02</span>
+            </header>
+            <div class="mode-list" role="group" aria-label="Spatial operation">
+              <button type="button" class="mode" data-mode="fragmentation" aria-pressed="false"><i aria-hidden="true"></i><span>Fragment</span></button>
+              <button type="button" class="mode" data-mode="folding" aria-pressed="false"><i aria-hidden="true"></i><span>Folding</span></button>
+              <button type="button" class="mode" data-mode="intersect" aria-pressed="false"><i aria-hidden="true"></i><span>Intersect</span></button>
+            </div>
+            <p class="mode-note" id="prompt">Choose Fragment, Folding, or Intersect to reveal its controls.</p>
+            <div id="operation-controls" hidden>
+              <label id="intensity-control" class="range-label">
+                <span id="strength-label-text">Operation intensity</span>
+                <output id="strength-value" for="strength">65%</output>
+                <input id="strength" type="range" min="0" max="100" value="65">
+              </label>
+              <div data-operation-panel="folding" hidden>
+                <div class="range-label">Fold direction</div>
+                <div class="choice-row" role="group" aria-label="Fold direction">
+                  <button type="button" class="choice active" data-fold-direction="inward" aria-pressed="true">Inward</button>
+                  <button type="button" class="choice" data-fold-direction="outward" aria-pressed="false">Outward</button>
+                </div>
+                <p id="fold-target-note" class="range-note">Click one or two fragments to fold; each stays hinged to a stationary neighbor.</p>
+                <button type="button" id="unfold-segment" class="action" hidden>Unfold selected segment</button>
+              </div>
+              <div data-operation-panel="intersect" hidden>
+                <p class="range-note">Panels slide along their X or Z axis. Intensity controls how far façades and interior partitions move toward and through one another.</p>
+              </div>
+              <div data-operation-panel="fragmentation" hidden>
+                <div class="range-label">Select a base panel</div>
+                <div id="fragment-selection-label" class="range-note">Click one of the three base panels in the model.</div>
+                <label class="range-label">Fragment
+                  <output id="fragment-level-value" for="fragment-level">0 cuts</output>
+                  <input id="fragment-level" type="range" min="0" max="7" step="1" value="0" disabled>
+                </label>
+                <small class="range-note">Each facade has three selectable base panels. Fragment adds angled cuts within the selected panel, with no gaps.</small>
+              </div>
+              <label class="range-label">
+                Interior / exterior connection
+                <output id="stickiness-value" for="stickiness">55%</output>
+                <input id="stickiness" type="range" min="0" max="100" value="55">
+              </label>
+            </div>
+            <div style="margin-top:0.65rem">
+              <button type="button" id="reset" class="action">Reset to conventional grid</button>
+            </div>
+          </section>
+        </aside>
+        <section class="workspace-main" aria-label="Architectural simulation">
+          <header class="drawing-head">
+            <div class="drawing-title" id="drawing-title">Museum / conventional grid</div>
+            <div class="drawing-meta" id="view-title">ISOMETRIC · EXTERIOR + INTERIOR</div>
+          </header>
+          <div class="canvas">
+            <div id="stage" role="img" aria-label="Interactive building simulation in plan or isometric view"></div>
+          </div>
+          <footer class="canvas-foot">
+            <span id="status">Choose an operation to transform the building.</span>
+            <div class="legend">
+              <span><i class="dot blue" aria-hidden="true"></i>Fold / intersection</span>
+              <span><i class="dot green" aria-hidden="true"></i>Fragmentation</span>
+              <span><i class="dot" style="background:#c84e42" aria-hidden="true"></i>Top hinge</span>
+              <span><i class="dot" style="background:#4b8794" aria-hidden="true"></i>Right hinge</span>
+              <span><i class="dot" style="background:#bd8830" aria-hidden="true"></i>Bottom hinge</span>
+              <span><i class="dot" style="background:#75628e" aria-hidden="true"></i>Left hinge</span>
+            </div>
+          </footer>
+          <div class="question"><strong>Central question</strong> &nbsp; How does the collision of exterior and interior behave under deconstructivism?</div>
+        </section>
       </div>
     </div>
   </section>
@@ -1928,7 +2315,7 @@ function initTexts() {
 }
 
 function initScrollSpy() {
-  const sections = ['matrix', 'dossiers', 'diagrams', 'genealogy', 'texts'];
+  const sections = ['matrix', 'dossiers', 'diagrams', 'genealogy', 'texts', 'collision-field'];
   const observerOptions = { root: null, rootMargin: '-20% 0px -60% 0px', threshold: 0 };
 
   const observer = new IntersectionObserver((entries) => {
@@ -1969,5 +2356,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
 });
 </script>
+<script src="assets/collision-field/three.min.js"></script>
+<script src="assets/collision-field/collision-field.js"></script>
 </body>
 </html>
