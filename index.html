@@ -1733,6 +1733,7 @@
               <li>Càndito, Cristina, and Alessandro Meloni. “Revelations of Folies through Geometric Transformations.” <i>Nexus Network Journal</i> 25, suppl. 1 (2023): 269&ndash;276. <a href="https://doi.org/10.1007/s00004-023-00717-0">https://doi.org/10.1007/s00004-023-00717-0</a>.</li>
               <li>Hendrix, John Shannon. <i>The Contradiction Between Form and Function in Architecture</i>. London: Routledge, 2013.</li>
               <li id="ref-mattie-2015">Mattie, Erik, Sophie Roulet, Bert de Muynck, and Cees de Jong. <i>The Colours of . . .: Frank O. Gehry, Jean Nouvel, Wang Shu, and Other Architects</i>. Translated by Textcase. 1st ed. Basel: Birkhäuser, 2015.</li>
+              <li id="ref-shigeru-ban-naked-house">Shigeru Ban Architects. “Naked House.” Accessed November 14, 2026. <a href="https://shigerubanarchitects.com/works/timber-and-bamboo/naked-house/">https://shigerubanarchitects.com/works/timber-and-bamboo/naked-house/</a>.</li>
             </ul>
           </section>
         </div>
@@ -2018,9 +2019,9 @@ const PROJECT_MATRIX_DATA = [
         text: '<strong>Naked House (2000):</strong> Shigeru Ban explores a similar spatial arrangement through movable, offset rooms within a single large translucent shed. Rather than fixed walls, independent room boxes can be repositioned to dissolve boundaries between interior and exterior.',
         imageLayout: 'masonry',
         images: [
-          { url: 'assets/images/naked-house-mobile-partition.jpg', frameColor: 'red', caption: 'Naked House - Movable translucent partition.' },
-          { url: 'assets/images/naked-house-interior.jpg', frameColor: 'red', caption: 'Naked House - Interior showing mobile room volumes.' },
-          { url: 'assets/images/naked-house-sliding-walls.jpg', frameColor: 'red', caption: 'Naked House - Sliding partitions open to the exterior.' }
+          { url: 'assets/images/naked-house-mobile-partition.jpg', frameColor: 'red', caption: 'Naked House - Movable translucent partition.', imageReference: '#ref-shigeru-ban-naked-house', citationAuthor: 'Shigeru Ban Architects', citationTitle: 'Naked House' },
+          { url: 'assets/images/naked-house-interior.jpg', frameColor: 'red', caption: 'Naked House - Interior showing mobile room volumes.', imageReference: '#ref-shigeru-ban-naked-house', citationAuthor: 'Shigeru Ban Architects', citationTitle: 'Naked House' },
+          { url: 'assets/images/naked-house-sliding-walls.jpg', frameColor: 'red', caption: 'Naked House - Sliding partitions open to the exterior.', imageReference: '#ref-shigeru-ban-naked-house', citationAuthor: 'Shigeru Ban Architects', citationTitle: 'Naked House' }
         ]
       }
     ]
@@ -2065,15 +2066,15 @@ const PROJECT_MATRIX_DATA = [
         text: 'Designed as affordable housing, Nemausus uses unconventional, cost-conscious materials and fixtures to create large, open-plan lofts. Residents can choose a layout suited to individual needs instead of receiving one of a set of identical apartments. The project also aims to bring daylight into every unit.',
         imageLayout: 'nemausus-gallery',
         images: [
-          { url: 'assets/images/nemausus-interior.png', frameColor: 'red', caption: 'Nemausus I - Interior view of the flexible living space.', imageReference: '#ref-mattie-2015' },
-          { url: 'assets/images/nemausus-exterior.png', frameColor: 'red', caption: 'Nemausus I - Exterior view of the housing complex.', imageReference: '#ref-mattie-2015' }
+          { url: 'assets/images/nemausus-interior.png', frameColor: 'red', caption: 'Nemausus I - Interior view of the flexible living space.', imageReference: '#ref-mattie-2015', citationAuthor: 'Erik Mattie, Sophie Roulet, Bert de Muynck, and Cees de Jong', citationTitle: 'The Colours of . . .: Frank O. Gehry, Jean Nouvel, Wang Shu, and Other Architects' },
+          { url: 'assets/images/nemausus-exterior.png', frameColor: 'red', caption: 'Nemausus I - Exterior view of the housing complex.', imageReference: '#ref-mattie-2015', citationAuthor: 'Erik Mattie, Sophie Roulet, Bert de Muynck, and Cees de Jong', citationTitle: 'The Colours of . . .: Frank O. Gehry, Jean Nouvel, Wang Shu, and Other Architects' }
         ]
       },
       {
         text: 'Each dwelling is treated as a customizable loft: spaces are not rigidly assigned, units are not repetitive, and openings loosen the boundary between indoors and outdoors. Rather than visually distorting the building, the project challenges expectations of apartment living by rethinking dwelling size and organization around spaciousness, choice, and cost efficiency.<br><br><strong>Spatial placement:</strong> Unlike the Gehry House’s offset, intersecting volumes or the Naked House’s movable room boxes within a shared envelope, Nemausus offers open lofts with resident-selected layouts. All three unsettle fixed spatial expectations; Nemausus does so at the scale of affordable everyday housing.',
         imageLayout: 'nemausus-section',
         images: [
-          { url: 'assets/images/nemausus-sections.png', frameColor: 'red', caption: 'Nemausus I - Section drawings showing the building layouts.', imageReference: '#ref-mattie-2015' }
+          { url: 'assets/images/nemausus-sections.png', frameColor: 'red', caption: 'Nemausus I - Section drawings showing the building layouts.', imageReference: '#ref-mattie-2015', citationAuthor: 'Erik Mattie, Sophie Roulet, Bert de Muynck, and Cees de Jong', citationTitle: 'The Colours of . . .: Frank O. Gehry, Jean Nouvel, Wang Shu, and Other Architects' }
         ]
       }
     ]
@@ -2109,7 +2110,7 @@ function renderProjectMatrix() {
                 ${group.images.map(img => `
                   <div class="matrix-image-frame matrix-image-frame--${img.frameColor}${img.imageReference ? ' matrix-image-frame--cited' : ''}">
                     <img src="${img.url}" alt="${img.caption}" style="width: 100%; height: 140px; object-fit: cover; background: #fff;" onerror="this.src='https://placehold.co/600x400/111111/e53e3e?text=Architectural+Drawing'">
-                    ${img.imageReference ? `<p class="matrix-image-citation"><a href="${img.imageReference}">Erik Mattie, Sophie Roulet, Bert de Muynck, and Cees de Jong, <i>The Colours of . . .: Frank O. Gehry, Jean Nouvel, Wang Shu, and Other Architects</i></a></p>` : ''}
+                    ${img.imageReference ? `<p class="matrix-image-citation"><a href="${img.imageReference}">${img.citationAuthor}, <i>${img.citationTitle}</i></a></p>` : ''}
                   </div>
                 `).join('')}
               </div>
