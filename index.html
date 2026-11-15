@@ -987,10 +987,41 @@
   .matrix-analysis-images--nemausus-gallery .matrix-image-frame {
     height: 300px;
   }
+  .matrix-analysis-images--nemausus-gallery .matrix-image-frame--cited,
+  .matrix-analysis-images--nemausus-section .matrix-image-frame--cited {
+    height: auto;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .matrix-analysis-images--nemausus-gallery .matrix-image-frame--cited {
+    min-height: 300px;
+  }
+  .matrix-analysis-images--nemausus-section .matrix-image-frame--cited {
+    min-height: 360px;
+  }
   .matrix-analysis-images--nemausus-gallery img,
   .matrix-analysis-images--nemausus-section img {
     height: 100% !important;
     object-fit: contain !important;
+  }
+  .matrix-image-frame--cited img {
+    height: 245px !important;
+    flex: 0 0 auto;
+  }
+  .matrix-analysis-images--nemausus-section .matrix-image-frame--cited img {
+    height: 305px !important;
+  }
+  .matrix-image-citation {
+    width: 100%;
+    margin: 0.4rem 0 0;
+    padding-top: 0.35rem;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-muted);
+    font: 0.64rem/1.45 var(--font-mono);
+  }
+  .matrix-image-citation a {
+    color: var(--ink);
+    text-underline-offset: 0.18em;
   }
   .matrix-analysis-images--nemausus-section {
     grid-template-columns: minmax(0, 1fr);
@@ -1228,6 +1259,10 @@
     margin-top: 0.55rem;
     color: var(--ink-muted);
     font: 0.68rem/1.5 var(--font-mono);
+  }
+  .reader-figure figcaption a {
+    color: var(--ink);
+    text-underline-offset: 0.18em;
   }
   .concept-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
   .concept-tag {
@@ -1685,7 +1720,7 @@
               <li>Derrida, Jacques. <i>Positions</i>. Translated by Alan Bass. Chicago: University of Chicago Press, 1981.</li>
               <li>Derrida, Jacques. <i>Writing and Difference</i>. Translated by Alan Bass. Chicago: University of Chicago Press, 1978. Originally published in 1967.</li>
               <li>Johnson, Philip, and Mark Wigley. <i>Deconstructivist Architecture</i>. New York: The Museum of Modern Art, distributed by New York Graphic Society Books, Little, Brown and Company, 1988. Exhibition catalog. <a href="https://www.moma.org/calendar/exhibitions/1813">https://www.moma.org/calendar/exhibitions/1813</a>.</li>
-              <li>Krauss, Rosalind. “Sculpture in the Expanded Field.” <i>October</i> 8 (Spring 1979): 30&ndash;44. <a href="https://www.jstor.org/stable/778224">https://www.jstor.org/stable/778224</a>.</li>
+              <li id="ref-krauss-1979">Krauss, Rosalind. “Sculpture in the Expanded Field.” <i>October</i> 8 (Spring 1979): 30&ndash;44. <a href="https://www.jstor.org/stable/778224">https://www.jstor.org/stable/778224</a>.</li>
               <li>Tafuri, Manfredo. “Toward a Critique of Architectural Ideology.” Translated by Barbara Luigia La Penta. In <i>Architecture Theory since 1968</i>, edited by K. Michael Hays, 2&ndash;35. Cambridge, MA: MIT Press, 1998. Originally published in 1969.</li>
               <li>Tschumi, Bernard. <i>Architecture and Disjunction</i>. 1st MIT Press paperback ed. Cambridge, MA: MIT Press, 1996.</li>
               <li>Venturi, Robert. <i>Complexity and Contradiction in Architecture</i>. 2nd ed. New York: Museum of Modern Art, 1977.</li>
@@ -1697,7 +1732,7 @@
               <li>Barsoum, John. “Deconstructivism in Philosophy, Architecture, and Reusability Contribution.” <i>International Journal of Emerging Science and Engineering</i> 6, no. 12 (2021): 1&ndash;5. <a href="https://doi.org/10.35940/ijese.I2490.0261221">https://doi.org/10.35940/ijese.I2490.0261221</a>.</li>
               <li>Càndito, Cristina, and Alessandro Meloni. “Revelations of Folies through Geometric Transformations.” <i>Nexus Network Journal</i> 25, suppl. 1 (2023): 269&ndash;276. <a href="https://doi.org/10.1007/s00004-023-00717-0">https://doi.org/10.1007/s00004-023-00717-0</a>.</li>
               <li>Hendrix, John Shannon. <i>The Contradiction Between Form and Function in Architecture</i>. London: Routledge, 2013.</li>
-              <li>Mattie, Erik, Sophie Roulet, Bert de Muynck, and Cees de Jong. <i>The Colours of . . .: Frank O. Gehry, Jean Nouvel, Wang Shu, and Other Architects</i>. Translated by Textcase. 1st ed. Basel: Birkhäuser, 2015.</li>
+              <li id="ref-mattie-2015">Mattie, Erik, Sophie Roulet, Bert de Muynck, and Cees de Jong. <i>The Colours of . . .: Frank O. Gehry, Jean Nouvel, Wang Shu, and Other Architects</i>. Translated by Textcase. 1st ed. Basel: Birkhäuser, 2015.</li>
             </ul>
           </section>
         </div>
@@ -1822,7 +1857,8 @@ const TEXTS = [
     concepts: ['Expanded Field', 'Klein Group', 'Not-Architecture', 'Site-Specificity'],
     figure: 'assets/images/krauss-expanded-field.png',
     figureAlt: 'Diagram of the expanded field, relating landscape, architecture, not-landscape, not-architecture, sculpture, site-construction, marked sites, axiomatic structures, the complex, and the neuter.',
-    figureCaption: "Rosalind Krauss's expanded-field diagram, “Sculpture in the Expanded Field,” October 8 (Spring 1979), p. 38. Reproduced from the supplied JSTOR reading."
+    figureCaption: "Rosalind Krauss's expanded-field diagram, “Sculpture in the Expanded Field,” October 8 (Spring 1979), p. 38. Reproduced from the supplied JSTOR reading.",
+    figureReference: '#ref-krauss-1979'
   },
   {
     author: 'Bernard Tschumi',
@@ -2029,15 +2065,15 @@ const PROJECT_MATRIX_DATA = [
         text: 'Designed as affordable housing, Nemausus uses unconventional, cost-conscious materials and fixtures to create large, open-plan lofts. Residents can choose a layout suited to individual needs instead of receiving one of a set of identical apartments. The project also aims to bring daylight into every unit.',
         imageLayout: 'nemausus-gallery',
         images: [
-          { url: 'assets/images/nemausus-interior.png', frameColor: 'red', caption: 'Nemausus I - Interior view of the flexible living space.' },
-          { url: 'assets/images/nemausus-exterior.png', frameColor: 'red', caption: 'Nemausus I - Exterior view of the housing complex.' }
+          { url: 'assets/images/nemausus-interior.png', frameColor: 'red', caption: 'Nemausus I - Interior view of the flexible living space.', imageReference: '#ref-mattie-2015' },
+          { url: 'assets/images/nemausus-exterior.png', frameColor: 'red', caption: 'Nemausus I - Exterior view of the housing complex.', imageReference: '#ref-mattie-2015' }
         ]
       },
       {
         text: 'Each dwelling is treated as a customizable loft: spaces are not rigidly assigned, units are not repetitive, and openings loosen the boundary between indoors and outdoors. Rather than visually distorting the building, the project challenges expectations of apartment living by rethinking dwelling size and organization around spaciousness, choice, and cost efficiency.<br><br><strong>Spatial placement:</strong> Unlike the Gehry House’s offset, intersecting volumes or the Naked House’s movable room boxes within a shared envelope, Nemausus offers open lofts with resident-selected layouts. All three unsettle fixed spatial expectations; Nemausus does so at the scale of affordable everyday housing.',
         imageLayout: 'nemausus-section',
         images: [
-          { url: 'assets/images/nemausus-sections.png', frameColor: 'red', caption: 'Nemausus I - Section drawings showing the building layouts.' }
+          { url: 'assets/images/nemausus-sections.png', frameColor: 'red', caption: 'Nemausus I - Section drawings showing the building layouts.', imageReference: '#ref-mattie-2015' }
         ]
       }
     ]
@@ -2071,8 +2107,9 @@ function renderProjectMatrix() {
               <p style="margin: 0 0 1rem 0; font-size: 0.9rem; color: var(--ink);">${group.text}</p>
               <div class="matrix-analysis-images${group.imageLayout === 'masonry' ? ' matrix-analysis-images--masonry' : ''}${group.imageLayout === 'nemausus-gallery' ? ' matrix-analysis-images--nemausus-gallery' : ''}${group.imageLayout === 'nemausus-section' ? ' matrix-analysis-images--nemausus-section' : ''}">
                 ${group.images.map(img => `
-                  <div class="matrix-image-frame matrix-image-frame--${img.frameColor}">
+                  <div class="matrix-image-frame matrix-image-frame--${img.frameColor}${img.imageReference ? ' matrix-image-frame--cited' : ''}">
                     <img src="${img.url}" alt="${img.caption}" style="width: 100%; height: 140px; object-fit: cover; background: #fff;" onerror="this.src='https://placehold.co/600x400/111111/e53e3e?text=Architectural+Drawing'">
+                    ${img.imageReference ? `<p class="matrix-image-citation">Source: <a href="${img.imageReference}">Erik Mattie, Sophie Roulet, Bert de Muynck, and Cees de Jong, <i>The Colours of . . .: Frank O. Gehry, Jean Nouvel, Wang Shu, and Other Architects</i> (Basel: Birkhäuser, 2015)</a>.</p>` : ''}
                   </div>
                 `).join('')}
               </div>
@@ -2750,7 +2787,7 @@ function initTexts() {
       <div class="reader-analysis">
         <h4>Architectural &amp; Philosophical Reading</h4>
         <p>${t.analysis}</p>
-        ${t.figure ? `<figure class="reader-figure"><img src="${t.figure}" alt="${t.figureAlt}" loading="lazy"><figcaption>${t.figureCaption}</figcaption></figure>` : ''}
+        ${t.figure ? `<figure class="reader-figure"><img src="${t.figure}" alt="${t.figureAlt}" loading="lazy"><figcaption>${t.figureCaption}${t.figureReference ? ` <a href="${t.figureReference}">Bibliography entry</a>` : ''}</figcaption></figure>` : ''}
         <div class="concept-tags">
           ${t.concepts.map(c => `<span class="concept-tag">${c}</span>`).join('')}
         </div>
