@@ -307,8 +307,63 @@
   }
   function syncBehaviors() { const b=config[state.building], radius=Math.hypot(b.w,b.d,b.h)*.78; state.points=state.behaviors.filter(function(behavior){return behavior!=='fragmentation'||state.behaviors.includes('folding');}).map(function(behavior){return {id:'global-'+behavior,x:0,z:0,height:b.h*.48,radius:radius,intensity:state.intensity,behavior:behavior,on:true};}); }
   function drawEmergencyModel(){const canvas=renderer.domElement,ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height;if(!ctx)return;ctx.clearRect(0,0,w,h);ctx.fillStyle='#f5f1e7';ctx.fillRect(0,0,w,h);const scale=Math.min(w/24,h/17),cx=w*.5,cy=h*.58;function pt(x,y,z){return state.view==='plan'?[cx+x*scale,cy+z*scale]:[cx+(x-z)*scale*.72,cy+(x+z)*scale*.38-y*scale*.9];}function face(points,fill){ctx.beginPath();points.forEach(function(p,i){const q=pt(p[0],p[1],p[2]);if(i)ctx.lineTo(q[0],q[1]);else ctx.moveTo(q[0],q[1]);});ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle='#343530';ctx.lineWidth=2;ctx.stroke();}const b=config[state.building],x0=-b.w/2,x1=b.w/2,z0=-b.d/2,z1=b.d/2;face([[x0,0,z0],[x1,0,z0],[x1,0,z1],[x0,0,z1]],'#e7e3d9');face([[x0,0,z0],[x1,0,z0],[x1,b.h,z0],[x0,b.h,z0]],'rgba(247,246,241,.85)');face([[x1,0,z0],[x1,0,z1],[x1,b.h,z1],[x1,b.h,z0]],'rgba(231,228,219,.8)');face([[x0,0,z1],[x1,0,z1],[x1,b.h,z1],[x0,b.h,z1]],'rgba(247,246,241,.64)');face([[x0,0,z0],[x0,0,z1],[x0,b.h,z1],[x0,b.h,z0]],'rgba(231,228,219,.55)');face([[-.15,0,-1.9],[2.65,0,-1.9],[2.65,2.8,-1.9],[-.15,2.8,-1.9]],'rgba(190,188,180,.72)');}
-  function render() { try {if (!fallback) build(); cameraMode(); const label=state.behaviors.length?state.behaviors.join(' + '):'conventional grid',foldWaiting=state.behaviors.includes('folding')&&!state.behaviors.includes('fragmentation'); document.getElementById('view-title').textContent = (state.view === 'plan' ? 'PLAN' : 'ISOMETRIC') + ' · EXTERIOR + INTERIOR' + (fallback ? ' · 2D FALLBACK' : ''); document.getElementById('drawing-title').textContent = config[state.building].name + ' / ' + label; document.getElementById('status').textContent = state.activeOperation==='fragmentation'?'Select one of the three base panels, then use Fragment to add 0–7 angled cuts of varying shapes with no gaps.':foldWaiting?'Folding is selected. Enable Fragmentation to create pieces for it to fold.':state.activeOperation==='intersect'?'Panels slide only along their X or Z axis. Intensity controls how far façades and interior partitions move toward and through one another.':state.behaviors.length ? label[0].toUpperCase()+label.slice(1)+' applied across the building · combine operations or adjust intensity' : 'Conventional grid baseline · choose one or more operations.'; renderer.render(scene, camera); } catch(error) { if(!fallback){activateFallback();document.getElementById('view-title').textContent=(state.view==='plan'?'PLAN':'ISOMETRIC')+' · EXTERIOR + INTERIOR · 2D FALLBACK';render();}else{console.error('Collision Field could not render the building.',error);drawEmergencyModel();} } }
-  function syncOperationPanels(){const hasSelection=!!state.activeOperation,controls=document.getElementById('operation-controls'),foldingContext=state.activeOperation==='folding';controls.hidden=!hasSelection;const intensityControl=document.getElementById('intensity-control');if(intensityControl)intensityControl.hidden=state.activeOperation==='fragmentation';document.querySelectorAll('[data-operation-panel]').forEach(function(panel){const mode=panel.dataset.operationPanel;panel.hidden=mode==='folding'?!foldingContext:mode==='fragmentation'?state.activeOperation!=='fragmentation':mode==='intersect'?state.activeOperation!=='intersect':true;});document.querySelectorAll('[data-mode]').forEach(function(button){const active=state.behaviors.includes(button.dataset.mode);button.classList.toggle('active',active);button.classList.toggle('selected',state.activeOperation===button.dataset.mode);button.setAttribute('aria-pressed',String(active));});const prompt=document.getElementById('prompt'),intensityLabel=document.getElementById('strength-label-text');if(intensityLabel)intensityLabel.textContent=state.activeOperation==='intersect'?'Intersection intensity':'Operation intensity';prompt.textContent=!hasSelection?'Choose Fragment, Folding, or Intersect to reveal its controls.':foldingContext?'Fragmentation is included automatically. Intensity sets the fold up to 120°. Fold one or two segments; each stays attached at a stationary hinge.':state.activeOperation==='intersect'?'Panels slide only along their X or Z axis. Intensity controls how far façades and interior partitions move toward and through one another.':'Each facade has three selectable base panels. Fragment adds 0–7 angled cuts within the selected panel, with no gaps.';}
+  function render() {
+    try {
+      if (!fallback) build();
+      cameraMode();
+      const label = state.behaviors.length ? state.behaviors.join(' + ') : 'conventional grid';
+      const foldWaiting = state.behaviors.includes('folding') && !state.behaviors.includes('fragmentation');
+      document.getElementById('view-title').textContent = (state.view === 'plan' ? 'PLAN' : 'ISOMETRIC') + ' · EXTERIOR + INTERIOR' + (fallback ? ' · 2D FALLBACK' : '');
+      document.getElementById('drawing-title').textContent = config[state.building].name + ' / ' + label;
+      document.getElementById('status').textContent = state.activeOperation === 'fragmentation'
+        ? 'Fragment operation active.'
+        : foldWaiting
+          ? 'Folding is selected. Enable Fragmentation to create pieces for it to fold.'
+          : state.activeOperation === 'intersect'
+            ? 'Intersection operation active.'
+            : state.behaviors.length
+              ? label[0].toUpperCase() + label.slice(1) + ' applied across the building · combine operations or adjust intensity'
+              : 'Conventional grid baseline · choose one or more operations.';
+      renderer.render(scene, camera);
+    } catch (error) {
+      if (!fallback) {
+        activateFallback();
+        document.getElementById('view-title').textContent = (state.view === 'plan' ? 'PLAN' : 'ISOMETRIC') + ' · EXTERIOR + INTERIOR · 2D FALLBACK';
+        render();
+      } else {
+        console.error('Collision Field could not render the building.', error);
+        drawEmergencyModel();
+      }
+    }
+  }
+  function syncOperationPanels() {
+    const hasSelection = !!state.activeOperation;
+    const controls = document.getElementById('operation-controls');
+    const foldingContext = state.activeOperation === 'folding';
+    controls.hidden = !hasSelection;
+    const intensityControl = document.getElementById('intensity-control');
+    if (intensityControl) intensityControl.hidden = state.activeOperation === 'fragmentation';
+    document.querySelectorAll('[data-operation-panel]').forEach(function (panel) {
+      const mode = panel.dataset.operationPanel;
+      panel.hidden = mode === 'folding' ? !foldingContext : mode === 'fragmentation' ? state.activeOperation !== 'fragmentation' : mode === 'intersect' ? state.activeOperation !== 'intersect' : true;
+    });
+    document.querySelectorAll('[data-mode]').forEach(function (button) {
+      const active = state.behaviors.includes(button.dataset.mode);
+      button.classList.toggle('active', active);
+      button.classList.toggle('selected', state.activeOperation === button.dataset.mode);
+      button.setAttribute('aria-pressed', String(active));
+    });
+    const prompt = document.getElementById('prompt');
+    const intensityLabel = document.getElementById('strength-label-text');
+    if (intensityLabel) intensityLabel.textContent = state.activeOperation === 'intersect' ? 'Intersection intensity' : 'Operation intensity';
+    prompt.textContent = !hasSelection
+      ? 'Choose Fragment, Folding, or Intersect to reveal its controls.'
+      : foldingContext
+        ? 'Fragmentation is included automatically. Intensity sets the fold up to 120°. Fold one or two segments; each stays attached at a stationary hinge.'
+        : state.activeOperation === 'intersect'
+          ? 'Panels slide along the X or Z axis.'
+          : 'Select a base panel to add angled fragments.';
+  }
   function setBehavior(value) { const wasSelected=state.activeOperation===value;state.activeOperation=value;const index=state.behaviors.indexOf(value);if(!wasSelected&&index>=0){syncOperationPanels();return;}if(value==='folding'){if(index<0){state.behaviors.push('folding');if(!state.behaviors.includes('fragmentation'))state.behaviors.push('fragmentation');}else{state.behaviors.splice(index,1);state.foldTargets=[];}}else if(value==='fragmentation'&&index>=0&&state.behaviors.includes('folding')){state.behaviors.splice(index,1);state.behaviors.splice(state.behaviors.indexOf('folding'),1);state.foldTargets=[];}else if(index<0)state.behaviors.push(value);else state.behaviors.splice(index,1);syncBehaviors();syncOperationPanels();updateFragmentControls();render(); }
   function foldTargetCenter(target){const surface=state.selectedBasePanel;if(!surface)return null;const pieceIndex=+(target.match(/:(\d+)$/)||[])[1],b=config[state.building],total=surface.axis==='z'?b.w:b.d,len=total/(surface.panelCount||3),u0=-total/2+len*surface.panelIndex,result=fragmentPolygons(u0,u0+len,b.h,state.fragmentLevel,surface.axis+':'+surface.plane+':'+surface.panelIndex),poly=result.polygons[pieceIndex];if(!poly)return null;const center=poly.reduce(function(sum,p){return [sum[0]+p.x/poly.length,sum[1]+p.y/poly.length];},[0,0]);return surface.axis==='z'?{x:center[0],y:center[1]+b.h/2,z:surface.plane}:{x:surface.plane,y:center[1]+b.h/2,z:center[0]};}
   function syncActiveFoldSettings(){const selected=state.selectedFoldTarget&&state.foldSettingsByTarget[state.selectedFoldTarget];if(selected){state.intensity=selected.intensity;state.foldDirection=selected.direction;const slider=document.getElementById('strength');slider.value=state.intensity;document.getElementById('strength-value').textContent=state.intensity+'%';document.querySelectorAll('[data-fold-direction]').forEach(function(button){const active=button.dataset.foldDirection===state.foldDirection;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});}const removeButton=document.getElementById('unfold-segment');if(removeButton)removeButton.hidden=!selected;syncBehaviors();}

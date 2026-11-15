@@ -1665,7 +1665,7 @@
                 <button type="button" id="unfold-segment" class="action" hidden>Unfold selected segment</button>
               </div>
               <div data-operation-panel="intersect" hidden>
-                <p class="range-note">Panels slide along their X or Z axis. Intensity controls how far façades and interior partitions move toward and through one another.</p>
+                <p class="range-note">Intensity sets how far façades and interior partitions move toward and through one another.</p>
               </div>
               <div data-operation-panel="fragmentation" hidden>
                 <div class="range-label">Select a base panel</div>
@@ -1674,7 +1674,7 @@
                   <output id="fragment-level-value" for="fragment-level">0 cuts</output>
                   <input id="fragment-level" type="range" min="0" max="7" step="1" value="0" disabled>
                 </label>
-                <small class="range-note">Each facade has three selectable base panels. Fragment adds angled cuts within the selected panel, with no gaps.</small>
+                <small class="range-note">Select a facade panel, then use Fragment to add angled cuts.</small>
               </div>
               <label class="range-label">
                 Interior / exterior connection
@@ -1719,7 +1719,7 @@
         <div>
           <h2 class="section-title">Foundational Texts &amp; Collaborations</h2>
           <p class="section-desc">
-            Select a source to examine a key passage, theoretical argument, and spatial consequences.
+            Select a source to read a paraphrase of its argument and consider its spatial consequences.
           </p>
         </div>
       </div>
@@ -1860,7 +1860,7 @@ const TEXTS = [
     year: '1967',
     title: 'Writing and Difference',
     pub: 'Editions du Seuil / University of Chicago Press',
-    excerpt: 'There is nothing outside of the text [...] The absolute present, Nature ... have always already escaped, have never existed; that what opens meaning and language is writing as the disappearance of natural presence.',
+    paraphrase: 'Meaning is not grounded in a self-contained reality outside interpretation. What appears immediate or natural is already shaped by signs, traces, and relations.',
     analysis: 'Derrida critiques the metaphysical desire for an absolute origin and pure presence in architectural and philosophical systems. By asserting that language and spatial syntax operate through relational différance and traces, Deconstructivism frees architectural form from the tyranny of logocentric functionalism and classical geometry.',
     concepts: ['Différance', 'Trace', 'Logocentrism', 'Textuality']
   },
@@ -1869,7 +1869,7 @@ const TEXTS = [
     year: '1969',
     title: 'Toward a Critique of Architectural Ideology',
     pub: 'Contropiano / MIT Press',
-    excerpt: 'The avant-gardes of the twentieth century take on the task of reducing the structure of artistic experience to the status of pure object.',
+    paraphrase: 'Twentieth-century avant-gardes sought to strip artistic experience down until the work could be encountered as an autonomous object.',
     analysis: 'Tafuri demonstrates how modern architectural avant-gardes attempt to internalize metropolitan shock, ultimately revealing how formal autonomy and utopian projections are absorbed into capitalist planning. Deconstructivism emerges from this critical realization that architecture can no longer rely on classical harmonization.',
     concepts: ['Metropolitan Shock', 'Capitalist Plan', 'Architectural Ideology', 'Autonomy']
   },
@@ -1878,7 +1878,7 @@ const TEXTS = [
     year: '1979',
     title: 'Sculpture in the Expanded Field',
     pub: 'October, Vol. 8',
-    excerpt: 'Sculpture had previously been historically tied to the monument ... but by 1970, sculpture had entered the expanded field through a Klein group of negations.',
+    paraphrase: 'Sculpture moved beyond its traditional role as monument and entered a wider field organized through contrasting spatial conditions.',
     analysis: 'Krauss maps how spatial practices transcend the binary opposition of architecture and landscape into a dynamic structural matrix. Deconstructivist practices frequently inhabit this expanded field, operating simultaneously as building, landscape, and critical installation.',
     concepts: ['Expanded Field', 'Klein Group', 'Not-Architecture', 'Site-Specificity'],
     figure: 'assets/images/krauss-expanded-field.png',
@@ -1891,7 +1891,7 @@ const TEXTS = [
     year: '1996',
     title: 'Architecture and Disjunction',
     pub: 'MIT Press',
-    excerpt: 'Architecture is not merely the knowledge of forms, but form as knowledge...',
+    paraphrase: 'Architecture is more than knowledge about forms; forms themselves can produce and organize knowledge.',
     analysis: 'Tschumi articulates the core thesis of programmatic disjunction: form does not follow function, nor does function follow form. Instead, architecture operates in the intense collision between space, movement, and event, generating productive spatial disorientation.',
     concepts: ['Disjunction', 'Pyramid vs. Labyrinth', 'Event and Program', 'Architectural Paradox']
   },
@@ -1900,7 +1900,7 @@ const TEXTS = [
     year: '2013',
     title: 'The Contradiction Between Form and Function in Architecture',
     pub: 'Architectural Theory Review',
-    excerpt: 'Deconstructivism in architecture exposes the arbitrary relationship between signifier and signified.',
+    paraphrase: 'Architectural deconstruction reveals that the relationship between a sign and what it signifies is contingent rather than fixed.',
     analysis: 'Hendrix provides a rigorous post-structuralist reading of deconstructivist form, explaining how dissociating architectural signifiers from fixed functional signifieds allows buildings to function as autonomous texts of logical collapse and spatial contradiction.',
     concepts: ['Signifier vs. Signified', 'Syntactic Dysfunction', 'Logical Collapse', 'Semiotics']
   },
@@ -1909,7 +1909,7 @@ const TEXTS = [
     year: '2023',
     title: 'Revelations of Folies through Geometric Transformations',
     pub: 'Nexus Network Journal',
-    excerpt: 'The combinatorial system of the folies complicates ideal geometry through non-homogeneous Euclidean transformations.',
+    paraphrase: 'The folies’ combinatorial order unsettles ideal geometry through Euclidean operations that vary across the grid.',
     analysis: 'Càndito & Meloni analyze the precise geometric operations underlying Tschumi’s Parc de la Villette folies and Derrida’s collaborative spatial analyses, detailing how 3x3x3 cubic grids undergo rotational and translational shear to produce deconstructivist déviance.',
     concepts: ['3x3x3 Cube Grid', 'Normalité vs. Déviance', 'Rotational Shear', 'Combinatorial Geometry']
   }
@@ -2286,15 +2286,15 @@ const diagramSteps = {
     { title: 'Step 1: Ideal 3×3×3 Mesh', explanation: 'The 27-cube mesh is the ideal geometric datum for Folie 7.', relevance: 'The regular lattice makes the later geometric deviations legible.' },
     { title: 'Step 2: Full and Skeletal Modules', explanation: 'Fourteen modules are removed. The 13 remaining modules combine a full-cube base with a skeletal upper group.', relevance: 'Full, empty, and partial modules turn the ideal mesh into a combinatorial scheme.' },
     { title: 'Step 3: Rotate the Upper Group', explanation: 'The upper skeletal group rotates 90° relative to the solid base; the base remains aligned to the original mesh.', relevance: 'The rotation changes the relation between the two assemblies without deforming the cubes themselves.' },
-    { title: 'Step 4: Cylindrical & Prismatic Intersections', explanation: 'Two cylindrical water mill wheels, an inclined water channel, and a triangular stair prism intersect the cubic lattice, modifying one base module.', relevance: 'Mechanical and circulation elements collide with the ideal grid, disrupting the purity of the base module.' },
-    { title: 'Step 5: Folie 7 — Combined Transformations', explanation: 'The final composition carries forward the six retained base modules, rotated skeletal group, two circular water wheels, inclined channel, and triangular stair prism inside the 3×3×3 frame.', relevance: 'The transformed grid and intersecting Euclidean forms resolve as one architectural composition.' }
+    { title: 'Step 4: Circular and Channel Intersections', explanation: 'Two circular water wheels and an inclined water channel intersect the cubic lattice, modifying the base modules.', relevance: 'Mechanical and circulation elements collide with the ideal grid, disrupting the purity of the base module.' },
+    { title: 'Step 5: Folie 7 — Combined Transformations', explanation: 'The final composition carries forward the six retained base modules, rotated skeletal group, two circular water wheels, and inclined channel inside the 3×3×3 frame.', relevance: 'The transformed grid and intersecting Euclidean forms resolve as one architectural composition.' }
   ],
   tschumiL6: [
     { title: 'Step 1: Ideal 3×3×3 Mesh', explanation: 'The 27-cube mesh establishes the fixed structural datum for Folie 6.', relevance: 'The regular lattice remains visible as the reference for the transformed mass.' },
     { title: 'Step 2: Full, Empty, and Partial Modules', explanation: 'A compact full-cube volume is distinguished from the empty and partial modules of the surrounding mesh.', relevance: 'The scheme separates the solid volume from the frame that locates it.' },
     { title: 'Step 3: Half-Module Translation', explanation: 'The block of full cubes moves one-half module in depth relative to the stationary structural grid.', relevance: 'The offset is measured against the unchanged lattice, not by deforming the cubes.' },
     { title: 'Step 4: Incline the Anterior Face', explanation: 'The translated mass keeps its half-module offset as its anterior face inclines slightly.', relevance: 'Translation and inclination create a directional deviation within the cubic system.' },
-    { title: 'Step 5: Folie 6', explanation: 'The final model combines the displaced solid volume and inclined face with its exposed structural frame.', relevance: 'The built folie preserves the grid as a datum while making its transformed parts visible.' }
+    { title: 'Step 5: Folie 6', explanation: 'The final model combines the displaced solid volume and inclined face with its exposed structural frame.', relevance: 'The mass remains intact in the final frame, with its offset and sloped face still legible.' }
   ]
 };
 
@@ -2417,46 +2417,6 @@ function drawFolieN7Step(cx, cy, step) {
         }
       }
     }
-
-    function drawPrismFace(points, fill) {
-      const projected = points.map(([x, y, z]) => isoProject(x, y, z));
-      ctx.beginPath();
-      projected.forEach((point, index) => index ? ctx.lineTo(point.px, point.py) : ctx.moveTo(point.px, point.py));
-      ctx.closePath();
-      ctx.fillStyle = fill;
-      ctx.fill();
-      ctx.strokeStyle = '#71332e';
-      ctx.lineWidth = 1.5;
-      ctx.stroke();
-    }
-
-    const frontY = off + 2 * u;
-    const backY = off + 1.42 * u;
-    const stairX = [off + 1.05 * u, off + 2.25 * u];
-    const stairZ = [0.12 * u, 1.02 * u];
-    drawPrismFace([
-      [stairX[0], frontY, stairZ[0]],
-      [stairX[1], frontY, stairZ[0]],
-      [stairX[1], frontY, stairZ[1]]
-    ], '#932c27');
-    drawPrismFace([
-      [stairX[0], frontY, stairZ[0]],
-      [stairX[1], frontY, stairZ[0]],
-      [stairX[1], backY, stairZ[0]],
-      [stairX[0], backY, stairZ[0]]
-    ], '#a43832');
-    drawPrismFace([
-      [stairX[1], frontY, stairZ[0]],
-      [stairX[1], backY, stairZ[0]],
-      [stairX[1], backY, stairZ[1]],
-      [stairX[1], frontY, stairZ[1]]
-    ], '#a43832');
-    drawPrismFace([
-      [stairX[0], frontY, stairZ[0]],
-      [stairX[1], frontY, stairZ[1]],
-      [stairX[1], backY, stairZ[1]],
-      [stairX[0], backY, stairZ[0]]
-    ], '#d75d52');
 
     const channelStart = [off + 0.65 * u, off + 1.3 * u, 2.35 * u];
     const channelEnd = [off + 2.35 * u, off + 1.3 * u, 0.75 * u];
@@ -2598,7 +2558,6 @@ function drawFolieL6Step(cx, cy, step) {
     drawGrid('#31558f');
   } else if (step === 1) {
     drawMass(0, '#d75d52');
-    drawIsoBox(off + 2 * u, off + 2 * u, 2 * u, u, u, u, { wireframeOnly: true, stroke: '#31558f', lineWidth: 2 });
   } else if (step === 2) {
     drawMass(0, '#d75d52');
     ctx.setLineDash([5, 4]);
@@ -2609,10 +2568,9 @@ function drawFolieL6Step(cx, cy, step) {
     ctx.beginPath(); ctx.moveTo(start.px, start.py); ctx.lineTo(end.px, end.py); ctx.stroke();
     ctx.setLineDash([]);
     drawMass(depthShift, '#d75d52');
-  } else {
+  } else if (step === 3) {
     drawMass(depthShift, '#d75d52');
     drawInclinedFront(depthShift);
-    drawIsoBox(off + 3 * u, massY + depthShift, 2 * u, u, u, u, { wireframeOnly: true, stroke: '#b43d34', lineWidth: 2.4 });
   }
   ctx.restore();
 }
@@ -2626,14 +2584,38 @@ function drawFolieL6Final(u, off, depthShift, massX, massY) {
     }
   }
 
-  drawIsoBox(massX, massY + depthShift, 0, 2 * u, 1.8 * u, 1.1 * u, { fillTop: '#cf534a', fillLeft: '#b84038', fillRight: '#91332e', stroke: '#652b27', lineWidth: 1.3 });
-  drawIsoBox(massX, massY + depthShift, 1.1 * u, 1.15 * u, 1.8 * u, .9 * u, { fillTop: '#d15a50', fillLeft: '#bd463d', fillRight: '#9b3832', stroke: '#652b27', lineWidth: 1.3 });
+  for (let x = 0; x < 2; x++) {
+    for (let y = 0; y < 2; y++) {
+      for (let z = 0; z < 2; z++) {
+        drawIsoBox(massX + x * u, massY + y * u + depthShift, z * u, u, u, u, {
+          fillTop: '#d75d52',
+          fillLeft: '#ad3a34',
+          fillRight: '#842d2a',
+          stroke: '#ffffff',
+          lineWidth: 1.3
+        });
+      }
+    }
+  }
+
+  const lean = u * 0.16;
   drawIsoPolygon([
-    [massX, massY + depthShift + 1.8 * u, 0],
-    [massX + 2 * u, massY + depthShift + 1.8 * u, 0],
-    [massX + 1.82 * u, massY + depthShift + 1.8 * u, 2 * u],
-    [massX + .12 * u, massY + depthShift + 1.8 * u, 2 * u]
-  ], '#c44d43', '#71332e', 2);
+    [massX, massY + depthShift, 0],
+    [massX + 2 * u, massY + depthShift, 0],
+    [massX + 2 * u, massY + depthShift + lean, 2 * u],
+    [massX, massY + depthShift + lean, 2 * u]
+  ], 'rgba(255, 190, 170, 0.68)', '#31558f', 2.5);
+
+  const offsetStart = isoProject(massX - 0.12 * u, massY + 1.5 * u, 1.5 * u);
+  const offsetEnd = isoProject(massX - 0.12 * u, massY + 1.5 * u + depthShift, 1.5 * u);
+  ctx.beginPath();
+  ctx.moveTo(offsetStart.px, offsetStart.py);
+  ctx.lineTo(offsetEnd.px, offsetEnd.py);
+  ctx.setLineDash([5, 4]);
+  ctx.strokeStyle = '#31558f';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.setLineDash([]);
 
   const frameX = off + 2 * u;
   for (let y = 0; y < 3; y++) {
@@ -2841,7 +2823,7 @@ function initTexts() {
         </div>
         <div class="reader-pub">${t.pub}</div>
       </div>
-      <blockquote class="reader-excerpt">${t.excerpt}</blockquote>
+      <p class="reader-excerpt">${t.paraphrase}</p>
       <div class="reader-analysis">
         <h4>Architectural &amp; Philosophical Reading</h4>
         <p>${t.analysis}</p>
