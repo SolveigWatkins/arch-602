@@ -1734,6 +1734,7 @@
               <li>Hendrix, John Shannon. <i>The Contradiction Between Form and Function in Architecture</i>. London: Routledge, 2013.</li>
               <li id="ref-mattie-2015">Mattie, Erik, Sophie Roulet, Bert de Muynck, and Cees de Jong. <i>The Colours of . . .: Frank O. Gehry, Jean Nouvel, Wang Shu, and Other Architects</i>. Translated by Textcase. 1st ed. Basel: Birkhäuser, 2015.</li>
               <li id="ref-shigeru-ban-naked-house">Shigeru Ban Architects. “Naked House.” Accessed November 14, 2026. <a href="https://shigerubanarchitects.com/works/timber-and-bamboo/naked-house/">https://shigerubanarchitects.com/works/timber-and-bamboo/naked-house/</a>.</li>
+              <li id="ref-wikiarquitectura-gehry-house">WikiArquitectura. “Gehry House.” Last modified July 8, 2020. <a href="https://en.wikiarquitectura.com/building/gehry-house/">https://en.wikiarquitectura.com/building/gehry-house/</a>.</li>
             </ul>
           </section>
         </div>
@@ -2010,9 +2011,9 @@ const PROJECT_MATRIX_DATA = [
         text: '<strong>Gehry House (1978):</strong> Frank Gehry wraps an original Dutch Colonial suburban house in a skewed, offset exoskeleton and volumetric additions placed at an angle.',
         imageLayout: 'masonry',
         images: [
-          { url: 'assets/images/gehry-house-interior.jpg', frameColor: 'black', caption: 'Gehry House - Interior view of the intersecting additions.' },
-          { url: 'assets/images/gehry-house-elevation.jpg', frameColor: 'black', caption: 'Gehry House - Elevation drawing showing the offset roof and volumes.' },
-          { url: 'assets/images/gehry-house-exterior.jpg', frameColor: 'black', caption: 'Gehry House - Exterior view of the metal-clad addition.' }
+          { url: 'assets/images/gehry-house-interior.jpg', frameColor: 'black', caption: 'Gehry House - Interior view of the intersecting additions.', imageReference: '#ref-wikiarquitectura-gehry-house', citationAuthor: 'WikiArquitectura', citationTitle: 'Gehry House', citationTitleInQuotes: true },
+          { url: 'assets/images/gehry-house-elevation.jpg', frameColor: 'black', caption: 'Gehry House - Elevation drawing showing the offset roof and volumes.', imageReference: '#ref-wikiarquitectura-gehry-house', citationAuthor: 'WikiArquitectura', citationTitle: 'Gehry House', citationTitleInQuotes: true },
+          { url: 'assets/images/gehry-house-exterior.jpg', frameColor: 'black', caption: 'Gehry House - Exterior view of the metal-clad addition.', imageReference: '#ref-wikiarquitectura-gehry-house', citationAuthor: 'WikiArquitectura', citationTitle: 'Gehry House', citationTitleInQuotes: true }
         ]
       },
       {
@@ -2110,7 +2111,7 @@ function renderProjectMatrix() {
                 ${group.images.map(img => `
                   <div class="matrix-image-frame matrix-image-frame--${img.frameColor}${img.imageReference ? ' matrix-image-frame--cited' : ''}">
                     <img src="${img.url}" alt="${img.caption}" style="width: 100%; height: 140px; object-fit: cover; background: #fff;" onerror="this.src='https://placehold.co/600x400/111111/e53e3e?text=Architectural+Drawing'">
-                    ${img.imageReference ? `<p class="matrix-image-citation"><a href="${img.imageReference}">${img.citationAuthor}, <i>${img.citationTitle}</i></a></p>` : ''}
+                    ${img.imageReference ? `<p class="matrix-image-citation"><a href="${img.imageReference}">${img.citationAuthor}, ${img.citationTitleInQuotes ? `“${img.citationTitle}”` : `<i>${img.citationTitle}</i>`}</a></p>` : ''}
                   </div>
                 `).join('')}
               </div>
