@@ -2606,17 +2606,6 @@ function drawFolieL6Final(u, off, depthShift, massX, massY) {
     [massX, massY + depthShift + lean, 2 * u]
   ], 'rgba(255, 190, 170, 0.68)', '#31558f', 2.5);
 
-  const offsetStart = isoProject(massX - 0.12 * u, massY + 1.5 * u, 1.5 * u);
-  const offsetEnd = isoProject(massX - 0.12 * u, massY + 1.5 * u + depthShift, 1.5 * u);
-  ctx.beginPath();
-  ctx.moveTo(offsetStart.px, offsetStart.py);
-  ctx.lineTo(offsetEnd.px, offsetEnd.py);
-  ctx.setLineDash([5, 4]);
-  ctx.strokeStyle = '#31558f';
-  ctx.lineWidth = 2;
-  ctx.stroke();
-  ctx.setLineDash([]);
-
   const frameX = off + 2 * u;
   for (let y = 0; y < 3; y++) {
     for (let z = 1; z < 3; z++) {
@@ -2889,6 +2878,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 <script src="assets/collision-field/three.min.js"></script>
-<script src="assets/collision-field/collision-field.js"></script>
+<script src="assets/collision-field/collision-field.js?v=collision-intersect-copy"></script>
 </body>
 </html>
