@@ -72,6 +72,8 @@
         entries.forEach(function(entry){let points=entry.poly.map(function(p){return axis==='z'?new THREE.Vector3(p.x,p.y+h/2,plane):new THREE.Vector3(plane,p.y+h/2,p.x);}),shouldFold=state.foldTargets.includes(entry.id);if(shouldFold&&foldPoint){let anchor=pairHinge,best=-Infinity;if(!anchor)entries.forEach(function(other){if(state.foldTargets.includes(other.id))return;const edge=sharedPanelEdge(entry.poly,other.poly);if(edge){const score=Math.hypot(edge[1].x-edge[0].x,edge[1].y-edge[0].y);if(score>best){best=score;anchor=edge;}}});if(anchor){const start=axis==='z'?new THREE.Vector3(anchor[0].x,anchor[0].y+h/2,plane):new THREE.Vector3(plane,anchor[0].y+h/2,anchor[0].x),end=axis==='z'?new THREE.Vector3(anchor[1].x,anchor[1].y+h/2,plane):new THREE.Vector3(plane,anchor[1].y+h/2,anchor[1].x),center=points.reduce(function(sum,q){return sum.add(q.clone().multiplyScalar(1/points.length));},new THREE.Vector3()),amount=pairHinge?pairAmount:foldAngleAt(foldPoint,center.x,center.y,center.z),direction=state.foldDirection==='inward'?(axis==='z'?-Math.sign(plane||1):Math.sign(plane||1)):(axis==='z'?Math.sign(plane||1):-Math.sign(plane||1)),angle=direction*amount;points=points.map(function(q){return rotateAroundEdge(q,start,end,angle);});}}polygon(points.map(function(q){return [q.x,q.y,q.z];}),shouldFold?'rgba(217,50,50,.76)':'rgba(247,246,241,.78)','#292a27',1.2);});
         return;
       }
+      const savedFragmentPanels=Array.from({length:3},function(_,panelIndex){const u0=a0+(a1-a0)*panelIndex,u1=u0+(a1-a0)/3,level=state.fragmentLevels[basePanelKey({face:'exterior',axis:axis,plane:plane,panelIndex:panelIndex})]||0;return {u0:u0,u1:u1,level:level,panelIndex:panelIndex};});
+      if(!state.behaviors.includes('folding')&&savedFragmentPanels.some(function(panel){return panel.level>0;})){savedFragmentPanels.forEach(function(panel){const polygons=panel.level>0?fragmentPolygons(panel.u0,panel.u1,h,panel.level,axis+':'+plane+':'+panel.panelIndex).polygons:[[{x:panel.u0,y:-h/2},{x:panel.u1,y:-h/2},{x:panel.u1,y:h/2},{x:panel.u0,y:h/2}]];polygons.forEach(function(poly){const points=poly.map(function(point){return axis==='z'?[point.x,point.y+h/2,plane]:[plane,point.y+h/2,point.x];});polygon(transformIntersectPanel(points,'fallback-saved-fragment-'+axis+'-'+plane.toFixed(2)+'-'+panel.panelIndex),'rgba(247,246,241,.82)','#292a27',1.4);});});return;}
       if (!fragmentPoint) { if(state.behaviors.includes('intersect')){const segment=(a1-a0)/3;for(let panelIndex=0;panelIndex<3;panelIndex++){const u0=a0+segment*panelIndex,u1=u0+segment,surface={axis:axis,plane:plane,face:'exterior',panelIndex:panelIndex,panelCount:3,len:segment,height:h},pts=axis==='z'?[[u0,0,plane],[u1,0,plane],[u1,h,plane],[u0,h,plane]]:[[plane,0,u0],[plane,0,u1],[plane,h,u1],[plane,h,u0]],transformed=transformIntersectPoints(pts.map(function(p){return new THREE.Vector3(p[0],p[1],p[2]);}),surface).map(function(p){return [p.x,p.y,p.z];});polygon(transformed,'rgba(247,246,241,.78)','#292a27',1.7);}return;}polygon(transformIntersectPanel(base,'fallback-envelope-'+axis+'-'+plane.toFixed(2)), 'rgba(247,246,241,.78)', '#292a27', 1.7);for(let i=1;i<3;i++){const u=a0+(a1-a0)*i/3,seam=axis==='z'?[[u,0,plane+.012],[u,h,plane+.012]]:[[plane+.012,0,u],[plane+.012,h,u]];line(seam,'rgba(41,42,39,.62)',1.2);}return; }
       const target = 6.2;
       const cols = fragmentPoint ? Math.max(1, Math.min(18, Math.ceil((a1-a0)/target))) : 5;
@@ -187,20 +189,20 @@
     return {polygons:polygons,cuts:cuts};
   }
   function wallSlab(group, axis, plane, len, height, opacity, displacement, face) {
-    const baseCount=face==='exterior'?3:1,selected=state.activeOperation==='fragmentation'&&state.selectedBasePanel&&state.selectedBasePanel.axis===axis&&state.selectedBasePanel.plane===plane&&state.selectedBasePanel.face===face?state.selectedBasePanel.panelIndex:-1;
+    const baseCount=face==='exterior'?3:1;
     const segmentLen=len/baseCount,u=displacement?displacement.u:0,v=displacement?displacement.v:0,n=displacement?displacement.n:0;
     function addEdge(mesh,geo,isSelected,highlightColor){const edge=new THREE.LineSegments(new THREE.EdgesGeometry(geo),new THREE.LineBasicMaterial({color:isSelected?(highlightColor||0xd93232):0x31558f,transparent:true,opacity:isSelected?.82:.48}));edge.position.copy(mesh.position);edge.rotation.copy(mesh.rotation);edge.raycast=function(){};group.add(edge);}
     for(let panelIndex=0;panelIndex<baseCount;panelIndex++){
-      const x0=-len/2+segmentLen*panelIndex,x1=x0+segmentLen,basePanelSurface={axis:axis,plane:plane,len:segmentLen,height:height,face:face,panelIndex:panelIndex,panelCount:baseCount},intersectionTransform=intersectTransformFor(basePanelSurface);
+      const x0=-len/2+segmentLen*panelIndex,x1=x0+segmentLen,basePanelSurface={axis:axis,plane:plane,len:segmentLen,height:height,face:face,panelIndex:panelIndex,panelCount:baseCount},intersectionTransform=intersectTransformFor(basePanelSurface),fragmentLevel=state.fragmentLevels[basePanelKey(basePanelSurface)]||0;
       if(state.behaviors.includes('intersect')||face==='interior'&&state.behaviors.includes('folding')){const originalQuad=axis==='z'?[new THREE.Vector3(x0,0,plane),new THREE.Vector3(x1,0,plane),new THREE.Vector3(x1,height,plane),new THREE.Vector3(x0,height,plane)]:[new THREE.Vector3(plane,0,x0),new THREE.Vector3(plane,0,x1),new THREE.Vector3(plane,height,x1),new THREE.Vector3(plane,height,x0)],movedQuad=originalQuad.map(function(p){return p.clone().add(new THREE.Vector3(intersectionTransform.x,intersectionTransform.y,intersectionTransform.z));});addStickyBridge(originalQuad,movedQuad,face+':'+axis+':'+plane+':'+panelIndex);}
-      if(panelIndex===selected){
-        const result=fragmentPolygons(x0,x1,height,state.fragmentLevel,axis+':'+plane+':'+panelIndex),pieces=result.polygons;
+      if(fragmentLevel>0){
+        const pieces=fragmentPolygons(x0,x1,height,fragmentLevel,axis+':'+plane+':'+panelIndex).polygons;
         for(let row=0;row<pieces.length;row++){
           const poly=pieces[row],shape=new THREE.Shape();shape.moveTo(poly[0].x,poly[0].y);for(let j=1;j<poly.length;j++)shape.lineTo(poly[j].x,poly[j].y);shape.closePath();
           const geo=new THREE.ExtrudeGeometry(shape,{depth:.13,bevelEnabled:false,steps:1});geo.translate(0,0,-.065);
-          const active=state.selectedFragmentPanel&&state.selectedFragmentPanel.index===row,mesh=new THREE.Mesh(geo,material('#ffffff',opacity));
+          const active=state.activeOperation==='fragmentation'&&state.selectedBasePanel&&state.selectedBasePanel.axis===axis&&state.selectedBasePanel.plane===plane&&state.selectedBasePanel.face===face&&state.selectedBasePanel.panelIndex===panelIndex&&state.selectedFragmentPanel&&state.selectedFragmentPanel.index===row,mesh=new THREE.Mesh(geo,material('#ffffff',opacity));
           mesh.position.set(axis==='z'?0:plane,height/2,axis==='z'?plane:0);mesh.position.add(new THREE.Vector3(intersectionTransform.x,intersectionTransform.y,intersectionTransform.z));if(axis==='x')mesh.rotation.y=-Math.PI/2;mesh.rotation.y+=intersectionTransform.yaw;
-          mesh.userData.basePanelSurface=basePanelSurface;if(state.fragmentLevel>0)mesh.userData.fragmentPanel={axis:axis,plane:plane,face:face,basePanelIndex:panelIndex,index:row,count:pieces.length};mesh.castShadow=true;mesh.receiveShadow=true;group.add(mesh);addEdge(mesh,geo,active);
+          mesh.userData.basePanelSurface=basePanelSurface;mesh.userData.fragmentPanel={axis:axis,plane:plane,face:face,basePanelIndex:panelIndex,index:row,count:pieces.length};mesh.castShadow=true;mesh.receiveShadow=true;group.add(mesh);addEdge(mesh,geo,active);
         }
       } else {
         const geo=new THREE.BoxGeometry(axis==='z'?segmentLen:.13,height,axis==='x'?segmentLen:.13),mesh=new THREE.Mesh(geo,material('#ffffff',opacity));
@@ -215,6 +217,11 @@
   function rotateAroundEdge(point,start,end,angle){const axis=end.clone().sub(start).normalize(),relative=point.clone().sub(start),cross=new THREE.Vector3().crossVectors(axis,relative),dot=axis.dot(relative),cos=Math.cos(angle),sin=Math.sin(angle);return start.clone().add(relative.multiplyScalar(cos)).add(cross.multiplyScalar(sin)).add(axis.multiplyScalar(dot*(1-cos)));}
   function facade(axis, plane, len, height, face) {
     const shellOffset=0;
+    if(!state.behaviors.includes('folding')){
+      const panelCount=face==='exterior'?3:1;
+      const hasSavedFragments=Array.from({length:panelCount},function(_,panelIndex){return state.fragmentLevels[basePanelKey({face:face,axis:axis,plane:plane,panelIndex:panelIndex})]||0;}).some(function(level){return level>0;});
+      if(hasSavedFragments){wallSlab(model,axis,plane,len,height,.42,{u:0,v:0,n:shellOffset,dx:0,dy:0,dz:0,rx:0,ry:0,rz:0},face);return;}
+    }
     if(state.behaviors.includes('folding')){
       const baseCount=3,segmentLen=len/baseCount,entries=[],panelFoldTargets=[];
       for(let panelIndex=0;panelIndex<baseCount;panelIndex++){

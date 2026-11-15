@@ -1262,7 +1262,7 @@
   .reader-excerpt {
     background: var(--paper-warm); border-left: 3px solid var(--ink);
     padding: 1.1rem 1.35rem; margin: 0 0 1.4rem 0;
-    font-style: italic; font-size: 1.06rem; color: var(--ink);
+    font-style: normal; font-size: 1.06rem; color: var(--ink);
   }
   .reader-analysis h4 {
     font-family: var(--font-mono); font-size: 0.74rem; text-transform: uppercase;
@@ -1474,9 +1474,10 @@
       <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
         <span style="color: var(--ink-muted); font-family: var(--font-mono); font-size: 0.72rem; margin-right: 0.5rem;">Filter Key Themes:</span>
         <button onclick="filterMatrix('all')" class="matrix-filter-btn tl-pill active">All Concepts</button>
+        <button onclick="filterMatrix('càndito')" class="matrix-filter-btn tl-pill">Càndito</button>
         <button onclick="filterMatrix('derrida')" class="matrix-filter-btn tl-pill">Derrida</button>
         <button onclick="filterMatrix('hendrix')" class="matrix-filter-btn tl-pill">Hendrix</button>
-        <button onclick="filterMatrix('tschumi')" class="matrix-filter-btn tl-pill">Tschumi / Càndito</button>
+        <button onclick="filterMatrix('tschumi')" class="matrix-filter-btn tl-pill">Tschumi</button>
         <button onclick="filterMatrix('venturi')" class="matrix-filter-btn tl-pill">Venturi</button>
       </div>
 
@@ -1515,13 +1516,12 @@
           <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; background: var(--accent); color: #ffffff; padding: 0.25rem 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; display: inline-block; margin-bottom: 0.75rem;">Geometric &amp; Syntactic Precedents</span>
           <h2 style="font-family: var(--font-display); font-size: 2.1rem; font-weight: 700; color: var(--ink); margin: 0 0 0.5rem 0; letter-spacing: -0.02em;">Interactive Transformation &amp; Spatial Deconstruction</h2>
           <p style="font-size: 0.98rem; color: var(--ink-soft); margin: 0; max-width: 62ch; line-height: 1.5;">
-            Visualizing geometric transformation rules (Càndito &amp; Meloni 2023 / Tschumi 1987) and syntactic unloading (Eisenman 1975).
+            Càndito &amp; Meloni’s geometric transformations of Tschumi’s Folies 6 and 7.
           </p>
         </div>
         <div class="flex flex-wrap gap-2 font-mono text-xs">
-          <button onclick="setDiagramMode('tschumiN7')" id="mode-tschumiN7-btn" class="tl-pill active" style="font-weight: 700; padding: 0.5rem 0.9rem; text-transform: uppercase;">Folie N7</button>
-          <button onclick="setDiagramMode('tschumiL6')" id="mode-tschumiL6-btn" class="tl-pill" style="padding: 0.5rem 0.9rem; text-transform: uppercase;">Folie L6</button>
-          <button onclick="setDiagramMode('eisenman')" id="mode-eisenman-btn" class="tl-pill" style="padding: 0.5rem 0.9rem; text-transform: uppercase;">Eisenman Axonometric</button>
+          <button onclick="setDiagramMode('tschumiL6')" id="mode-tschumiL6-btn" class="tl-pill active" style="font-weight: 700; padding: 0.5rem 0.9rem; text-transform: uppercase;">Folie 6</button>
+          <button onclick="setDiagramMode('tschumiN7')" id="mode-tschumiN7-btn" class="tl-pill" style="padding: 0.5rem 0.9rem; text-transform: uppercase;">Folie 7</button>
         </div>
       </div>
 
@@ -1529,7 +1529,7 @@
         <div style="border: 1.5px solid var(--rule-strong); background: var(--paper-warm); padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
           <div>
             <div class="w-full flex justify-between items-center mb-3 font-mono text-xs" style="color: var(--ink-muted);">
-              <span id="canvas-title"><i class="fa-solid fa-shapes mr-1.5" style="color: var(--accent);"></i>Folie N7: Axonometric Rotational Transformation (Tschumi / Càndito)</span>
+              <span id="canvas-title"><i class="fa-solid fa-right-left mr-1.5"></i>Folie 6: Translated Mass and Inclined Face (Càndito &amp; Meloni)</span>
               <span id="canvas-status">Step: 1 / 5</span>
             </div>
             <div class="w-full flex items-center justify-center relative overflow-hidden diagram-canvas-surface" style="min-height: 400px; display: flex; align-items: center; justify-content: center;">
@@ -2276,32 +2276,25 @@ function showAuthor(authorKey) {
 }
 
 let canvas, ctx;
-let diagramMode = 'tschumiN7';
+let diagramMode = 'tschumiL6';
 let currentStep = 0;
 let isAnimating = false;
 let animInterval = null;
 
 const diagramSteps = {
   tschumiN7: [
-    { title: 'Step 1: Ideal 27-Cube Axonometric Mesh', explanation: 'Càndito & Meloni identify the theoretical starting point of Folie N7: a pure Euclidean axonometric grid of 27 cubes.', relevance: 'Represents classical geometric unity, symmetry, and predictability before deconstructivist transformation.' },
-    { title: 'Step 2: Combinatorial Subtraction & Base Massing', explanation: 'Solid base modules are formed with an upper skeletal lattice grid overlaying the 3x3x3 envelope.', relevance: 'Breaks volumetric solidity into a fragmented axonometric syntax of solid presence and skeletal void.' },
-    { title: 'Step 3: Rotational Offset & Isolated Module Shift', explanation: 'An isolated modular cube unit is shifted outward from the upper skeletal lattice.', relevance: 'Euclidean rotation induces geometric déviance from standard orthogonal stacking.' },
-    { title: 'Step 4: Vector Alignment & Rotational Axis', explanation: 'A diagonal vector links the upper rotational axis node with the displaced corner volume.', relevance: 'Form collides with circulation axes, severing single-purpose formal purity.' },
-    { title: 'Step 5: Complete Axonometric Folie N7', explanation: 'The final composed folie integrates solid massing, displaced modular units, and rotational vectors.', relevance: 'Illustrates deconstructivism’s logical contradiction: negating expected form while maintaining physical stability.' }
+    { title: 'Step 1: Ideal 3×3×3 Mesh', explanation: 'The 27-cube mesh is the ideal geometric datum for Folie 7.', relevance: 'The regular lattice makes the later geometric deviations legible.' },
+    { title: 'Step 2: Full and Skeletal Modules', explanation: 'Fourteen modules are removed. The 13 remaining modules combine a full-cube base with a skeletal upper group.', relevance: 'Full, empty, and partial modules turn the ideal mesh into a combinatorial scheme.' },
+    { title: 'Step 3: Rotate the Upper Group', explanation: 'The upper skeletal group rotates 90° relative to the solid base; the base remains aligned to the original mesh.', relevance: 'The rotation changes the relation between the two assemblies without deforming the cubes themselves.' },
+    { title: 'Step 4: Cylindrical & Prismatic Intersections', explanation: 'Two cylindrical water mill wheels, an inclined water channel, and a triangular stair prism intersect the cubic lattice, modifying one base module.', relevance: 'Mechanical and circulation elements collide with the ideal grid, disrupting the purity of the base module.' },
+    { title: 'Step 5: Folie 7 — Combined Transformations', explanation: 'The final composition carries forward the six retained base modules, rotated skeletal group, two circular water wheels, inclined channel, and triangular stair prism inside the 3×3×3 frame.', relevance: 'The transformed grid and intersecting Euclidean forms resolve as one architectural composition.' }
   ],
   tschumiL6: [
-    { title: 'Step 1: Ideal 3x3x3 Axonometric Lattice', explanation: 'Folie L6 begins within the standard Cartesian axonometric grid of Parc de la Villette.', relevance: 'Establishes the normative baseline lattice before translational shear is introduced.' },
-    { title: 'Step 2: Solid Subtraction & Volumetric Stepping', explanation: 'Solid red modules are arranged in a stepped volumetric massing within the 3x3x3 envelope.', relevance: 'Establishes initial volumetric asymmetry and massing distribution.' },
-    { title: 'Step 3: Lattice Shift & Exposed Skeleton', explanation: 'The solid volume shifts within the envelope, exposing an open skeletal framework.', relevance: 'Exposes the internal structural cage separate from solid enclosure.' },
-    { title: 'Step 4: Translational Depth Offset', explanation: 'The entire solid block translates forward within the structural envelope, showing interlayer interference and displacement.', relevance: 'Translation decouples spatial enclosure from the structural frame, materializing Derridean spacing.' },
-    { title: 'Step 5: Complete Folie L6', explanation: 'The final composition features stepped solid massing paired with an extending skeletal cantilever armature.', relevance: 'Demonstrates how logical collapse of classical symmetry opens architecture to shifting social uses.' }
-  ],
-  eisenman: [
-    { title: 'Step 1: Base Grid & Four Corner Columns', explanation: 'Establishes the foundational 3x3 isometric grid with four vertical structural columns at the corners.', relevance: 'Represents the primary syntactic datum prior to structural unloading.' },
-    { title: 'Step 2: Top Red Frame & Upper Beam Lattice', explanation: 'A red rectangular beam frame is introduced at the top of the corner columns, enlarging the structural cage.', relevance: 'Establishes the primary structural enclosure.' },
-    { title: 'Step 3: Central Column & Suspended Node', explanation: 'A central vertical column and upper red hanging segment are introduced with a white nodal joint.', relevance: 'Introduces structural non-necessity and autonomous syntactic marking within the grid.' },
-    { title: 'Step 4: Red Translucent Wall Plane Insertion', explanation: 'A vertical red translucent plane slices through the spatial matrix and divides the volumetric field.', relevance: 'Deconstructs traditional volumetric unity by interposing autonomous planar surfaces.' },
-    { title: 'Step 5: Inclined Translucent Roof Plane', explanation: 'An inclined translucent roof plane spans across the upper structure, completing the syntactic transformation sequence.', relevance: 'Exemplifies deconstructivist spatial disruption where planes and vectors override functional necessity.' }
+    { title: 'Step 1: Ideal 3×3×3 Mesh', explanation: 'The 27-cube mesh establishes the fixed structural datum for Folie 6.', relevance: 'The regular lattice remains visible as the reference for the transformed mass.' },
+    { title: 'Step 2: Full, Empty, and Partial Modules', explanation: 'A compact full-cube volume is distinguished from the empty and partial modules of the surrounding mesh.', relevance: 'The scheme separates the solid volume from the frame that locates it.' },
+    { title: 'Step 3: Half-Module Translation', explanation: 'The block of full cubes moves one-half module in depth relative to the stationary structural grid.', relevance: 'The offset is measured against the unchanged lattice, not by deforming the cubes.' },
+    { title: 'Step 4: Incline the Anterior Face', explanation: 'The translated mass keeps its half-module offset as its anterior face inclines slightly.', relevance: 'Translation and inclination create a directional deviation within the cubic system.' },
+    { title: 'Step 5: Folie 6', explanation: 'The final model combines the displaced solid volume and inclined face with its exposed structural frame.', relevance: 'The built folie preserves the grid as a datum while making its transformed parts visible.' }
   ]
 };
 
@@ -2316,14 +2309,13 @@ function initCanvas() {
 function setDiagramMode(mode) {
   diagramMode = mode;
   currentStep = 0;
-  ['tschumiN7', 'tschumiL6', 'eisenman'].forEach(m => {
+  ['tschumiN7', 'tschumiL6'].forEach(m => {
     const btn = document.getElementById(`mode-${m}-btn`);
     if (btn) btn.classList.toggle('active', m === mode);
   });
   const titleMap = {
-    tschumiN7: '<i class="fa-solid fa-arrows-rotate mr-1.5"></i>Folie N7: Axonometric Rotational Transformation (Tschumi / Càndito)',
-    tschumiL6: '<i class="fa-solid fa-right-left mr-1.5"></i>Folie L6: Axonometric Translational Shear (Tschumi / Càndito)',
-    eisenman: '<i class="fa-solid fa-cube mr-1.5"></i>Eisenman\'s House VI: Axonometric Syntax & Dislocation'
+    tschumiN7: '<i class="fa-solid fa-arrows-rotate mr-1.5"></i>Folie 7: Rotated Skeletal Grid (Càndito &amp; Meloni)',
+    tschumiL6: '<i class="fa-solid fa-right-left mr-1.5"></i>Folie 6: Translated Mass and Inclined Face (Càndito &amp; Meloni)'
   };
   const titleEl = document.getElementById('canvas-title');
   if (titleEl) titleEl.innerHTML = titleMap[mode];
@@ -2368,256 +2360,297 @@ function drawIsoBox(x, y, z, dx, dy, dz, options = {}) {
   }
 }
 
-function drawIso3x3x3Cage(unit) {
-  const total = unit * 3;
-  const off = -total / 2;
-  ctx.setLineDash([4, 4]);
-  for (let i = 0; i <= 3; i++) {
-    for (let j = 0; j <= 3; j++) {
-      let b = isoProject(off + i * unit, off + j * unit, 0);
-      let t = isoProject(off + i * unit, off + j * unit, total);
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
-      ctx.lineWidth = 1.2;
-      ctx.beginPath(); ctx.moveTo(b.px, b.py); ctx.lineTo(t.px, t.py); ctx.stroke();
-    }
-  }
-  ctx.setLineDash([]);
+function drawIsoPolygon(points, fill, stroke, lineWidth = 1.5) {
+  const projected = points.map(([x, y, z]) => isoProject(x, y, z));
+  ctx.beginPath();
+  projected.forEach((point, index) => index ? ctx.lineTo(point.px, point.py) : ctx.moveTo(point.px, point.py));
+  ctx.closePath();
+  ctx.fillStyle = fill;
+  ctx.fill();
+  ctx.strokeStyle = stroke;
+  ctx.lineWidth = lineWidth;
+  ctx.stroke();
+}
+
+function drawIsoLine(start, end, color, lineWidth = 1.5) {
+  const a = isoProject(start[0], start[1], start[2]);
+  const b = isoProject(end[0], end[1], end[2]);
+  ctx.beginPath();
+  ctx.moveTo(a.px, a.py);
+  ctx.lineTo(b.px, b.py);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = lineWidth;
+  ctx.stroke();
 }
 
 function drawFolieN7Step(cx, cy, step) {
   const u = 38;
   const off = -1.5 * u;
-  ctx.save();
-  ctx.translate(cx, cy + 45);
-  drawIso3x3x3Cage(u);
-
-  if (step === 0) {
+  const skeletalModules = [[0, 0, 1], [1, 0, 1], [0, 1, 1], [0, 0, 2]];
+  const rotateModules = modules => modules.map(([x, y, z]) => [2 - y, x, z]);
+  function drawMesh(color) {
     for (let x = 0; x < 3; x++) {
       for (let y = 0; y < 3; y++) {
         for (let z = 0; z < 3; z++) {
-          drawIsoBox(off + x * u, off + y * u, z * u, u, u, u, { wireframeOnly: true, stroke: '#31558f', lineWidth: 1.5 });
+          drawIsoBox(off + x * u, off + y * u, z * u, u, u, u, { wireframeOnly: true, stroke: color, lineWidth: 1.2 });
         }
       }
     }
-  } else if (step === 1) {
-    for (let x = 0; x < 3; x++) {
-      for (let y = 0; y < 2; y++) {
-        drawIsoBox(off + x * u, off + y * u, 0, u, u, u, { fillTop: '#ff4d4d', fillLeft: '#cc2929', fillRight: '#991414', stroke: '#FFFFFF', lineWidth: 1.8 });
-      }
-    }
-    for (let x = 0; x < 3; x++) {
-      for (let y = 0; y < 2; y++) {
-        for (let z = 2; z < 3; z++) {
-          drawIsoBox(off + x * u, off + y * u, z * u, u, u, u, { wireframeOnly: true, stroke: '#31558f', lineWidth: 2.0 });
-        }
-      }
-    }
-  } else if (step === 2) {
-    for (let x = 0; x < 2; x++) {
-      for (let y = 0; y < 2; y++) {
-        drawIsoBox(off + x * u, off + y * u, 0, u, u, u, { fillTop: '#ff4d4d', fillLeft: '#cc2929', fillRight: '#991414', stroke: '#FFFFFF', lineWidth: 1.8 });
-      }
-    }
+  }
+  function drawSolidBase() {
     for (let x = 0; x < 3; x++) {
       for (let y = 0; y < 3; y++) {
-        for (let z = 2; z < 3; z++) {
-          if (!(x === 2 && y === 2)) {
-            drawIsoBox(off + x * u, off + y * u, z * u, u, u, u, { wireframeOnly: true, stroke: '#ffffff', lineWidth: 1.8 });
-          }
+        drawIsoBox(off + x * u, off + y * u, 0, u, u, u, { fillTop: '#d75d52', fillLeft: '#ba382f', fillRight: '#932c27', stroke: '#ffffff', lineWidth: 1.4 });
+      }
+    }
+  }
+  function drawSkeletalModules(modules, color, lineWidth) {
+    modules.forEach(([x, y, z]) => {
+      drawIsoBox(off + x * u, off + y * u, z * u, u, u, u, { wireframeOnly: true, stroke: color, lineWidth });
+    });
+  }
+  function drawFolieN7Intersections(drawBase = true) {
+    if (drawBase) {
+      for (let x = 0; x < 3; x++) {
+        for (let y = 0; y < 2; y++) {
+          drawIsoBox(off + x * u, off + y * u, 0, u, u, u, { fillTop: '#d75d52', fillLeft: '#ba382f', fillRight: '#932c27', stroke: '#ffffff', lineWidth: 1.4 });
         }
       }
     }
-    drawIsoBox(off + 2 * u, off + 2 * u, u, u, u, u, { wireframeOnly: true, stroke: '#31558f', lineWidth: 2.5 });
-  } else if (step === 3) {
-    for (let x = 0; x < 2; x++) {
-      for (let y = 0; y < 2; y++) {
-        drawIsoBox(off + x * u, off + y * u, 0, u, u, u, { fillTop: '#ff4d4d', fillLeft: '#cc2929', fillRight: '#991414', stroke: '#FFFFFF', lineWidth: 1.8 });
-      }
+
+    function drawPrismFace(points, fill) {
+      const projected = points.map(([x, y, z]) => isoProject(x, y, z));
+      ctx.beginPath();
+      projected.forEach((point, index) => index ? ctx.lineTo(point.px, point.py) : ctx.moveTo(point.px, point.py));
+      ctx.closePath();
+      ctx.fillStyle = fill;
+      ctx.fill();
+      ctx.strokeStyle = '#71332e';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
     }
-    for (let x = 0; x < 3; x++) {
-      for (let y = 0; y < 3; y++) {
-        for (let z = 2; z < 3; z++) {
-          drawIsoBox(off + x * u, off + y * u, z * u, u, u, u, { wireframeOnly: true, stroke: '#ffffff', lineWidth: 1.5 });
-        }
-      }
-    }
-    let pTop = isoProject(off + 1.5 * u, off + 1.5 * u, 2 * u);
-    let pBot = isoProject(off + 2.5 * u, off + 1.5 * u, 0.5 * u);
-    ctx.strokeStyle = '#ff4d4d';
-    ctx.lineWidth = 3;
-    ctx.beginPath(); ctx.moveTo(pTop.px, pTop.py); ctx.lineTo(pBot.px, pBot.py); ctx.stroke();
+
+    const frontY = off + 2 * u;
+    const backY = off + 1.42 * u;
+    const stairX = [off + 1.05 * u, off + 2.25 * u];
+    const stairZ = [0.12 * u, 1.02 * u];
+    drawPrismFace([
+      [stairX[0], frontY, stairZ[0]],
+      [stairX[1], frontY, stairZ[0]],
+      [stairX[1], frontY, stairZ[1]]
+    ], '#932c27');
+    drawPrismFace([
+      [stairX[0], frontY, stairZ[0]],
+      [stairX[1], frontY, stairZ[0]],
+      [stairX[1], backY, stairZ[0]],
+      [stairX[0], backY, stairZ[0]]
+    ], '#a43832');
+    drawPrismFace([
+      [stairX[1], frontY, stairZ[0]],
+      [stairX[1], backY, stairZ[0]],
+      [stairX[1], backY, stairZ[1]],
+      [stairX[1], frontY, stairZ[1]]
+    ], '#a43832');
+    drawPrismFace([
+      [stairX[0], frontY, stairZ[0]],
+      [stairX[1], frontY, stairZ[1]],
+      [stairX[1], backY, stairZ[1]],
+      [stairX[0], backY, stairZ[0]]
+    ], '#d75d52');
+
+    const channelStart = [off + 0.65 * u, off + 1.3 * u, 2.35 * u];
+    const channelEnd = [off + 2.35 * u, off + 1.3 * u, 0.75 * u];
+    const channelWidth = 0.28 * u;
+    const channelPoints = [
+      channelStart,
+      channelEnd,
+      [channelEnd[0], channelEnd[1] + channelWidth, channelEnd[2]],
+      [channelStart[0], channelStart[1] + channelWidth, channelStart[2]]
+    ].map(([x, y, z]) => isoProject(x, y, z));
+    ctx.beginPath();
+    channelPoints.forEach((point, index) => index ? ctx.lineTo(point.px, point.py) : ctx.moveTo(point.px, point.py));
+    ctx.closePath();
+    ctx.fillStyle = '#d75d52';
+    ctx.fill();
     ctx.strokeStyle = '#ffffff';
-    ctx.beginPath(); ctx.ellipse(pTop.px, pTop.py, 14, 14, 0, 0, Math.PI * 2); ctx.stroke();
-    ctx.beginPath(); ctx.ellipse(pBot.px, pBot.py, 16, 16, 0, 0, Math.PI * 2); ctx.stroke();
-  } else if (step === 4) {
-    for (let x = 0; x < 2; x++) {
-      for (let y = 0; y < 2; y++) {
-        drawIsoBox(off + x * u, off + y * u, 0, u, u, u, { fillTop: '#ff4d4d', fillLeft: '#cc2929', fillRight: '#991414', stroke: '#FFFFFF', lineWidth: 1.8 });
-      }
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    function drawWheel(x, y, z, radius) {
+      const center = isoProject(x, y, z);
+      ctx.beginPath();
+      ctx.arc(center.px, center.py, radius, 0, Math.PI * 2);
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 2.4;
+      ctx.stroke();
     }
-    for (let x = 0; x < 3; x++) {
-      for (let y = 0; y < 3; y++) {
-        for (let z = 2; z < 3; z++) {
-          drawIsoBox(off + x * u, off + y * u, z * u, u, u, u, { wireframeOnly: true, stroke: '#31558f', lineWidth: 1.8 });
-        }
-      }
+
+    drawWheel(off + 0.65 * u, off + 1.3 * u, 2.35 * u, 0.38 * u);
+    drawWheel(off + 2.35 * u, off + 1.3 * u, 0.75 * u, 0.52 * u);
+  }
+  ctx.save();
+  ctx.translate(cx, cy + 45);
+  if (step === 4) {
+    drawFolieN7Final(u, off);
+    drawFolieN7Intersections(false);
+    ctx.restore();
+    return;
+  }
+  drawMesh('#b7c1c7');
+
+  if (step === 0) {
+    drawMesh('#31558f');
+  } else if (step === 3) {
+    drawFolieN7Intersections();
+  } else {
+    drawSolidBase();
+    if (step === 1) {
+      drawSkeletalModules(skeletalModules, '#dc8278', 2);
+    } else if (step === 2) {
+      drawSkeletalModules(skeletalModules, '#e8b0aa', 1.5);
+      const rotatedModules = rotateModules(skeletalModules);
+      drawSkeletalModules(rotatedModules, '#31558f', 2.4);
+      const pivot = isoProject(0, 0, 2.5 * u);
+      ctx.strokeStyle = '#31558f';
+      ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(pivot.px, pivot.py, 23, -Math.PI * 0.85, Math.PI * 0.15); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(pivot.px + 22, pivot.py + 5); ctx.lineTo(pivot.px + 15, pivot.py + 2); ctx.lineTo(pivot.px + 19, pivot.py + 12); ctx.fillStyle = '#31558f'; ctx.fill();
+    } else {
+      const rotatedModules = rotateModules(skeletalModules);
+      drawSkeletalModules(rotatedModules, '#b43d34', 2.5);
     }
-    drawIsoBox(off + 2 * u, off + 2 * u, u, u, u, u, { wireframeOnly: true, stroke: '#ffffff', lineWidth: 2.2 });
   }
   ctx.restore();
+}
+
+function drawFolieN7Final(u, off) {
+  for (let x = 0; x < 3; x++) {
+    for (let y = 0; y < 3; y++) {
+      for (let z = 0; z < 3; z++) {
+        drawIsoBox(off + x * u, off + y * u, z * u, u, u, u, { wireframeOnly: true, stroke: '#b7c1c7', lineWidth: 1.2 });
+      }
+    }
+  }
+  for (let x = 0; x < 3; x++) {
+    for (let y = 0; y < 2; y++) {
+      drawIsoBox(off + x * u, off + y * u, 0, u, u, u, { fillTop: '#d75d52', fillLeft: '#ba382f', fillRight: '#932c27', stroke: '#ffffff', lineWidth: 1.4 });
+    }
+  }
+
+  const skeletalModules = [[0, 0, 1], [1, 0, 1], [0, 1, 1], [0, 0, 2]];
+  const rotatedModules = skeletalModules.map(([x, y, z]) => [2 - y, x, z]);
+  rotatedModules.forEach(([x, y, z]) => {
+    drawIsoBox(off + x * u, off + y * u, z * u, u, u, u, { wireframeOnly: true, stroke: '#b43d34', lineWidth: 2.8 });
+  });
 }
 
 function drawFolieL6Step(cx, cy, step) {
   const u = 38;
   const off = -1.5 * u;
-  ctx.save();
-  ctx.translate(cx, cy + 45);
-  drawIso3x3x3Cage(u);
-
-  if (step === 0) {
+  const depthShift = u / 2;
+  const massX = off + u / 2;
+  const massY = off + u / 2;
+  function drawGrid(color) {
     for (let x = 0; x < 3; x++) {
       for (let y = 0; y < 3; y++) {
         for (let z = 0; z < 3; z++) {
-          drawIsoBox(off + x * u, off + y * u, z * u, u, u, u, { wireframeOnly: true, stroke: '#ffffff', lineWidth: 1.5 });
+          drawIsoBox(off + x * u, off + y * u, z * u, u, u, u, { wireframeOnly: true, stroke: color, lineWidth: 1.2 });
         }
       }
     }
-  } else if (step === 1) {
+  }
+  function drawMass(yOffset, color) {
     for (let x = 0; x < 2; x++) {
       for (let y = 0; y < 2; y++) {
         for (let z = 0; z < 2; z++) {
-          drawIsoBox(off + x * u, off + y * u, z * u, u, u, u, { fillTop: '#ff4d4d', fillLeft: '#cc2929', fillRight: '#991414', stroke: '#FFFFFF', lineWidth: 1.5 });
+          drawIsoBox(massX + x * u, massY + y * u + yOffset, z * u, u, u, u, { fillTop: color, fillLeft: '#ad3a34', fillRight: '#842d2a', stroke: '#ffffff', lineWidth: 1.3 });
         }
       }
     }
+  }
+  function drawInclinedFront(yOffset) {
+    const lean = u * 0.16;
+    const points = [
+      isoProject(massX, massY + yOffset, 0),
+      isoProject(massX + 2 * u, massY + yOffset, 0),
+      isoProject(massX + 2 * u, massY + yOffset + lean, 2 * u),
+      isoProject(massX, massY + yOffset + lean, 2 * u)
+    ];
+    ctx.beginPath();
+    points.forEach((point, index) => index ? ctx.lineTo(point.px, point.py) : ctx.moveTo(point.px, point.py));
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(255, 190, 170, 0.68)';
+    ctx.fill();
+    ctx.strokeStyle = '#31558f';
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+  }
+  ctx.save();
+  ctx.translate(cx, cy + 45);
+  if (step === 4) {
+    drawFolieL6Final(u, off, depthShift, massX, massY);
+    ctx.restore();
+    return;
+  }
+  drawGrid('#b7c1c7');
+
+  if (step === 0) {
+    drawGrid('#31558f');
+  } else if (step === 1) {
+    drawMass(0, '#d75d52');
+    drawIsoBox(off + 2 * u, off + 2 * u, 2 * u, u, u, u, { wireframeOnly: true, stroke: '#31558f', lineWidth: 2 });
   } else if (step === 2) {
-    for (let x = 0; x < 2; x++) {
-      for (let y = 0; y < 3; y++) {
-        for (let z = 0; z < 2; z++) {
-          drawIsoBox(off + x * u, off + y * u, z * u, u, u, u, { fillTop: '#ff4d4d', fillLeft: '#cc2929', fillRight: '#991414', stroke: '#FFFFFF', lineWidth: 1.5 });
-        }
-      }
-    }
-  } else if (step === 3) {
-    for (let x = 0.5; x < 2.5; x++) {
-      for (let y = 0.5; y < 2.5; y++) {
-        for (let z = 0; z < 2; z++) {
-          drawIsoBox(off + (x - 0.5) * u, off + y * u, z * u, u, u, u, { fillTop: '#ff4d4d', fillLeft: '#cc2929', fillRight: '#991414', stroke: '#FFFFFF', lineWidth: 1.5 });
-        }
-      }
-    }
-  } else if (step === 4) {
-    for (let x = 0; x < 2; x++) {
-      for (let y = 0; y < 3; y++) {
-        for (let z = 0; z < 2; z++) {
-          drawIsoBox(off + x * u, off + y * u, z * u, u, u, u, { fillTop: '#ff4d4d', fillLeft: '#cc2929', fillRight: '#991414', stroke: '#FFFFFF', lineWidth: 1.5 });
-        }
-      }
-    }
-    for (let i = 0; i < 3; i++) {
-      drawIsoBox(off + 2.2 * u + i * u, off + 2 * u, 0, u, 0.7 * u, 0.7 * u, { wireframeOnly: true, stroke: '#31558f', lineWidth: 2.2 });
-    }
+    drawMass(0, '#d75d52');
+    ctx.setLineDash([5, 4]);
+    ctx.strokeStyle = '#31558f';
+    ctx.lineWidth = 2;
+    const start = isoProject(massX, massY + 1.5 * u, 1.5 * u);
+    const end = isoProject(massX, massY + 1.5 * u + depthShift, 1.5 * u);
+    ctx.beginPath(); ctx.moveTo(start.px, start.py); ctx.lineTo(end.px, end.py); ctx.stroke();
+    ctx.setLineDash([]);
+    drawMass(depthShift, '#d75d52');
+  } else {
+    drawMass(depthShift, '#d75d52');
+    drawInclinedFront(depthShift);
+    drawIsoBox(off + 3 * u, massY + depthShift, 2 * u, u, u, u, { wireframeOnly: true, stroke: '#b43d34', lineWidth: 2.4 });
   }
   ctx.restore();
 }
 
-function drawEisenmanAxonStep(cx, cy, step) {
-  ctx.save();
-  ctx.translate(cx, cy + 30);
-  function project(x, y, z) {
-    return { px: (x - y) * Math.cos(Math.PI / 6), py: (x + y) * Math.sin(Math.PI / 6) - z };
-  }
-  const scale = 70;
-
-  ctx.strokeStyle = '#334155';
-  ctx.lineWidth = 1;
-  for (let x = -1; x <= 1; x += 0.5) {
-    let p1 = project(x * scale, -scale, 0);
-    let p2 = project(x * scale, scale, 0);
-    ctx.beginPath(); ctx.moveTo(p1.px, p1.py); ctx.lineTo(p2.px, p2.py); ctx.stroke();
-
-    let p3 = project(-scale, x * scale, 0);
-    let p4 = project(scale, x * scale, 0);
-    ctx.beginPath(); ctx.moveTo(p3.px, p3.py); ctx.lineTo(p4.px, p4.py); ctx.stroke();
+function drawFolieL6Final(u, off, depthShift, massX, massY) {
+  for (let x = 0; x < 3; x++) {
+    for (let y = 0; y < 3; y++) {
+      for (let z = 0; z < 3; z++) {
+        drawIsoBox(off + x * u, off + y * u, z * u, u, u, u, { wireframeOnly: true, stroke: '#b7c1c7', lineWidth: 1.2 });
+      }
+    }
   }
 
-  const corners = [[-0.8, -0.8], [0.8, -0.8], [0.8, 0.8], [-0.8, 0.8]];
-  corners.forEach(c => {
-    let bot = project(c[0]*scale, c[1]*scale, 0);
-    let top = project(c[0]*scale, c[1]*scale, scale*1.2);
-    ctx.strokeStyle = '#ffffff';
-    ctx.lineWidth = 3;
-    ctx.beginPath(); ctx.moveTo(bot.px, bot.py); ctx.lineTo(top.px, top.py); ctx.stroke();
-  });
+  drawIsoBox(massX, massY + depthShift, 0, 2 * u, 1.8 * u, 1.1 * u, { fillTop: '#cf534a', fillLeft: '#b84038', fillRight: '#91332e', stroke: '#652b27', lineWidth: 1.3 });
+  drawIsoBox(massX, massY + depthShift, 1.1 * u, 1.15 * u, 1.8 * u, .9 * u, { fillTop: '#d15a50', fillLeft: '#bd463d', fillRight: '#9b3832', stroke: '#652b27', lineWidth: 1.3 });
+  drawIsoPolygon([
+    [massX, massY + depthShift + 1.8 * u, 0],
+    [massX + 2 * u, massY + depthShift + 1.8 * u, 0],
+    [massX + 1.82 * u, massY + depthShift + 1.8 * u, 2 * u],
+    [massX + .12 * u, massY + depthShift + 1.8 * u, 2 * u]
+  ], '#c44d43', '#71332e', 2);
 
-  if (step >= 1) {
-    let p1 = project(-0.8*scale, -0.8*scale, scale*1.2);
-    let p2 = project(0.8*scale, -0.8*scale, scale*1.2);
-    let p3 = project(0.8*scale, 0.8*scale, scale*1.2);
-    let p4 = project(-0.8*scale, 0.8*scale, scale*1.2);
-
-    ctx.strokeStyle = '#ff4d4d';
-    ctx.lineWidth = 3.5;
-    ctx.beginPath();
-    ctx.moveTo(p1.px, p1.py); ctx.lineTo(p2.px, p2.py);
-    ctx.lineTo(p3.px, p3.py); ctx.lineTo(p4.px, p4.py);
-    ctx.closePath();
-    ctx.stroke();
+  const frameX = off + 2 * u;
+  for (let y = 0; y < 3; y++) {
+    for (let z = 1; z < 3; z++) {
+      drawIsoBox(frameX, off + y * u, z * u, u, u, u, { wireframeOnly: true, stroke: '#71332e', lineWidth: 2.6 });
+    }
   }
-
-  if (step >= 2) {
-    let botC = project(0, 0, 0);
-    let midC = project(0, 0, scale*1.2);
-    ctx.strokeStyle = '#ffffff';
-    ctx.lineWidth = 3;
-    ctx.beginPath(); ctx.moveTo(botC.px, botC.py); ctx.lineTo(midC.px, midC.py); ctx.stroke();
-
-    let hangTop = project(0, 0, scale*1.2);
-    let hangBot = project(0, 0, scale*0.6);
-    ctx.strokeStyle = '#ff4d4d';
-    ctx.lineWidth = 4;
-    ctx.beginPath(); ctx.moveTo(hangBot.px, hangBot.py); ctx.lineTo(hangTop.px, hangTop.py); ctx.stroke();
-
-    let node = project(0, 0, scale*0.6);
-    ctx.fillStyle = '#ffffff';
-    ctx.beginPath(); ctx.arc(node.px, node.py, 5, 0, Math.PI*2); ctx.fill();
+  for (let y = 0; y <= 3; y++) {
+    for (let z = 1; z <= 3; z++) {
+      drawIsoLine([frameX, off + y * u, z * u], [frameX + u, off + y * u, z * u], '#71332e', 2.6);
+    }
   }
-
-  if (step >= 3) {
-    let w1 = project(-0.8*scale, 0, 0);
-    let w2 = project(0.8*scale, 0, 0);
-    let w3 = project(0.8*scale, 0, scale*1.2);
-    let w4 = project(-0.8*scale, 0, scale*1.2);
-
-    ctx.fillStyle = 'rgba(239, 68, 68, 0.35)';
-    ctx.strokeStyle = '#ef4444';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(w1.px, w1.py); ctx.lineTo(w2.px, w2.py);
-    ctx.lineTo(w3.px, w3.py); ctx.lineTo(w4.px, w4.py);
-    ctx.closePath();
-    ctx.fill();
-    ctx.stroke();
+  for (let y = 0; y <= 3; y++) {
+    for (let x = 0; x <= 1; x++) {
+      drawIsoLine([frameX + x * u, off + y * u, u], [frameX + x * u, off + y * u, 3 * u], '#71332e', 2.6);
+    }
   }
-
-  if (step >= 4) {
-    let r1 = project(-0.8*scale, -0.8*scale, scale*0.9);
-    let r2 = project(0.8*scale, -0.8*scale, scale*0.6);
-    let r3 = project(0.8*scale, 0.8*scale, scale*0.9);
-    let r4 = project(-0.8*scale, 0.8*scale, scale*1.1);
-
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
-    ctx.strokeStyle = '#ffffff';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(r1.px, r1.py); ctx.lineTo(r2.px, r2.py);
-    ctx.lineTo(r3.px, r3.py); ctx.lineTo(r4.px, r4.py);
-    ctx.closePath();
-    ctx.fill();
-    ctx.stroke();
-  }
-
-  ctx.restore();
 }
 
 function drawDiagram() {
@@ -2630,7 +2663,6 @@ function drawDiagram() {
   const cy = canvas.height / 2;
   if (diagramMode === 'tschumiN7') drawFolieN7Step(cx, cy, currentStep);
   else if (diagramMode === 'tschumiL6') drawFolieL6Step(cx, cy, currentStep);
-  else if (diagramMode === 'eisenman') drawEisenmanAxonStep(cx, cy, currentStep);
 
   const statusEl = document.getElementById('canvas-status');
   if (statusEl) statusEl.textContent = `Step: ${currentStep + 1} / ${steps.length}`;
