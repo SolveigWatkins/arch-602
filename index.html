@@ -975,6 +975,20 @@
     display: block;
     height: 100% !important;
   }
+  .matrix-analysis-images--masonry.matrix-analysis-images--with-citations {
+    grid-template-rows: auto auto;
+    aspect-ratio: auto;
+  }
+  .matrix-analysis-images--masonry.matrix-analysis-images--with-citations .matrix-image-frame--cited {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 0;
+  }
+  .matrix-analysis-images--masonry.matrix-analysis-images--with-citations .matrix-image-frame--cited img {
+    height: auto !important;
+    flex: 0 1 auto;
+  }
   .matrix-analysis-images--nemausus-gallery {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
@@ -2107,7 +2121,7 @@ function renderProjectMatrix() {
           ${p.analysisGroups.map(group => `
             <div class="matrix-analysis-group${group.imageLayout === 'beside-text' ? ' matrix-analysis-group--image-aside' : ''}" style="margin-bottom: 1rem;">
               <p style="margin: 0 0 1rem 0; font-size: 0.9rem; color: var(--ink);">${group.text}</p>
-              <div class="matrix-analysis-images${group.imageLayout === 'masonry' ? ' matrix-analysis-images--masonry' : ''}${group.imageLayout === 'nemausus-gallery' ? ' matrix-analysis-images--nemausus-gallery' : ''}${group.imageLayout === 'nemausus-section' ? ' matrix-analysis-images--nemausus-section' : ''}">
+              <div class="matrix-analysis-images${group.imageLayout === 'masonry' ? ' matrix-analysis-images--masonry' : ''}${group.imageLayout === 'nemausus-gallery' ? ' matrix-analysis-images--nemausus-gallery' : ''}${group.imageLayout === 'nemausus-section' ? ' matrix-analysis-images--nemausus-section' : ''}${group.images.some(img => img.imageReference) ? ' matrix-analysis-images--with-citations' : ''}">
                 ${group.images.map(img => `
                   <div class="matrix-image-frame matrix-image-frame--${img.frameColor}${img.imageReference ? ' matrix-image-frame--cited' : ''}">
                     <img src="${img.url}" alt="${img.caption}" style="width: 100%; height: 140px; object-fit: cover; background: #fff;" onerror="this.src='https://placehold.co/600x400/111111/e53e3e?text=Architectural+Drawing'">
