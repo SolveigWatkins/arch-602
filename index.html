@@ -1046,7 +1046,7 @@
   }
   .matrix-analysis-group--image-aside {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(140px, 30%);
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 40%);
     align-items: start;
     gap: 1rem;
   }
@@ -1057,6 +1057,12 @@
     grid-column: 2;
     grid-row: 1;
     grid-template-columns: minmax(0, 1fr);
+  }
+  .matrix-analysis-group--image-aside .matrix-image-frame img {
+    display: block;
+    width: 100%;
+    height: auto !important;
+    object-fit: contain !important;
   }
   @media (max-width: 640px) {
     .matrix-analysis-group--image-aside {
