@@ -2109,7 +2109,7 @@ function renderProjectMatrix() {
                 ${group.images.map(img => `
                   <div class="matrix-image-frame matrix-image-frame--${img.frameColor}${img.imageReference ? ' matrix-image-frame--cited' : ''}">
                     <img src="${img.url}" alt="${img.caption}" style="width: 100%; height: 140px; object-fit: cover; background: #fff;" onerror="this.src='https://placehold.co/600x400/111111/e53e3e?text=Architectural+Drawing'">
-                    ${img.imageReference ? `<p class="matrix-image-citation">Source: <a href="${img.imageReference}">Erik Mattie, Sophie Roulet, Bert de Muynck, and Cees de Jong, <i>The Colours of . . .: Frank O. Gehry, Jean Nouvel, Wang Shu, and Other Architects</i> (Basel: Birkhäuser, 2015)</a>.</p>` : ''}
+                    ${img.imageReference ? `<p class="matrix-image-citation"><a href="${img.imageReference}">Erik Mattie, Sophie Roulet, Bert de Muynck, and Cees de Jong, <i>The Colours of . . .: Frank O. Gehry, Jean Nouvel, Wang Shu, and Other Architects</i></a></p>` : ''}
                   </div>
                 `).join('')}
               </div>
