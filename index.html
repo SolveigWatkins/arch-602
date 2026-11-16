@@ -1216,82 +1216,8 @@
   .matrix-chip.pulse {
     animation: matrixNodePulse 650ms ease-out 2;
   }
-
-  .texts-layout {
-    display: grid; grid-template-columns: 340px 1fr; gap: 2rem; align-items: start;
-  }
-  .text-index {
-    display: flex; flex-direction: column; border: 1.5px solid var(--rule-strong);
-    background: #fff;
-  }
-  .text-tab {
-    text-align: left; padding: 1rem 1.15rem; border-bottom: 1px solid var(--rule);
-    transition: background 140ms ease; position: relative;
-  }
-  .text-tab:last-child { border-bottom: none; }
-  .text-tab:hover { background: var(--paper-warm); }
-  .text-tab.active { background: var(--accent); color: #fff; }
-  .text-tab.active .text-tab-meta { color: #d0d0d0; }
-  .text-tab-meta {
-    font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase;
-    letter-spacing: 0.06em; color: var(--accent); margin-bottom: 0.25rem;
-  }
-  .text-tab-title {
-    font-family: var(--font-display); font-weight: 700; font-size: 1rem; line-height: 1.25;
-  }
-  .text-reader {
-    border: 1.5px solid var(--rule-strong); background: #fff;
-    padding: clamp(1.5rem, 3vw, 2.5rem);
-  }
-  .reader-top {
-    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem;
-    padding-bottom: 1.1rem; border-bottom: 1px solid var(--rule); margin-bottom: 1.4rem;
-  }
-  .reader-author {
-    font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase;
-    letter-spacing: 0.07em; color: var(--accent); font-weight: 600;
-  }
-  .reader-title {
-    font-family: var(--font-display); font-size: clamp(1.4rem, 2.3vw, 1.9rem);
-    font-weight: 700; line-height: 1.18; margin: 0.35rem 0 0 0;
-  }
-  .reader-pub {
-    font-family: var(--font-mono); font-size: 0.74rem; color: var(--ink-muted);
-    align-self: flex-end;
-  }
-  .reader-excerpt {
-    background: var(--paper-warm); border-left: 3px solid var(--ink);
-    padding: 1.1rem 1.35rem; margin: 0 0 1.4rem 0;
-    font-style: normal; font-size: 1.06rem; color: var(--ink);
-  }
-  .reader-analysis h4 {
-    font-family: var(--font-mono); font-size: 0.74rem; text-transform: uppercase;
-    letter-spacing: 0.08em; color: var(--ink-muted); margin: 0 0 0.5rem 0;
-  }
-  .reader-analysis p { margin: 0 0 1.25rem 0; max-width: 66ch; }
-  .reader-figure {
-    margin: 1.5rem 0;
-    padding: 0.6rem;
-    border: 1px solid var(--rule);
-    background: var(--paper);
-  }
-  .reader-figure img { display: block; width: 100%; height: auto; }
-  .reader-figure figcaption {
-    margin-top: 0.55rem;
-    color: var(--ink-muted);
-    font: 0.68rem/1.5 var(--font-mono);
-  }
-  .reader-figure figcaption a {
-    color: var(--ink);
-    text-underline-offset: 0.18em;
-  }
-  .concept-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
-  .concept-tag {
-    font-family: var(--font-mono); font-size: 0.72rem; padding: 0.28rem 0.6rem;
-    background: var(--accent-soft); color: var(--accent); border: 1px solid rgba(184, 41, 31, 0.25);
-  }
   .reference-list {
-    margin-top: 2rem;
+    margin-top: 0;
     padding: clamp(1.25rem, 3vw, 2rem);
     border: 1.5px solid var(--rule-strong);
     background: var(--paper);
@@ -1367,7 +1293,7 @@
   }
 
   @media (max-width: 960px) {
-    .hero-grid, .essay-grid, .texts-layout, .footer-inner { grid-template-columns: 1fr; }
+    .hero-grid, .essay-grid, .footer-inner { grid-template-columns: 1fr; }
     .reference-columns { grid-template-columns: 1fr; gap: 1.5rem; }
     .intro-hero-inner { min-height: auto; grid-template-columns: 1fr; }
     .intro-visual { width: min(70%, 390px); }
@@ -1477,6 +1403,8 @@
         <button onclick="filterMatrix('càndito')" class="matrix-filter-btn tl-pill">Càndito</button>
         <button onclick="filterMatrix('derrida')" class="matrix-filter-btn tl-pill">Derrida</button>
         <button onclick="filterMatrix('hendrix')" class="matrix-filter-btn tl-pill">Hendrix</button>
+        <button onclick="filterMatrix('krauss')" class="matrix-filter-btn tl-pill">Krauss</button>
+        <button onclick="filterMatrix('tafuri')" class="matrix-filter-btn tl-pill">Tafuri</button>
         <button onclick="filterMatrix('tschumi')" class="matrix-filter-btn tl-pill">Tschumi</button>
         <button onclick="filterMatrix('venturi')" class="matrix-filter-btn tl-pill">Venturi</button>
       </div>
@@ -1580,7 +1508,7 @@
           <button type="button" class="tl-pill" data-era="event"><span class="tl-swatch event"></span>Exhibitions &amp; Studios</button>
           <button type="button" class="tl-pill" data-era="project"><span class="tl-swatch project"></span>Built &amp; Spatial Works</button>
         </div>
-        <div class="tl-link-hint">Click any timeline card to inspect historical continuity</div>
+        <div class="tl-link-hint">Click any RED timeline card to inspect historical continuity</div>
       </div>
 
       <div class="tl-canvas-frame" style="margin-bottom: 2.5rem;">
@@ -1714,24 +1642,9 @@
 
   <section id="view-texts" class="band">
     <div class="wrap">
-      <div class="section-head">
-        <div class="section-num">Section 07<span>Primary Literature</span></div>
-        <div>
-          <h2 class="section-title">Foundational Texts &amp; Collaborations</h2>
-          <p class="section-desc">
-            Select a source to read a paraphrase of its argument and consider its spatial consequences.
-          </p>
-        </div>
-      </div>
-
-      <div class="texts-layout">
-        <div class="text-index" id="textIndex" role="tablist" aria-label="Foundational texts"></div>
-        <article class="text-reader" id="textReader" aria-live="polite"></article>
-      </div>
-
       <section class="reference-list" aria-labelledby="reference-list-title">
         <div class="reference-list-head">
-          <h3 class="reference-list-title" id="reference-list-title">References</h3>
+          <h2 class="reference-list-title" id="reference-list-title">References</h2>
           <p class="reference-list-style">Chicago-style bibliography</p>
         </div>
         <div class="reference-columns">
@@ -1817,6 +1730,24 @@ const matrixData = [
     keyPoint: 'That disjunction makes form a deliberate contradiction of use.'
   },
   {
+    id: 'architectural-ideology',
+    author: 'Tafuri',
+    title: 'Toward a Critique of Architectural Ideology',
+    subtitle: 'Avant-Garde Autonomy & Capitalist Planning',
+    dichotomy: 'Formal Autonomy vs. Capitalist Planning',
+    summary: 'Twentieth-century avant-gardes sought to strip artistic experience down until the work could be encountered as an autonomous object.',
+    keyPoint: 'Formal autonomy and utopian projections are ultimately absorbed into capitalist planning.'
+  },
+  {
+    id: 'expanded-field',
+    author: 'Krauss',
+    title: 'Sculpture in the Expanded Field',
+    subtitle: 'Architecture, Landscape & the Expanded Field',
+    dichotomy: 'Architecture vs. Landscape',
+    summary: 'Sculpture moved beyond its traditional role as monument and entered a wider field organized through contrasting spatial conditions.',
+    keyPoint: 'Spatial practices cross architecture and landscape, allowing works to operate as building, landscape, and critical installation.'
+  },
+  {
     id: 'geometric-transformation',
     author: 'Càndito',
     title: 'Geometric Transformation & Déviance',
@@ -1851,67 +1782,6 @@ const matrixData = [
     dichotomy: 'Either-Or Exclusion vs. Both-And Inclusion',
     summary: 'Venturi’s both-and approach embraces ambiguity and contradiction over modernist either-or simplicity.',
     keyPoint: 'Deconstructivism extends that critique by disrupting symmetry and visual unity.'
-  }
-];
-
-const TEXTS = [
-  {
-    author: 'Jacques Derrida',
-    year: '1967',
-    title: 'Writing and Difference',
-    pub: 'Editions du Seuil / University of Chicago Press',
-    paraphrase: 'Meaning is not grounded in a self-contained reality outside interpretation. What appears immediate or natural is already shaped by signs, traces, and relations.',
-    analysis: 'Derrida critiques the metaphysical desire for an absolute origin and pure presence in architectural and philosophical systems. By asserting that language and spatial syntax operate through relational différance and traces, Deconstructivism frees architectural form from the tyranny of logocentric functionalism and classical geometry.',
-    concepts: ['Différance', 'Trace', 'Logocentrism', 'Textuality']
-  },
-  {
-    author: 'Manfredo Tafuri',
-    year: '1969',
-    title: 'Toward a Critique of Architectural Ideology',
-    pub: 'Contropiano / MIT Press',
-    paraphrase: 'Twentieth-century avant-gardes sought to strip artistic experience down until the work could be encountered as an autonomous object.',
-    analysis: 'Tafuri demonstrates how modern architectural avant-gardes attempt to internalize metropolitan shock, ultimately revealing how formal autonomy and utopian projections are absorbed into capitalist planning. Deconstructivism emerges from this critical realization that architecture can no longer rely on classical harmonization.',
-    concepts: ['Metropolitan Shock', 'Capitalist Plan', 'Architectural Ideology', 'Autonomy']
-  },
-  {
-    author: 'Rosalind Krauss',
-    year: '1979',
-    title: 'Sculpture in the Expanded Field',
-    pub: 'October, Vol. 8',
-    paraphrase: 'Sculpture moved beyond its traditional role as monument and entered a wider field organized through contrasting spatial conditions.',
-    analysis: 'Krauss maps how spatial practices transcend the binary opposition of architecture and landscape into a dynamic structural matrix. Deconstructivist practices frequently inhabit this expanded field, operating simultaneously as building, landscape, and critical installation.',
-    concepts: ['Expanded Field', 'Klein Group', 'Not-Architecture', 'Site-Specificity'],
-    figure: 'assets/images/krauss-expanded-field.png',
-    figureAlt: 'Diagram of the expanded field, relating landscape, architecture, not-landscape, not-architecture, sculpture, site-construction, marked sites, axiomatic structures, the complex, and the neuter.',
-    figureCaption: "Rosalind Krauss's expanded-field diagram, “Sculpture in the Expanded Field,” October 8 (Spring 1979), p. 38. Reproduced from the supplied JSTOR reading.",
-    figureReference: '#ref-krauss-1979'
-  },
-  {
-    author: 'Bernard Tschumi',
-    year: '1996',
-    title: 'Architecture and Disjunction',
-    pub: 'MIT Press',
-    paraphrase: 'Architecture is more than knowledge about forms; forms themselves can produce and organize knowledge.',
-    analysis: 'Tschumi articulates the core thesis of programmatic disjunction: form does not follow function, nor does function follow form. Instead, architecture operates in the intense collision between space, movement, and event, generating productive spatial disorientation.',
-    concepts: ['Disjunction', 'Pyramid vs. Labyrinth', 'Event and Program', 'Architectural Paradox']
-  },
-  {
-    author: 'John Shannon Hendrix',
-    year: '2013',
-    title: 'The Contradiction Between Form and Function in Architecture',
-    pub: 'Architectural Theory Review',
-    paraphrase: 'Architectural deconstruction reveals that the relationship between a sign and what it signifies is contingent rather than fixed.',
-    analysis: 'Hendrix provides a rigorous post-structuralist reading of deconstructivist form, explaining how dissociating architectural signifiers from fixed functional signifieds allows buildings to function as autonomous texts of logical collapse and spatial contradiction.',
-    concepts: ['Signifier vs. Signified', 'Syntactic Dysfunction', 'Logical Collapse', 'Semiotics']
-  },
-  {
-    author: 'Cristina Càndito & Alessandro Meloni',
-    year: '2023',
-    title: 'Revelations of Folies through Geometric Transformations',
-    pub: 'Nexus Network Journal',
-    paraphrase: 'The folies’ combinatorial order unsettles ideal geometry through Euclidean operations that vary across the grid.',
-    analysis: 'Càndito & Meloni analyze the precise geometric operations underlying Tschumi’s Parc de la Villette folies and Derrida’s collaborative spatial analyses, detailing how 3x3x3 cubic grids undergo rotational and translational shear to produce deconstructivist déviance.',
-    concepts: ['3x3x3 Cube Grid', 'Normalité vs. Déviance', 'Rotational Shear', 'Combinatorial Geometry']
   }
 ];
 
@@ -2796,45 +2666,6 @@ function syncTimelineAndMatrix(nodeId) {
   });
 }
 
-function initTexts() {
-  const indexEl = document.getElementById('textIndex');
-  const readerEl = document.getElementById('textReader');
-  if (!indexEl || !readerEl) return;
-
-  function renderText(idx) {
-    const t = TEXTS[idx];
-    Array.from(indexEl.children).forEach((tab, i) => tab.classList.toggle('active', i === idx));
-    readerEl.innerHTML = `
-      <div class="reader-top">
-        <div>
-          <div class="reader-author">${t.author} &bull; ${t.year}</div>
-          <h3 class="reader-title">${t.title}</h3>
-        </div>
-        <div class="reader-pub">${t.pub}</div>
-      </div>
-      <p class="reader-excerpt">${t.paraphrase}</p>
-      <div class="reader-analysis">
-        <h4>Architectural &amp; Philosophical Reading</h4>
-        <p>${t.analysis}</p>
-        ${t.figure ? `<figure class="reader-figure"><img src="${t.figure}" alt="${t.figureAlt}" loading="lazy"><figcaption>${t.figureCaption}${t.figureReference ? ` <a href="${t.figureReference}">Bibliography entry</a>` : ''}</figcaption></figure>` : ''}
-        <div class="concept-tags">
-          ${t.concepts.map(c => `<span class="concept-tag">${c}</span>`).join('')}
-        </div>
-      </div>
-    `;
-  }
-
-  TEXTS.forEach((t, idx) => {
-    const tab = document.createElement('button');
-    tab.type = 'button';
-    tab.className = 'text-tab' + (idx === 0 ? ' active' : '');
-    tab.innerHTML = `<div class="text-tab-meta">${t.author} &bull; ${t.year}</div><div class="text-tab-title">${t.title}</div>`;
-    tab.addEventListener('click', () => renderText(idx));
-    indexEl.appendChild(tab);
-  });
-  renderText(0);
-}
-
 function initScrollSpy() {
   const sections = ['matrix', 'dossiers', 'diagrams', 'genealogy', 'project-matrix', 'collision-field', 'texts'];
   const observerOptions = { root: null, rootMargin: '-20% 0px -60% 0px', threshold: 0 };
@@ -2864,7 +2695,6 @@ document.addEventListener('DOMContentLoaded', () => {
   showAuthor('venturi');
   initCanvas();
   initTimeline();
-  initTexts();
   initScrollSpy();
   syncTimelineAndMatrix('villette-1984');
 
