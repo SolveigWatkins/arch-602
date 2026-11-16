@@ -1270,6 +1270,120 @@
     overflow-wrap: anywhere;
   }
   .reference-entries a { color: var(--ink); }
+  .process-log-panel {
+    border: 1.5px solid var(--rule-strong);
+    background: var(--paper);
+    box-shadow: 8px 8px 0 var(--paper-off), 8px 8px 0 1px var(--rule-strong);
+  }
+  .process-log-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper-warm);
+    color: var(--ink-muted);
+    font: 0.68rem var(--font-mono);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .process-log-download {
+    padding: 0.35rem 0.65rem;
+    border: 1px solid var(--rule-strong);
+    background: #fff;
+    color: var(--ink);
+    transition: background 140ms ease, color 140ms ease;
+  }
+  .process-log-download:hover {
+    background: var(--ink);
+    color: #fff;
+  }
+  .process-log-content {
+    padding: clamp(1.25rem, 3vw, 2.5rem);
+  }
+  .process-log-content h2,
+  .process-log-content h3,
+  .process-log-content h4 {
+    font-family: var(--font-display);
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .process-log-content h2 {
+    margin: 2.5rem 0 0.9rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid var(--rule-strong);
+    font-size: clamp(1.4rem, 2.3vw, 1.9rem);
+  }
+  .process-log-content h2:first-child { margin-top: 0; }
+  .process-log-content h3 {
+    margin: 1.7rem 0 0.65rem;
+    color: var(--blueprint);
+    font-size: 1.2rem;
+  }
+  .process-log-content h4 {
+    margin: 1.35rem 0 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .process-log-content p {
+    max-width: 90ch;
+    margin: 0 0 0.85rem;
+    color: var(--ink-soft);
+  }
+  .process-log-content ul {
+    display: grid;
+    gap: 0.7rem;
+    margin: 0 0 1rem;
+    padding-left: 1.3rem;
+    color: var(--ink-soft);
+  }
+  .process-log-content li::marker { color: var(--accent); }
+  .process-log-content a {
+    color: var(--blueprint);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.15em;
+  }
+  .process-log-content code {
+    padding: 0.08rem 0.25rem;
+    background: var(--paper-warm);
+    font-family: var(--font-mono);
+    font-size: 0.86em;
+  }
+  .process-log-table-wrap {
+    overflow-x: auto;
+    margin: 1rem 0 1.5rem;
+    border: 1px solid var(--rule-strong);
+  }
+  .process-log-content table {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  .process-log-content th {
+    padding: 0.7rem 0.8rem;
+    background: var(--ink);
+    color: #fff;
+    font: 600 0.68rem var(--font-mono);
+    letter-spacing: 0.05em;
+    text-align: left;
+    text-transform: uppercase;
+    vertical-align: top;
+  }
+  .process-log-content td {
+    padding: 0.7rem 0.8rem;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-soft);
+    vertical-align: top;
+  }
+  .process-log-content tr:nth-child(even) td { background: var(--paper-tint); }
+  .process-log-status { color: var(--ink-muted); font: 0.8rem var(--font-mono); }
+  .process-log-status[role="alert"] { color: var(--accent); }
 
   .site-footer {
     background: var(--paper-warm); color: var(--ink);
@@ -1361,6 +1475,9 @@
     </button>
     <button onclick="scrollToSection('texts')" id="nav-texts" aria-label="Texts and Literature" title="Texts and Literature">
       <span class="nav-rail-label"><span class="nav-rail-code">B7</span><span>Sources</span></span>
+    </button>
+    <button onclick="scrollToSection('process-log')" id="nav-process-log" aria-label="Process Log" title="Process Log">
+      <span class="nav-rail-label"><span class="nav-rail-code">B8</span><span>Process</span></span>
     </button>
   </nav>
 </aside>
@@ -1678,6 +1795,26 @@
       </section>
     </div>
   </section>
+
+  <section id="view-process-log" class="band alt">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-num">Section 08<span>Process &amp; Credits</span></div>
+        <div>
+          <h2 class="section-title">Process Log</h2>
+          <p class="section-desc">A transparent record of the project’s human direction, AI-assisted implementation, design revisions, tool choices, and verification.</p>
+        </div>
+      </div>
+      <div class="process-log-panel">
+        <div class="process-log-toolbar">
+          <span>Project record · human + AI contributions</span>
+          <a class="process-log-download" href="PROCESS_LOG.md" download>Download Markdown</a>
+        </div>
+        <div id="processLogStatus" class="process-log-content process-log-status" role="status">Loading the project process log…</div>
+        <article id="processLogContent" class="process-log-content" aria-live="polite"></article>
+      </div>
+    </div>
+  </section>
 </main>
   <footer class="site-footer">
     <div class="footer-inner">
@@ -1706,6 +1843,9 @@ const PLATES = {
 function scrollToSection(sectionId) {
   const target = document.getElementById(`view-${sectionId}`);
   if (target) {
+    document.querySelectorAll('.nav-links button').forEach(button => {
+      button.classList.toggle('active', button.id === `nav-${sectionId}`);
+    });
     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
@@ -2667,26 +2807,139 @@ function syncTimelineAndMatrix(nodeId) {
 }
 
 function initScrollSpy() {
-  const sections = ['matrix', 'dossiers', 'diagrams', 'genealogy', 'project-matrix', 'collision-field', 'texts'];
+  const sections = ['matrix', 'dossiers', 'diagrams', 'genealogy', 'project-matrix', 'collision-field', 'texts', 'process-log'];
   const observerOptions = { root: null, rootMargin: '-20% 0px -60% 0px', threshold: 0 };
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const viewId = entry.target.id;
-        const sectionId = viewId.replace('view-', '');
-        sections.forEach(id => {
-          const navBtn = document.getElementById(`nav-${id}`);
-          if (navBtn) navBtn.classList.toggle('active', id === sectionId);
-        });
-      }
+  function updateActiveSection() {
+    const marker = window.innerHeight * 0.3;
+    const current = sections.find(id => {
+      const section = document.getElementById(`view-${id}`);
+      if (!section) return false;
+      const bounds = section.getBoundingClientRect();
+      return bounds.top <= marker && bounds.bottom > marker;
     });
-  }, observerOptions);
+    if (!current) return;
+    sections.forEach(id => {
+      const navBtn = document.getElementById(`nav-${id}`);
+      if (navBtn) navBtn.classList.toggle('active', id === current);
+    });
+  }
+
+  const observer = new IntersectionObserver(updateActiveSection, observerOptions);
 
   sections.forEach(id => {
     const el = document.getElementById(`view-${id}`);
     if (el) observer.observe(el);
   });
+  window.addEventListener('scroll', updateActiveSection, { passive: true });
+  updateActiveSection();
+}
+
+function renderProcessLogInline(text) {
+  const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  const parts = [];
+  let inline = escaped
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (_, label, url) => {
+      parts.push(`<a href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`);
+      return `\u0000${parts.length - 1}\u0000`;
+    })
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  inline = inline.replace(/\u0000(\d+)\u0000/g, (_, index) => parts[Number(index)]);
+  return inline;
+}
+
+function renderProcessLog(markdown) {
+  const target = document.getElementById('processLogContent');
+  const status = document.getElementById('processLogStatus');
+  if (!target || !status) return;
+
+  const lines = markdown.split(/\r?\n/);
+  const output = [];
+  let paragraph = [];
+  let listItems = [];
+  let tableRows = [];
+
+  function flushParagraph() {
+    if (!paragraph.length) return;
+    output.push(`<p>${renderProcessLogInline(paragraph.join(' '))}</p>`);
+    paragraph = [];
+  }
+
+  function flushList() {
+    if (!listItems.length) return;
+    output.push(`<ul>${listItems.map(item => `<li>${renderProcessLogInline(item)}</li>`).join('')}</ul>`);
+    listItems = [];
+  }
+
+  function flushTable() {
+    if (tableRows.length < 2) {
+      tableRows.forEach(row => output.push(`<p>${renderProcessLogInline(row.join(' · '))}</p>`));
+      tableRows = [];
+      return;
+    }
+    const [header, ...rows] = tableRows;
+    const head = `<thead><tr>${header.map(cell => `<th scope="col">${renderProcessLogInline(cell)}</th>`).join('')}</tr></thead>`;
+    const body = `<tbody>${rows.map(row => `<tr>${row.map(cell => `<td>${renderProcessLogInline(cell)}</td>`).join('')}</tr>`).join('')}</tbody>`;
+    output.push(`<div class="process-log-table-wrap"><table>${head}${body}</table></div>`);
+    tableRows = [];
+  }
+
+  function flushBlocks() {
+    flushParagraph();
+    flushList();
+    flushTable();
+  }
+
+  lines.forEach(line => {
+    const trimmed = line.trim();
+    const heading = trimmed.match(/^(#{1,6})\s+(.+)$/);
+    if (!trimmed) {
+      flushBlocks();
+      return;
+    }
+    if (heading) {
+      flushBlocks();
+      const level = Math.min(6, heading[1].length + 1);
+      output.push(`<h${level}>${renderProcessLogInline(heading[2])}</h${level}>`);
+      return;
+    }
+    if (/^\|\s*:?-{3,}/.test(trimmed)) return;
+    if (trimmed.startsWith('|')) {
+      flushParagraph();
+      flushList();
+      tableRows.push(trimmed.replace(/^\||\|$/g, '').split('|').map(cell => cell.trim()));
+      return;
+    }
+    const listItem = trimmed.match(/^-\s+(.+)$/);
+    if (listItem) {
+      flushParagraph();
+      flushTable();
+      listItems.push(listItem[1]);
+      return;
+    }
+    flushList();
+    flushTable();
+    paragraph.push(trimmed);
+  });
+  flushBlocks();
+
+  target.innerHTML = output.join('\n');
+  status.hidden = true;
+}
+
+async function initProcessLog() {
+  const status = document.getElementById('processLogStatus');
+  if (!status) return;
+  try {
+    const response = await fetch('PROCESS_LOG.md');
+    if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
+    renderProcessLog(await response.text());
+  } catch (error) {
+    console.error('Could not load the project process log.', error);
+    status.setAttribute('role', 'alert');
+    status.textContent = 'The process log could not be loaded. Use “Download Markdown” to open the source document.';
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -2695,6 +2948,7 @@ document.addEventListener('DOMContentLoaded', () => {
   showAuthor('venturi');
   initCanvas();
   initTimeline();
+  initProcessLog();
   initScrollSpy();
   syncTimelineAndMatrix('villette-1984');
 

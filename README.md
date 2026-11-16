@@ -3,7 +3,7 @@
 This repository contains a static website for the ARCH 602 class project, built as a GitHub Pages-ready landing page.
 
 ## Files
-- `index.html` — homepage for GitHub Pages, including the interactive Collision Field section
+- `index.html` — homepage for GitHub Pages, including the Collision Field simulation and styled Process Log section in the side navigation
 - `assets/collision-field/` — local Three.js engine and simulation logic
 - `PROCESS_LOG.md` — consolidated history of human and AI contributions, design revisions, tool choices, and validation notes
 - `deconstructivism_ideas_texts_buildings(1).html` — alternate file name preserving your working title
