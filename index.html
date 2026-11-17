@@ -215,7 +215,7 @@
     margin: 0 0 1.5rem;
     color: var(--ink);
     font: 700 clamp(3.1rem, 6.1vw, 6.2rem)/0.82 var(--font-display);
-    letter-spacing: -0.085em;
+    letter-spacing: -0.045em;
     text-transform: uppercase;
   }
   .intro-title span {
@@ -1348,82 +1348,8 @@
   .matrix-chip.pulse {
     animation: matrixNodePulse 650ms ease-out 2;
   }
-
-  .texts-layout {
-    display: grid; grid-template-columns: 340px 1fr; gap: 2rem; align-items: start;
-  }
-  .text-index {
-    display: flex; flex-direction: column; border: 1.5px solid var(--rule-strong);
-    background: #fff;
-  }
-  .text-tab {
-    text-align: left; padding: 1rem 1.15rem; border-bottom: 1px solid var(--rule);
-    transition: background 140ms ease; position: relative;
-  }
-  .text-tab:last-child { border-bottom: none; }
-  .text-tab:hover { background: var(--paper-warm); }
-  .text-tab.active { background: var(--accent); color: #fff; }
-  .text-tab.active .text-tab-meta { color: #d0d0d0; }
-  .text-tab-meta {
-    font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase;
-    letter-spacing: 0.06em; color: var(--accent); margin-bottom: 0.25rem;
-  }
-  .text-tab-title {
-    font-family: var(--font-display); font-weight: 700; font-size: 1rem; line-height: 1.25;
-  }
-  .text-reader {
-    border: 1.5px solid var(--rule-strong); background: #fff;
-    padding: clamp(1.5rem, 3vw, 2.5rem);
-  }
-  .reader-top {
-    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem;
-    padding-bottom: 1.1rem; border-bottom: 1px solid var(--rule); margin-bottom: 1.4rem;
-  }
-  .reader-author {
-    font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase;
-    letter-spacing: 0.07em; color: var(--accent); font-weight: 600;
-  }
-  .reader-title {
-    font-family: var(--font-display); font-size: clamp(1.4rem, 2.3vw, 1.9rem);
-    font-weight: 700; line-height: 1.18; margin: 0.35rem 0 0 0;
-  }
-  .reader-pub {
-    font-family: var(--font-mono); font-size: 0.74rem; color: var(--ink-muted);
-    align-self: flex-end;
-  }
-  .reader-excerpt {
-    background: var(--paper-warm); border-left: 3px solid var(--ink);
-    padding: 1.1rem 1.35rem; margin: 0 0 1.4rem 0;
-    font-style: normal; font-size: 1.06rem; color: var(--ink);
-  }
-  .reader-analysis h4 {
-    font-family: var(--font-mono); font-size: 0.74rem; text-transform: uppercase;
-    letter-spacing: 0.08em; color: var(--ink-muted); margin: 0 0 0.5rem 0;
-  }
-  .reader-analysis p { margin: 0 0 1.25rem 0; max-width: 66ch; }
-  .reader-figure {
-    margin: 1.5rem 0;
-    padding: 0.6rem;
-    border: 1px solid var(--rule);
-    background: var(--paper);
-  }
-  .reader-figure img { display: block; width: 100%; height: auto; }
-  .reader-figure figcaption {
-    margin-top: 0.55rem;
-    color: var(--ink-muted);
-    font: 0.68rem/1.5 var(--font-mono);
-  }
-  .reader-figure figcaption a {
-    color: var(--ink);
-    text-underline-offset: 0.18em;
-  }
-  .concept-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
-  .concept-tag {
-    font-family: var(--font-mono); font-size: 0.72rem; padding: 0.28rem 0.6rem;
-    background: var(--accent-soft); color: var(--accent); border: 1px solid rgba(184, 41, 31, 0.25);
-  }
   .reference-list {
-    margin-top: 2rem;
+    margin-top: 0;
     padding: clamp(1.25rem, 3vw, 2rem);
     border: 1.5px solid var(--rule-strong);
     background: var(--paper);
@@ -1476,6 +1402,120 @@
     overflow-wrap: anywhere;
   }
   .reference-entries a { color: var(--ink); }
+  .process-log-panel {
+    border: 1.5px solid var(--rule-strong);
+    background: var(--paper);
+    box-shadow: 8px 8px 0 var(--paper-off), 8px 8px 0 1px var(--rule-strong);
+  }
+  .process-log-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper-warm);
+    color: var(--ink-muted);
+    font: 0.68rem var(--font-mono);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .process-log-download {
+    padding: 0.35rem 0.65rem;
+    border: 1px solid var(--rule-strong);
+    background: #fff;
+    color: var(--ink);
+    transition: background 140ms ease, color 140ms ease;
+  }
+  .process-log-download:hover {
+    background: var(--ink);
+    color: #fff;
+  }
+  .process-log-content {
+    padding: clamp(1.25rem, 3vw, 2.5rem);
+  }
+  .process-log-content h2,
+  .process-log-content h3,
+  .process-log-content h4 {
+    font-family: var(--font-display);
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .process-log-content h2 {
+    margin: 2.5rem 0 0.9rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid var(--rule-strong);
+    font-size: clamp(1.4rem, 2.3vw, 1.9rem);
+  }
+  .process-log-content h2:first-child { margin-top: 0; }
+  .process-log-content h3 {
+    margin: 1.7rem 0 0.65rem;
+    color: var(--blueprint);
+    font-size: 1.2rem;
+  }
+  .process-log-content h4 {
+    margin: 1.35rem 0 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .process-log-content p {
+    max-width: 90ch;
+    margin: 0 0 0.85rem;
+    color: var(--ink-soft);
+  }
+  .process-log-content ul {
+    display: grid;
+    gap: 0.7rem;
+    margin: 0 0 1rem;
+    padding-left: 1.3rem;
+    color: var(--ink-soft);
+  }
+  .process-log-content li::marker { color: var(--accent); }
+  .process-log-content a {
+    color: var(--blueprint);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.15em;
+  }
+  .process-log-content code {
+    padding: 0.08rem 0.25rem;
+    background: var(--paper-warm);
+    font-family: var(--font-mono);
+    font-size: 0.86em;
+  }
+  .process-log-table-wrap {
+    overflow-x: auto;
+    margin: 1rem 0 1.5rem;
+    border: 1px solid var(--rule-strong);
+  }
+  .process-log-content table {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  .process-log-content th {
+    padding: 0.7rem 0.8rem;
+    background: var(--ink);
+    color: #fff;
+    font: 600 0.68rem var(--font-mono);
+    letter-spacing: 0.05em;
+    text-align: left;
+    text-transform: uppercase;
+    vertical-align: top;
+  }
+  .process-log-content td {
+    padding: 0.7rem 0.8rem;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-soft);
+    vertical-align: top;
+  }
+  .process-log-content tr:nth-child(even) td { background: var(--paper-tint); }
+  .process-log-status { color: var(--ink-muted); font: 0.8rem var(--font-mono); }
+  .process-log-status[role="alert"] { color: var(--accent); }
 
   .site-footer {
     background: var(--paper-warm); color: var(--ink);
@@ -1499,7 +1539,7 @@
   }
 
   @media (max-width: 960px) {
-    .hero-grid, .essay-grid, .texts-layout, .footer-inner { grid-template-columns: 1fr; }
+    .hero-grid, .essay-grid, .footer-inner { grid-template-columns: 1fr; }
     .reference-columns { grid-template-columns: 1fr; gap: 1.5rem; }
     .intro-hero-inner { min-height: auto; grid-template-columns: 1fr; }
     .intro-visual { width: min(70%, 390px); }
@@ -1547,26 +1587,29 @@
 
 <aside class="nav-sidebar">
   <nav class="nav-links" aria-label="Primary sections">
-    <button onclick="scrollToSection('matrix')" id="nav-matrix" class="active" aria-label="Concept Matrix" title="Concept Matrix">
-      <span class="nav-rail-label"><span class="nav-rail-code">B1</span><span>Concepts</span></span>
+    <button onclick="scrollToSection('matrix')" id="nav-matrix" class="active" aria-label="Ideas" title="Ideas">
+      <span class="nav-rail-label"><span class="nav-rail-code">1</span><span>Ideas</span></span>
     </button>
-    <button onclick="scrollToSection('dossiers')" id="nav-dossiers" aria-label="Author Dossiers" title="Author Dossiers">
-      <span class="nav-rail-label"><span class="nav-rail-code">B2</span><span>Authors</span></span>
+    <button onclick="scrollToSection('dossiers')" id="nav-dossiers" aria-label="Thinkers" title="Thinkers">
+      <span class="nav-rail-label"><span class="nav-rail-code">2</span><span>Thinkers</span></span>
     </button>
-    <button onclick="scrollToSection('diagrams')" id="nav-diagrams" aria-label="Transformation Diagrams" title="Transformation Diagrams">
-      <span class="nav-rail-label"><span class="nav-rail-code">B3</span><span>Diagrams</span></span>
+    <button onclick="scrollToSection('diagrams')" id="nav-diagrams" aria-label="Diagrams" title="Diagrams">
+      <span class="nav-rail-label"><span class="nav-rail-code">3</span><span>Diagrams</span></span>
     </button>
     <button onclick="scrollToSection('genealogy')" id="nav-genealogy" aria-label="Timeline" title="Timeline">
-      <span class="nav-rail-label"><span class="nav-rail-code">B4</span><span>Timeline</span></span>
+      <span class="nav-rail-label"><span class="nav-rail-code">4</span><span>Timeline</span></span>
     </button>
-    <button onclick="scrollToSection('project-matrix')" id="nav-project-matrix" aria-label="Project and Spatial Matrix" title="Project and Spatial Matrix">
-      <span class="nav-rail-label"><span class="nav-rail-code">B5</span><span>Spatial Matrix</span></span>
+    <button onclick="scrollToSection('project-matrix')" id="nav-project-matrix" aria-label="Analysis" title="Analysis">
+      <span class="nav-rail-label"><span class="nav-rail-code">5</span><span>Analysis</span></span>
     </button>
-    <button onclick="scrollToSection('collision-field')" id="nav-collision-field" aria-label="Spatial Collision" title="Spatial Collision">
-      <span class="nav-rail-label"><span class="nav-rail-code">B6</span><span>Collision</span></span>
+    <button onclick="scrollToSection('collision-field')" id="nav-collision-field" aria-label="Simulation" title="Simulation">
+      <span class="nav-rail-label"><span class="nav-rail-code">6</span><span>Simulation</span></span>
     </button>
-    <button onclick="scrollToSection('texts')" id="nav-texts" aria-label="Texts and Literature" title="Texts and Literature">
-      <span class="nav-rail-label"><span class="nav-rail-code">B7</span><span>Sources</span></span>
+    <button onclick="scrollToSection('texts')" id="nav-texts" aria-label="References" title="References">
+      <span class="nav-rail-label"><span class="nav-rail-code">7</span><span>References</span></span>
+    </button>
+    <button onclick="scrollToSection('process-log')" id="nav-process-log" aria-label="Process Log" title="Process Log">
+      <span class="nav-rail-label"><span class="nav-rail-code">8</span><span>Process</span></span>
     </button>
   </nav>
 </aside>
@@ -1581,8 +1624,10 @@
         <p class="intro-description">A critical atlas of broken grids, spatial collisions, and architectural thought.</p>
         <a class="intro-cta" href="#view-matrix">Explore the matrix <span aria-hidden="true">&darr;</span></a>
         <div class="intro-meta">
-          <span>1966&ndash;2023</span>
-          <span>Ideas / Texts / Buildings</span>
+          <span>Georgia Boucher</span>
+          <span>Fawn Chan</span>
+          <span>Solveig Watkins</span>
+          <span>Sydney Zuk</span>
         </div>
       </div>
       <div class="intro-visual">
@@ -1594,9 +1639,9 @@
   <section id="view-matrix" class="band">
     <div class="wrap">
       <div class="section-head">
-        <div class="section-num">Section 01<span>Syntactic Matrix</span></div>
+        <div class="section-num">Section 01<span>Ideas</span></div>
         <div>
-          <h2 class="section-title">Logical Collapse and Spatial Contradiction</h2>
+          <h2 class="section-title">Deconstructivist Ideas</h2>
           <p class="section-desc">
             Deconstructivism in architecture is grounded in Jacques Derrida’s philosophical post-structuralism. By applying <em style="font-family:var(--font-mono); color:var(--accent);">Différance</em> and textual deconstruction, architects challenge traditional rules of visual unity, symmetry, and predictability.
           </p>
@@ -1609,6 +1654,8 @@
         <button onclick="filterMatrix('càndito')" class="matrix-filter-btn tl-pill">Càndito</button>
         <button onclick="filterMatrix('derrida')" class="matrix-filter-btn tl-pill">Derrida</button>
         <button onclick="filterMatrix('hendrix')" class="matrix-filter-btn tl-pill">Hendrix</button>
+        <button onclick="filterMatrix('krauss')" class="matrix-filter-btn tl-pill">Krauss</button>
+        <button onclick="filterMatrix('tafuri')" class="matrix-filter-btn tl-pill">Tafuri</button>
         <button onclick="filterMatrix('tschumi')" class="matrix-filter-btn tl-pill">Tschumi</button>
         <button onclick="filterMatrix('venturi')" class="matrix-filter-btn tl-pill">Venturi</button>
       </div>
@@ -1620,9 +1667,9 @@
   <section id="view-dossiers" class="band alt">
     <div class="wrap">
       <div class="section-head">
-        <div class="section-num">Section 02<span>Author Dossiers</span></div>
+        <div class="section-num">Section 02<span>Thinkers</span></div>
         <div>
-          <h2 class="section-title">Critical Exegesis of Primary Theorists</h2>
+          <h2 class="section-title">Key Thinkers</h2>
           <p class="section-desc">
             Chronological and thematic breakdown of key figures shaping architectural discourse from 1966 to 2023.
           </p>
@@ -1646,7 +1693,7 @@
       <div style="border: 1.5px solid var(--rule-strong); background: var(--paper-warm); padding: 1.75rem 2rem; margin-bottom: 2rem; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; gap: 1.5rem;">
         <div>
           <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; background: var(--accent); color: #ffffff; padding: 0.25rem 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; display: inline-block; margin-bottom: 0.75rem;">Geometric &amp; Syntactic Precedents</span>
-          <h2 style="font-family: var(--font-display); font-size: 2.1rem; font-weight: 700; color: var(--ink); margin: 0 0 0.5rem 0; letter-spacing: -0.02em;">Interactive Transformation &amp; Spatial Deconstruction</h2>
+          <h2 style="font-family: var(--font-display); font-size: 2.1rem; font-weight: 700; color: var(--ink); margin: 0 0 0.5rem 0; letter-spacing: -0.02em;">Building Transformations</h2>
           <p style="font-size: 0.98rem; color: var(--ink-soft); margin: 0; max-width: 62ch; line-height: 1.5;">
             Càndito &amp; Meloni’s geometric transformations of Tschumi’s Folies 6 and 7.
           </p>
@@ -1698,7 +1745,7 @@
       <div class="section-head">
         <div class="section-num">Section 04<span>Timeline</span></div>
         <div>
-          <h2 class="section-title">Chronology, Syntactic Shifts &amp; Canonical Works</h2>
+          <h2 class="section-title">Timeline</h2>
           <p class="section-desc">
             Explore the historical evolution of Deconstructivism from 1967 post-structuralist critiques to 2007 topological and spatial works.
           </p>
@@ -1712,7 +1759,7 @@
           <button type="button" class="tl-pill" data-era="event"><span class="tl-swatch event"></span>Exhibitions &amp; Studios</button>
           <button type="button" class="tl-pill" data-era="project"><span class="tl-swatch project"></span>Built &amp; Spatial Works</button>
         </div>
-        <div class="tl-link-hint">Click any timeline card to inspect historical continuity</div>
+        <div class="tl-link-hint">Click any RED timeline card to inspect historical continuity</div>
       </div>
 
       <div class="tl-canvas-frame" style="margin-bottom: 2.5rem;">
@@ -1724,18 +1771,20 @@
   <section id="view-project-matrix" class="band">
     <div class="wrap">
       <div class="section-head">
-        <div class="section-num">Section 05<span>Project &amp; Spatial Matrix</span></div>
+        <div class="section-num">Section 05<span>Analysis</span></div>
         <div>
           <h2 class="section-title">How does the collision of exterior and interior behave under Deconstructivism?</h2>
           <p class="section-desc">These projects show how Deconstructivism can be expressed in interiors: through program, structure, renovation, material, and even furniture. Select a case to compare its images, plan reading, and relationship to Eisenman’s house projects.</p>
+          <h2 class="section-title">Analysis</h2>
+          <p class="section-desc">Select a project to connect its timeline node to a focused spatial analysis.</p>
         </div>
       </div>
       <div class="matrix-wrap">
         <div class="matrix-status-bar">
-          <div><strong style="color: var(--accent);">Project &amp; Spatial Matrix:</strong> Click any project to inspect its timeline node and spatial analysis.</div>
+          <div><strong style="color: var(--accent);">Analysis:</strong> Click any project to inspect its timeline node and spatial analysis.</div>
           <button type="button" class="matrix-clear-btn" onclick="clearMatrixSelection()">Reset Selection</button>
         </div>
-        <table class="matrix" aria-label="Project and Spatial Work Matrix">
+        <table class="matrix" aria-label="Analysis">
           <thead>
             <tr>
               <th style="width: 22%;">Project</th>
@@ -1761,9 +1810,9 @@
   <section id="view-collision-field" class="band alt">
     <div class="wrap">
       <div class="section-head">
-        <div class="section-num">Section 06<span>Spatial Collision</span></div>
+        <div class="section-num">Section 06<span>Simulation</span></div>
         <div>
-          <h2 class="section-title">Collision Field</h2>
+          <h2 class="section-title">Building Simulation</h2>
           <p class="section-desc">Explore how folding, intersection, and fragmentation transform the relationship between a building’s interior and exterior.</p>
         </div>
       </div>
@@ -1855,24 +1904,9 @@
 
   <section id="view-texts" class="band">
     <div class="wrap">
-      <div class="section-head">
-        <div class="section-num">Section 07<span>Primary Literature</span></div>
-        <div>
-          <h2 class="section-title">Foundational Texts &amp; Collaborations</h2>
-          <p class="section-desc">
-            Select a source to read a paraphrase of its argument and consider its spatial consequences.
-          </p>
-        </div>
-      </div>
-
-      <div class="texts-layout">
-        <div class="text-index" id="textIndex" role="tablist" aria-label="Foundational texts"></div>
-        <article class="text-reader" id="textReader" aria-live="polite"></article>
-      </div>
-
       <section class="reference-list" aria-labelledby="reference-list-title">
         <div class="reference-list-head">
-          <h3 class="reference-list-title" id="reference-list-title">References</h3>
+          <h2 class="reference-list-title" id="reference-list-title">References</h2>
           <p class="reference-list-style">Chicago-style bibliography</p>
         </div>
         <div class="reference-columns">
@@ -1913,6 +1947,26 @@
       </section>
     </div>
   </section>
+
+  <section id="view-process-log" class="band alt">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-num">Section 08<span>Process &amp; Credits</span></div>
+        <div>
+          <h2 class="section-title">Process Log</h2>
+          <p class="section-desc">A transparent record of the project’s human direction, AI-assisted implementation, design revisions, tool choices, and verification.</p>
+        </div>
+      </div>
+      <div class="process-log-panel">
+        <div class="process-log-toolbar">
+          <span>Project record · human + AI contributions</span>
+          <a class="process-log-download" href="PROCESS_LOG.md" download>Download Markdown</a>
+        </div>
+        <div id="processLogStatus" class="process-log-content process-log-status" role="status">Loading the project process log…</div>
+        <article id="processLogContent" class="process-log-content" aria-live="polite"></article>
+      </div>
+    </div>
+  </section>
 </main>
   <footer class="site-footer">
     <div class="footer-inner">
@@ -1941,6 +1995,9 @@ const PLATES = {
 function scrollToSection(sectionId) {
   const target = document.getElementById(`view-${sectionId}`);
   if (target) {
+    document.querySelectorAll('.nav-links button').forEach(button => {
+      button.classList.toggle('active', button.id === `nav-${sectionId}`);
+    });
     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
@@ -1963,6 +2020,24 @@ const matrixData = [
     dichotomy: 'Symbol vs. Reality / Sign vs. Being / Thought vs. Language',
     summary: 'Hendrix treats architectural form as a sign whose meaning can detach from its intended function, unsettling conventional unity and symmetry.',
     keyPoint: 'That disjunction makes form a deliberate contradiction of use.'
+  },
+  {
+    id: 'architectural-ideology',
+    author: 'Tafuri',
+    title: 'Toward a Critique of Architectural Ideology',
+    subtitle: 'Avant-Garde Autonomy & Capitalist Planning',
+    dichotomy: 'Formal Autonomy vs. Capitalist Planning',
+    summary: 'Twentieth-century avant-gardes sought to strip artistic experience down until the work could be encountered as an autonomous object.',
+    keyPoint: 'Formal autonomy and utopian projections are ultimately absorbed into capitalist planning.'
+  },
+  {
+    id: 'expanded-field',
+    author: 'Krauss',
+    title: 'Sculpture in the Expanded Field',
+    subtitle: 'Architecture, Landscape & the Expanded Field',
+    dichotomy: 'Architecture vs. Landscape',
+    summary: 'Sculpture moved beyond its traditional role as monument and entered a wider field organized through contrasting spatial conditions.',
+    keyPoint: 'Spatial practices cross architecture and landscape, allowing works to operate as building, landscape, and critical installation.'
   },
   {
     id: 'geometric-transformation',
@@ -1999,67 +2074,6 @@ const matrixData = [
     dichotomy: 'Either-Or Exclusion vs. Both-And Inclusion',
     summary: 'Venturi’s both-and approach embraces ambiguity and contradiction over modernist either-or simplicity.',
     keyPoint: 'Deconstructivism extends that critique by disrupting symmetry and visual unity.'
-  }
-];
-
-const TEXTS = [
-  {
-    author: 'Jacques Derrida',
-    year: '1967',
-    title: 'Writing and Difference',
-    pub: 'Editions du Seuil / University of Chicago Press',
-    paraphrase: 'Meaning is not grounded in a self-contained reality outside interpretation. What appears immediate or natural is already shaped by signs, traces, and relations.',
-    analysis: 'Derrida critiques the metaphysical desire for an absolute origin and pure presence in architectural and philosophical systems. By asserting that language and spatial syntax operate through relational différance and traces, Deconstructivism frees architectural form from the tyranny of logocentric functionalism and classical geometry.',
-    concepts: ['Différance', 'Trace', 'Logocentrism', 'Textuality']
-  },
-  {
-    author: 'Manfredo Tafuri',
-    year: '1969',
-    title: 'Toward a Critique of Architectural Ideology',
-    pub: 'Contropiano / MIT Press',
-    paraphrase: 'Twentieth-century avant-gardes sought to strip artistic experience down until the work could be encountered as an autonomous object.',
-    analysis: 'Tafuri demonstrates how modern architectural avant-gardes attempt to internalize metropolitan shock, ultimately revealing how formal autonomy and utopian projections are absorbed into capitalist planning. Deconstructivism emerges from this critical realization that architecture can no longer rely on classical harmonization.',
-    concepts: ['Metropolitan Shock', 'Capitalist Plan', 'Architectural Ideology', 'Autonomy']
-  },
-  {
-    author: 'Rosalind Krauss',
-    year: '1979',
-    title: 'Sculpture in the Expanded Field',
-    pub: 'October, Vol. 8',
-    paraphrase: 'Sculpture moved beyond its traditional role as monument and entered a wider field organized through contrasting spatial conditions.',
-    analysis: 'Krauss maps how spatial practices transcend the binary opposition of architecture and landscape into a dynamic structural matrix. Deconstructivist practices frequently inhabit this expanded field, operating simultaneously as building, landscape, and critical installation.',
-    concepts: ['Expanded Field', 'Klein Group', 'Not-Architecture', 'Site-Specificity'],
-    figure: 'assets/images/krauss-expanded-field.png',
-    figureAlt: 'Diagram of the expanded field, relating landscape, architecture, not-landscape, not-architecture, sculpture, site-construction, marked sites, axiomatic structures, the complex, and the neuter.',
-    figureCaption: "Rosalind Krauss's expanded-field diagram, “Sculpture in the Expanded Field,” October 8 (Spring 1979), p. 38. Reproduced from the supplied JSTOR reading.",
-    figureReference: '#ref-krauss-1979'
-  },
-  {
-    author: 'Bernard Tschumi',
-    year: '1996',
-    title: 'Architecture and Disjunction',
-    pub: 'MIT Press',
-    paraphrase: 'Architecture is more than knowledge about forms; forms themselves can produce and organize knowledge.',
-    analysis: 'Tschumi articulates the core thesis of programmatic disjunction: form does not follow function, nor does function follow form. Instead, architecture operates in the intense collision between space, movement, and event, generating productive spatial disorientation.',
-    concepts: ['Disjunction', 'Pyramid vs. Labyrinth', 'Event and Program', 'Architectural Paradox']
-  },
-  {
-    author: 'John Shannon Hendrix',
-    year: '2013',
-    title: 'The Contradiction Between Form and Function in Architecture',
-    pub: 'Architectural Theory Review',
-    paraphrase: 'Architectural deconstruction reveals that the relationship between a sign and what it signifies is contingent rather than fixed.',
-    analysis: 'Hendrix provides a rigorous post-structuralist reading of deconstructivist form, explaining how dissociating architectural signifiers from fixed functional signifieds allows buildings to function as autonomous texts of logical collapse and spatial contradiction.',
-    concepts: ['Signifier vs. Signified', 'Syntactic Dysfunction', 'Logical Collapse', 'Semiotics']
-  },
-  {
-    author: 'Cristina Càndito & Alessandro Meloni',
-    year: '2023',
-    title: 'Revelations of Folies through Geometric Transformations',
-    pub: 'Nexus Network Journal',
-    paraphrase: 'The folies’ combinatorial order unsettles ideal geometry through Euclidean operations that vary across the grid.',
-    analysis: 'Càndito & Meloni analyze the precise geometric operations underlying Tschumi’s Parc de la Villette folies and Derrida’s collaborative spatial analyses, detailing how 3x3x3 cubic grids undergo rotational and translational shear to produce deconstructivist déviance.',
-    concepts: ['3x3x3 Cube Grid', 'Normalité vs. Déviance', 'Rotational Shear', 'Combinatorial Geometry']
   }
 ];
 
@@ -3077,66 +3091,140 @@ function syncTimelineAndMatrix(nodeId) {
   });
 }
 
-function initTexts() {
-  const indexEl = document.getElementById('textIndex');
-  const readerEl = document.getElementById('textReader');
-  if (!indexEl || !readerEl) return;
-
-  function renderText(idx) {
-    const t = TEXTS[idx];
-    Array.from(indexEl.children).forEach((tab, i) => tab.classList.toggle('active', i === idx));
-    readerEl.innerHTML = `
-      <div class="reader-top">
-        <div>
-          <div class="reader-author">${t.author} &bull; ${t.year}</div>
-          <h3 class="reader-title">${t.title}</h3>
-        </div>
-        <div class="reader-pub">${t.pub}</div>
-      </div>
-      <p class="reader-excerpt">${t.paraphrase}</p>
-      <div class="reader-analysis">
-        <h4>Architectural &amp; Philosophical Reading</h4>
-        <p>${t.analysis}</p>
-        ${t.figure ? `<figure class="reader-figure"><img src="${t.figure}" alt="${t.figureAlt}" loading="lazy"><figcaption>${t.figureCaption}${t.figureReference ? ` <a href="${t.figureReference}">Bibliography entry</a>` : ''}</figcaption></figure>` : ''}
-        <div class="concept-tags">
-          ${t.concepts.map(c => `<span class="concept-tag">${c}</span>`).join('')}
-        </div>
-      </div>
-    `;
-  }
-
-  TEXTS.forEach((t, idx) => {
-    const tab = document.createElement('button');
-    tab.type = 'button';
-    tab.className = 'text-tab' + (idx === 0 ? ' active' : '');
-    tab.innerHTML = `<div class="text-tab-meta">${t.author} &bull; ${t.year}</div><div class="text-tab-title">${t.title}</div>`;
-    tab.addEventListener('click', () => renderText(idx));
-    indexEl.appendChild(tab);
-  });
-  renderText(0);
-}
-
 function initScrollSpy() {
-  const sections = ['matrix', 'dossiers', 'diagrams', 'genealogy', 'project-matrix', 'collision-field', 'texts'];
+  const sections = ['matrix', 'dossiers', 'diagrams', 'genealogy', 'project-matrix', 'collision-field', 'texts', 'process-log'];
   const observerOptions = { root: null, rootMargin: '-20% 0px -60% 0px', threshold: 0 };
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const viewId = entry.target.id;
-        const sectionId = viewId.replace('view-', '');
-        sections.forEach(id => {
-          const navBtn = document.getElementById(`nav-${id}`);
-          if (navBtn) navBtn.classList.toggle('active', id === sectionId);
-        });
-      }
+  function updateActiveSection() {
+    const marker = window.innerHeight * 0.3;
+    const current = sections.find(id => {
+      const section = document.getElementById(`view-${id}`);
+      if (!section) return false;
+      const bounds = section.getBoundingClientRect();
+      return bounds.top <= marker && bounds.bottom > marker;
     });
-  }, observerOptions);
+    if (!current) return;
+    sections.forEach(id => {
+      const navBtn = document.getElementById(`nav-${id}`);
+      if (navBtn) navBtn.classList.toggle('active', id === current);
+    });
+  }
+
+  const observer = new IntersectionObserver(updateActiveSection, observerOptions);
 
   sections.forEach(id => {
     const el = document.getElementById(`view-${id}`);
     if (el) observer.observe(el);
   });
+  window.addEventListener('scroll', updateActiveSection, { passive: true });
+  updateActiveSection();
+}
+
+function renderProcessLogInline(text) {
+  const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  const parts = [];
+  let inline = escaped
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (_, label, url) => {
+      parts.push(`<a href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`);
+      return `\u0000${parts.length - 1}\u0000`;
+    })
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  inline = inline.replace(/\u0000(\d+)\u0000/g, (_, index) => parts[Number(index)]);
+  return inline;
+}
+
+function renderProcessLog(markdown) {
+  const target = document.getElementById('processLogContent');
+  const status = document.getElementById('processLogStatus');
+  if (!target || !status) return;
+
+  const lines = markdown.split(/\r?\n/);
+  const output = [];
+  let paragraph = [];
+  let listItems = [];
+  let tableRows = [];
+
+  function flushParagraph() {
+    if (!paragraph.length) return;
+    output.push(`<p>${renderProcessLogInline(paragraph.join(' '))}</p>`);
+    paragraph = [];
+  }
+
+  function flushList() {
+    if (!listItems.length) return;
+    output.push(`<ul>${listItems.map(item => `<li>${renderProcessLogInline(item)}</li>`).join('')}</ul>`);
+    listItems = [];
+  }
+
+  function flushTable() {
+    if (tableRows.length < 2) {
+      tableRows.forEach(row => output.push(`<p>${renderProcessLogInline(row.join(' · '))}</p>`));
+      tableRows = [];
+      return;
+    }
+    const [header, ...rows] = tableRows;
+    const head = `<thead><tr>${header.map(cell => `<th scope="col">${renderProcessLogInline(cell)}</th>`).join('')}</tr></thead>`;
+    const body = `<tbody>${rows.map(row => `<tr>${row.map(cell => `<td>${renderProcessLogInline(cell)}</td>`).join('')}</tr>`).join('')}</tbody>`;
+    output.push(`<div class="process-log-table-wrap"><table>${head}${body}</table></div>`);
+    tableRows = [];
+  }
+
+  function flushBlocks() {
+    flushParagraph();
+    flushList();
+    flushTable();
+  }
+
+  lines.forEach(line => {
+    const trimmed = line.trim();
+    const heading = trimmed.match(/^(#{1,6})\s+(.+)$/);
+    if (!trimmed) {
+      flushBlocks();
+      return;
+    }
+    if (heading) {
+      flushBlocks();
+      const level = Math.min(6, heading[1].length + 1);
+      output.push(`<h${level}>${renderProcessLogInline(heading[2])}</h${level}>`);
+      return;
+    }
+    if (/^\|\s*:?-{3,}/.test(trimmed)) return;
+    if (trimmed.startsWith('|')) {
+      flushParagraph();
+      flushList();
+      tableRows.push(trimmed.replace(/^\||\|$/g, '').split('|').map(cell => cell.trim()));
+      return;
+    }
+    const listItem = trimmed.match(/^-\s+(.+)$/);
+    if (listItem) {
+      flushParagraph();
+      flushTable();
+      listItems.push(listItem[1]);
+      return;
+    }
+    flushList();
+    flushTable();
+    paragraph.push(trimmed);
+  });
+  flushBlocks();
+
+  target.innerHTML = output.join('\n');
+  status.hidden = true;
+}
+
+async function initProcessLog() {
+  const status = document.getElementById('processLogStatus');
+  if (!status) return;
+  try {
+    const response = await fetch('PROCESS_LOG.md');
+    if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
+    renderProcessLog(await response.text());
+  } catch (error) {
+    console.error('Could not load the project process log.', error);
+    status.setAttribute('role', 'alert');
+    status.textContent = 'The process log could not be loaded. Use “Download Markdown” to open the source document.';
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -3145,7 +3233,7 @@ document.addEventListener('DOMContentLoaded', () => {
   showAuthor('venturi');
   initCanvas();
   initTimeline();
-  initTexts();
+  initProcessLog();
   initScrollSpy();
   syncTimelineAndMatrix('villette-1984');
 
