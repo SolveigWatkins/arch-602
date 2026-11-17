@@ -215,7 +215,7 @@
     margin: 0 0 1.5rem;
     color: var(--ink);
     font: 700 clamp(3.1rem, 6.1vw, 6.2rem)/0.82 var(--font-display);
-    letter-spacing: -0.085em;
+    letter-spacing: -0.045em;
     text-transform: uppercase;
   }
   .intro-title span {
@@ -1455,29 +1455,29 @@
 
 <aside class="nav-sidebar">
   <nav class="nav-links" aria-label="Primary sections">
-    <button onclick="scrollToSection('matrix')" id="nav-matrix" class="active" aria-label="Concept Matrix" title="Concept Matrix">
-      <span class="nav-rail-label"><span class="nav-rail-code">B1</span><span>Concepts</span></span>
+    <button onclick="scrollToSection('matrix')" id="nav-matrix" class="active" aria-label="Ideas" title="Ideas">
+      <span class="nav-rail-label"><span class="nav-rail-code">1</span><span>Ideas</span></span>
     </button>
-    <button onclick="scrollToSection('dossiers')" id="nav-dossiers" aria-label="Author Dossiers" title="Author Dossiers">
-      <span class="nav-rail-label"><span class="nav-rail-code">B2</span><span>Authors</span></span>
+    <button onclick="scrollToSection('dossiers')" id="nav-dossiers" aria-label="Thinkers" title="Thinkers">
+      <span class="nav-rail-label"><span class="nav-rail-code">2</span><span>Thinkers</span></span>
     </button>
-    <button onclick="scrollToSection('diagrams')" id="nav-diagrams" aria-label="Transformation Diagrams" title="Transformation Diagrams">
-      <span class="nav-rail-label"><span class="nav-rail-code">B3</span><span>Diagrams</span></span>
+    <button onclick="scrollToSection('diagrams')" id="nav-diagrams" aria-label="Diagrams" title="Diagrams">
+      <span class="nav-rail-label"><span class="nav-rail-code">3</span><span>Diagrams</span></span>
     </button>
     <button onclick="scrollToSection('genealogy')" id="nav-genealogy" aria-label="Timeline" title="Timeline">
-      <span class="nav-rail-label"><span class="nav-rail-code">B4</span><span>Timeline</span></span>
+      <span class="nav-rail-label"><span class="nav-rail-code">4</span><span>Timeline</span></span>
     </button>
-    <button onclick="scrollToSection('project-matrix')" id="nav-project-matrix" aria-label="Project and Spatial Matrix" title="Project and Spatial Matrix">
-      <span class="nav-rail-label"><span class="nav-rail-code">B5</span><span>Spatial Matrix</span></span>
+    <button onclick="scrollToSection('project-matrix')" id="nav-project-matrix" aria-label="Analysis" title="Analysis">
+      <span class="nav-rail-label"><span class="nav-rail-code">5</span><span>Analysis</span></span>
     </button>
-    <button onclick="scrollToSection('collision-field')" id="nav-collision-field" aria-label="Spatial Collision" title="Spatial Collision">
-      <span class="nav-rail-label"><span class="nav-rail-code">B6</span><span>Collision</span></span>
+    <button onclick="scrollToSection('collision-field')" id="nav-collision-field" aria-label="Simulation" title="Simulation">
+      <span class="nav-rail-label"><span class="nav-rail-code">6</span><span>Simulation</span></span>
     </button>
-    <button onclick="scrollToSection('texts')" id="nav-texts" aria-label="Texts and Literature" title="Texts and Literature">
-      <span class="nav-rail-label"><span class="nav-rail-code">B7</span><span>Sources</span></span>
+    <button onclick="scrollToSection('texts')" id="nav-texts" aria-label="References" title="References">
+      <span class="nav-rail-label"><span class="nav-rail-code">7</span><span>References</span></span>
     </button>
     <button onclick="scrollToSection('process-log')" id="nav-process-log" aria-label="Process Log" title="Process Log">
-      <span class="nav-rail-label"><span class="nav-rail-code">B8</span><span>Process</span></span>
+      <span class="nav-rail-label"><span class="nav-rail-code">8</span><span>Process</span></span>
     </button>
   </nav>
 </aside>
@@ -1492,8 +1492,10 @@
         <p class="intro-description">A critical atlas of broken grids, spatial collisions, and architectural thought.</p>
         <a class="intro-cta" href="#view-matrix">Explore the matrix <span aria-hidden="true">&darr;</span></a>
         <div class="intro-meta">
-          <span>1966&ndash;2023</span>
-          <span>Ideas / Texts / Buildings</span>
+          <span>Georgia Boucher</span>
+          <span>Fawn Chan</span>
+          <span>Solveig Watkins</span>
+          <span>Sydney Zuk</span>
         </div>
       </div>
       <div class="intro-visual">
@@ -1505,9 +1507,9 @@
   <section id="view-matrix" class="band">
     <div class="wrap">
       <div class="section-head">
-        <div class="section-num">Section 01<span>Syntactic Matrix</span></div>
+        <div class="section-num">Section 01<span>Ideas</span></div>
         <div>
-          <h2 class="section-title">Logical Collapse and Spatial Contradiction</h2>
+          <h2 class="section-title">Deconstructivist Ideas</h2>
           <p class="section-desc">
             Deconstructivism in architecture is grounded in Jacques Derrida’s philosophical post-structuralism. By applying <em style="font-family:var(--font-mono); color:var(--accent);">Différance</em> and textual deconstruction, architects challenge traditional rules of visual unity, symmetry, and predictability.
           </p>
@@ -1533,9 +1535,9 @@
   <section id="view-dossiers" class="band alt">
     <div class="wrap">
       <div class="section-head">
-        <div class="section-num">Section 02<span>Author Dossiers</span></div>
+        <div class="section-num">Section 02<span>Thinkers</span></div>
         <div>
-          <h2 class="section-title">Critical Exegesis of Primary Theorists</h2>
+          <h2 class="section-title">Key Thinkers</h2>
           <p class="section-desc">
             Chronological and thematic breakdown of key figures shaping architectural discourse from 1966 to 2023.
           </p>
@@ -1559,7 +1561,7 @@
       <div style="border: 1.5px solid var(--rule-strong); background: var(--paper-warm); padding: 1.75rem 2rem; margin-bottom: 2rem; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; gap: 1.5rem;">
         <div>
           <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; background: var(--accent); color: #ffffff; padding: 0.25rem 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; display: inline-block; margin-bottom: 0.75rem;">Geometric &amp; Syntactic Precedents</span>
-          <h2 style="font-family: var(--font-display); font-size: 2.1rem; font-weight: 700; color: var(--ink); margin: 0 0 0.5rem 0; letter-spacing: -0.02em;">Interactive Transformation &amp; Spatial Deconstruction</h2>
+          <h2 style="font-family: var(--font-display); font-size: 2.1rem; font-weight: 700; color: var(--ink); margin: 0 0 0.5rem 0; letter-spacing: -0.02em;">Building Transformations</h2>
           <p style="font-size: 0.98rem; color: var(--ink-soft); margin: 0; max-width: 62ch; line-height: 1.5;">
             Càndito &amp; Meloni’s geometric transformations of Tschumi’s Folies 6 and 7.
           </p>
@@ -1611,7 +1613,7 @@
       <div class="section-head">
         <div class="section-num">Section 04<span>Timeline</span></div>
         <div>
-          <h2 class="section-title">Chronology, Syntactic Shifts &amp; Canonical Works</h2>
+          <h2 class="section-title">Timeline</h2>
           <p class="section-desc">
             Explore the historical evolution of Deconstructivism from 1967 post-structuralist critiques to 2007 topological and spatial works.
           </p>
@@ -1637,18 +1639,18 @@
   <section id="view-project-matrix" class="band">
     <div class="wrap">
       <div class="section-head">
-        <div class="section-num">Section 05<span>Project &amp; Spatial Matrix</span></div>
+        <div class="section-num">Section 05<span>Analysis</span></div>
         <div>
-          <h2 class="section-title">Project &amp; Spatial Work Matrix</h2>
+          <h2 class="section-title">Analysis</h2>
           <p class="section-desc">Select a project to connect its timeline node to a focused spatial analysis.</p>
         </div>
       </div>
       <div class="matrix-wrap">
         <div class="matrix-status-bar">
-          <div><strong style="color: var(--accent);">Project &amp; Spatial Matrix:</strong> Click any project to inspect its timeline node and spatial analysis.</div>
+          <div><strong style="color: var(--accent);">Analysis:</strong> Click any project to inspect its timeline node and spatial analysis.</div>
           <button type="button" class="matrix-clear-btn" onclick="clearMatrixSelection()">Reset Selection</button>
         </div>
-        <table class="matrix" aria-label="Project and Spatial Work Matrix">
+        <table class="matrix" aria-label="Analysis">
           <thead>
             <tr>
               <th style="width: 22%;">Project</th>
@@ -1665,9 +1667,9 @@
   <section id="view-collision-field" class="band alt">
     <div class="wrap">
       <div class="section-head">
-        <div class="section-num">Section 06<span>Spatial Collision</span></div>
+        <div class="section-num">Section 06<span>Simulation</span></div>
         <div>
-          <h2 class="section-title">Collision Field</h2>
+          <h2 class="section-title">Building Simulation</h2>
           <p class="section-desc">Explore how folding, intersection, and fragmentation transform the relationship between a building’s interior and exterior.</p>
         </div>
       </div>
