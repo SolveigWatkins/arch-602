@@ -1064,6 +1064,138 @@
     height: auto !important;
     object-fit: contain !important;
   }
+  .matrix-plan-analysis {
+    margin: 1rem 0 0;
+    padding: 1rem 0 0;
+    border-top: 1px solid var(--rule);
+  }
+  .matrix-plan-analysis h4,
+  .matrix-plan-entry h5 {
+    margin: 0 0 0.65rem;
+    color: var(--ink);
+    font: 600 0.78rem/1.4 var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .matrix-plan-entry + .matrix-plan-entry {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--rule);
+  }
+  .matrix-plan-entry p,
+  .matrix-case-conclusion {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.88rem;
+  }
+  .matrix-case-conclusion {
+    padding: 0.9rem 1rem;
+    border-left: 3px solid var(--accent);
+    background: #fff;
+  }
+  .matrix-case-conclusion strong {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: var(--ink);
+    font: 600 0.68rem var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .matrix-argument {
+    margin-top: 2rem;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border: 1px solid var(--rule-strong);
+    background: var(--paper-warm);
+  }
+  .matrix-argument h3 {
+    margin: 0 0 1rem;
+    color: var(--ink);
+    font: 600 0.78rem var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .matrix-argument ol {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 0.8rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: matrix-conclusion;
+  }
+  .matrix-argument li {
+    counter-increment: matrix-conclusion;
+    padding: 0.9rem;
+    border-top: 2px solid var(--accent);
+    background: #fff;
+    color: var(--ink-soft);
+    font-size: 0.86rem;
+  }
+  .matrix-argument li::before {
+    content: "0" counter(matrix-conclusion);
+    display: block;
+    margin-bottom: 0.4rem;
+    color: var(--accent);
+    font: 600 0.68rem var(--font-mono);
+  }
+  .matrix-analysis-images--cozy-collection {
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  }
+  .matrix-analysis-images--cozy-collection .matrix-image-frame {
+    border-color: var(--rule);
+    background: #fff;
+  }
+  .matrix-analysis-images--cozy-collection .matrix-image-frame--cited {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+  .matrix-analysis-images--cozy-collection .matrix-image-frame img {
+    display: block;
+    width: 100%;
+    height: auto !important;
+    aspect-ratio: 8 / 5;
+    object-fit: contain !important;
+    flex: 0 0 auto;
+  }
+  .matrix-analysis-images--cozy-collection .matrix-image-citation,
+  .matrix-analysis-images--cozy-collection .matrix-image-citation a {
+    color: var(--ink);
+  }
+  .matrix-image-caption {
+    margin: 0.45rem 0 0;
+    color: var(--ink-soft);
+    font: 0.65rem/1.45 var(--font-mono);
+  }
+  .matrix-plan-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-top: 0.85rem;
+  }
+  .matrix-plan-image {
+    margin: 0;
+    padding: 0.6rem;
+    border: 1px solid var(--rule);
+    background: #fff;
+  }
+  .matrix-plan-image img {
+    display: block;
+    width: 100%;
+    max-height: 380px;
+    object-fit: contain;
+  }
+  .matrix-plan-image figcaption {
+    margin-top: 0.55rem;
+    color: var(--ink-muted);
+    font: 0.64rem/1.45 var(--font-mono);
+    overflow-wrap: anywhere;
+  }
+  .matrix-plan-image .matrix-image-credit {
+    display: block;
+    margin-top: 0.25rem;
+  }
+  .matrix-image-citation { overflow-wrap: anywhere; }
   @media (max-width: 640px) {
     .matrix-analysis-group--image-aside {
       grid-template-columns: minmax(0, 1fr);
@@ -1594,8 +1726,8 @@
       <div class="section-head">
         <div class="section-num">Section 05<span>Project &amp; Spatial Matrix</span></div>
         <div>
-          <h2 class="section-title">Project &amp; Spatial Work Matrix</h2>
-          <p class="section-desc">Select a project to connect its timeline node to a focused spatial analysis.</p>
+          <h2 class="section-title">How does the collision of exterior and interior behave under Deconstructivism?</h2>
+          <p class="section-desc">These projects show how Deconstructivism can be expressed in interiors: through program, structure, renovation, material, and even furniture. Select a case to compare its images, plan reading, and relationship to Eisenman’s house projects.</p>
         </div>
       </div>
       <div class="matrix-wrap">
@@ -1614,6 +1746,15 @@
           <tbody id="projectMatrixBody"></tbody>
         </table>
       </div>
+      <section class="matrix-argument" aria-labelledby="matrix-argument-title">
+        <h3 id="matrix-argument-title">Full argument / conclusion</h3>
+        <ol>
+          <li>Interior space can be designed functionally and in the flow of programmatic use, rather than orthogonally to the structure around it.</li>
+          <li>Deconstructivist projects are not complete until interior design is integrated with the deconstructivist structural and architectural elements that shape it.</li>
+          <li>Deconstructivism can begin in a project's details and social-conceptual ideas, then enter its interior program and the design and construction of spaces that challenge established architectural typologies.</li>
+          <li>Deconstructivism can also come from within: the Cozy Collection suggests furniture as a point of influence, raising the question of what interior-led Deconstructivism looks like at the scale of furniture.</li>
+        </ol>
+      </section>
     </div>
   </section>
 
@@ -1755,10 +1896,17 @@
               <li id="ref-eisenman-house-iii-1971">Eisenman Architects. “House III 1971.” Accessed November 14, 2026. <a href="https://eisenmanarchitects.com/House-III-1971">https://eisenmanarchitects.com/House-III-1971</a>.</li>
               <li>Hendrix, John Shannon. <i>The Contradiction Between Form and Function in Architecture</i>. London: Routledge, 2013.</li>
               <li id="ref-hiddenarchitecture-kihoku">Hidden Architecture. “Kihoku Astronomical Museum.” Accessed November 14, 2026. <a href="https://hiddenarchitecture.net/kihoku-astronomical-museu/">https://hiddenarchitecture.net/kihoku-astronomical-museu/</a>.</li>
+              <li id="ref-architizer-kihoku">Architizer. “Kihoku Astronomical Museum / Takasaki Architects.” Accessed November 16, 2026. <a href="https://architizer.com/idea/1444160/">https://architizer.com/idea/1444160/</a>.</li>
+              <li id="ref-archeyes-naked-house">ArchEyes Team. “Naked House / Shigeru Ban.” Accessed November 16, 2026. <a href="https://archeyes.com/naked-house-shigeru-ban/">https://archeyes.com/naked-house-shigeru-ban/</a>.</li>
+              <li id="ref-hariri-openrom">Hariri Pontarini Architects. “OpenROM.” Accessed November 16, 2026. <a href="https://www.hariripontarini.com/projects/openrom">https://www.hariripontarini.com/projects/openrom</a>.</li>
+              <li id="ref-jean-nouvel-nemausus">Nouvel, Jean. “Nemausus.” Accessed November 16, 2026. <a href="https://www.jeannouvel.com/en/projects/nemausus/">https://www.jeannouvel.com/en/projects/nemausus/</a>.</li>
               <li id="ref-mattie-2015">Mattie, Erik, Sophie Roulet, Bert de Muynck, and Cees de Jong. <i>The Colours of . . .: Frank O. Gehry, Jean Nouvel, Wang Shu, and Other Architects</i>. Translated by Textcase. 1st ed. Basel: Birkhäuser, 2015.</li>
+              <li id="ref-global-housing-projects">Steinemann, Ramias. <i>Global Housing Projects: 25 Buildings since 1980</i>. ETH Actar, 2008.</li>
+              <li id="ref-rom-crystal-plan">“ROM Crystal Plans.” PDF. Google Drive. Accessed November 16, 2026. <a href="https://drive.google.com/file/d/1YGVnhK-KSU11kM5ylW0F55GeiH_vVpa3/view">https://drive.google.com/file/d/1YGVnhK-KSU11kM5ylW0F55GeiH_vVpa3/view</a>.</li>
               <li id="ref-shigeru-ban-naked-house">Shigeru Ban Architects. “Naked House.” Accessed November 14, 2026. <a href="https://shigerubanarchitects.com/works/timber-and-bamboo/naked-house/">https://shigerubanarchitects.com/works/timber-and-bamboo/naked-house/</a>.</li>
               <li id="ref-libeskind-royal-ontario-museum">Studio Libeskind. “Royal Ontario Museum.” Accessed November 14, 2026. <a href="https://libeskind.com/work/royal-ontario-museum/">https://libeskind.com/work/royal-ontario-museum/</a>.</li>
               <li id="ref-wikiarquitectura-gehry-house">WikiArquitectura. “Gehry House.” Last modified July 8, 2020. <a href="https://en.wikiarquitectura.com/building/gehry-house/">https://en.wikiarquitectura.com/building/gehry-house/</a>.</li>
+              <li id="ref-hannes-grebin-cozy">Grebin, Hannes. “Cozy Collection Original.” Accessed November 16, 2026. <a href="https://hannesgrebin.com/cozy-furniture-collection">https://hannesgrebin.com/cozy-furniture-collection</a>.</li>
             </ul>
           </section>
         </div>
@@ -1998,13 +2146,16 @@ const PROJECT_MATRIX_DATA = [
     architect: 'Peter Eisenman',
     year: '1971–1976',
     summaryTitle: 'Grid Interactions & Planar Shifts',
-    expandedDetails: 'The set demonstrates how deconstructivism can operate through geometric misalignment, not just distortion of surface language.',
+    expandedDetails: 'Eisenman’s houses establish a comparative vocabulary for every case study: grids are shifted, rotated, and divided so that spatial order becomes visible as a process rather than a neutral container.',
     analysisGroups: [
       {
         text: '<strong>Grid Interactions:</strong><br><br><strong>House III (1971):</strong> Operates on an orthogonal nine-square grid interlocked with a second volumetric grid subjected to a 45-degree rotation. This geometric collision generates an accentuated central void and subverts traditional interior spatial hierarchy.',
         imageLayout: 'beside-text',
         images: [
           { url: 'assets/images/house-iii.jpg', frameColor: 'black', caption: 'House III (1971) - 9-step axonometric grid transformation.', imageReference: '#ref-eisenman-house-iii-1971', citationAuthor: 'Eisenman Architects', citationTitle: 'House III 1971', citationTitleInQuotes: true }
+        ],
+        planAnalysis: [
+          { title: 'House III · rotated grids', text: 'Read the plan as two systems at once: an orthogonal nine-square order and a rotated grid. Their overlap displaces the center and makes the void an active part of the room sequence.' }
         ]
       },
       {
@@ -2012,6 +2163,9 @@ const PROJECT_MATRIX_DATA = [
         imageLayout: 'beside-text',
         images: [
           { url: 'assets/images/house-vi.jpg', frameColor: 'black', caption: 'House VI (1975) - Axonometric transformation and volumetric planar study.', imageReference: '#ref-eisenman-house-iii-1971', citationAuthor: 'Eisenman Architects', citationTitle: 'House III 1971', citationTitleInQuotes: true }
+        ],
+        planAnalysis: [
+          { title: 'House VI · transformation as inhabitation', text: 'The plan carries its transformations into daily use. Displaced planes and the interrupted stair make the house’s formal history part of how occupants move through it.' }
         ]
       },
       {
@@ -2019,6 +2173,9 @@ const PROJECT_MATRIX_DATA = [
         imageLayout: 'beside-text',
         images: [
           { url: 'assets/images/house-x.jpg', frameColor: 'black', caption: 'House X (1976) - Non-vertebrate quadrant spatial analysis.', imageReference: '#ref-eisenman-house-iii-1971', citationAuthor: 'Eisenman Architects', citationTitle: 'House III 1971', citationTitleInQuotes: true }
+        ],
+        planAnalysis: [
+          { title: 'House X · four quadrants', text: 'The plan breaks the axial center into four differentiated quadrants. This is the closest Eisenman comparison for Libeskind and Takasaki: each uses intersecting geometries to produce spaces within and between volumes.' }
         ]
       }
     ]
@@ -2028,25 +2185,45 @@ const PROJECT_MATRIX_DATA = [
     name: 'Gehry House & Naked House',
     architect: 'Frank Gehry & Shigeru Ban',
     year: '1978 / 2000',
-    summaryTitle: 'Analysis & Comparison of Offset Placement of Internal Spaces',
-    expandedDetails: 'Both projects dismantle traditional domestic compartmentalization through offset placement of internal spaces. Gehry achieves this through rigid geometric skewness and material collision, whereas Ban achieves programmatic fluidity through movable room units.',
+    summaryTitle: 'House III, Gehry House & Naked House · Grid and Program',
+    expandedDetails: 'House III and Gehry both displace the familiar domestic grid, but make the collision legible differently: Eisenman through a rotated ordering system, Gehry through additions that cut across an existing house. Naked House shifts the comparison from formal geometry to movable room units and changing occupation. Gehry House and Naked House are therefore not equivalent renovations: only Gehry reworks an existing historic domestic shell.',
+    caseConclusion: 'The interior space can be designed functionally and in the flow of programmatic use rather than orthogonally to the structure around it.',
     analysisGroups: [
       {
-        text: '<strong>Gehry House (1978):</strong> Frank Gehry wraps an original Dutch Colonial suburban house in a skewed, offset exoskeleton and volumetric additions placed at an angle.',
+        text: '<strong>Gehry House (1978):</strong> Frank Gehry retains the original Dutch Colonial house while cutting, wrapping, and extending it with a skewed envelope and new volumes. Its prior domestic structure remains legible inside the new work.',
         imageLayout: 'masonry',
         images: [
           { url: 'assets/images/gehry-house-interior.jpg', frameColor: 'black', caption: 'Gehry House - Interior view of the intersecting additions.', imageReference: '#ref-wikiarquitectura-gehry-house', citationAuthor: 'WikiArquitectura', citationTitle: 'Gehry House', citationTitleInQuotes: true },
           { url: 'assets/images/gehry-house-elevation.jpg', frameColor: 'black', caption: 'Gehry House - Elevation drawing showing the offset roof and volumes.', imageReference: '#ref-wikiarquitectura-gehry-house', citationAuthor: 'WikiArquitectura', citationTitle: 'Gehry House', citationTitleInQuotes: true },
           { url: 'assets/images/gehry-house-exterior.jpg', frameColor: 'black', caption: 'Gehry House - Exterior view of the metal-clad addition.', imageReference: '#ref-wikiarquitectura-gehry-house', citationAuthor: 'WikiArquitectura', citationTitle: 'Gehry House', citationTitleInQuotes: true }
+        ],
+        planAnalysis: [
+          {
+            title: 'Gehry House · inherited plan and insertion',
+            text: 'The old house’s rooms and circulation remain the datum. New skewed additions interrupt and redirect that domestic sequence, so the finished interior records the friction between inherited layout and new geometry.',
+            images: [
+              { url: 'assets/images/gehry-house-plan.png', caption: 'Gehry House plan with circulation and room annotations.', imageReference: '#ref-wikiarquitectura-gehry-house' }
+            ]
+          }
         ]
       },
       {
-        text: '<strong>Naked House (2000):</strong> Shigeru Ban explores a similar spatial arrangement through movable, offset rooms within a single large translucent shed. Rather than fixed walls, independent room boxes can be repositioned to dissolve boundaries between interior and exterior.',
+        text: '<strong>Naked House (2000):</strong> Shigeru Ban places movable room units inside a translucent shared envelope. Repositioning the wheeled units creates programmatic fluidity, distorts the expected reading of rooms, and changes how inhabitants understand and occupy the space.',
         imageLayout: 'masonry',
         images: [
           { url: 'assets/images/naked-house-mobile-partition.jpg', frameColor: 'red', caption: 'Naked House - Movable translucent partition.', imageReference: '#ref-shigeru-ban-naked-house', citationAuthor: 'Shigeru Ban Architects', citationTitle: 'Naked House' },
           { url: 'assets/images/naked-house-interior.jpg', frameColor: 'red', caption: 'Naked House - Interior showing mobile room volumes.', imageReference: '#ref-shigeru-ban-naked-house', citationAuthor: 'Shigeru Ban Architects', citationTitle: 'Naked House' },
           { url: 'assets/images/naked-house-sliding-walls.jpg', frameColor: 'red', caption: 'Naked House - Sliding partitions open to the exterior.', imageReference: '#ref-shigeru-ban-naked-house', citationAuthor: 'Shigeru Ban Architects', citationTitle: 'Naked House' }
+        ],
+        planAnalysis: [
+          {
+            title: 'Naked House · plan and section',
+            text: 'The plan shows the shared interior as one flexible field, while the section makes its two-story volume legible. The movable rooms can be gathered, separated, or moved onto the terrace, shifting the boundary between room, passage, and collective space. This is a programmatic counterpart to House III’s grid displacement, not a copy of its formal method.',
+            images: [
+              { url: 'https://i0.wp.com/archeyes.com/wp-content/uploads/2016/02/naked-house-shigeru-ban-15.jpg?resize=1140%2C648&ssl=1', caption: 'Naked House floor plan, credited to Shigeru Ban.', imageReference: '#ref-archeyes-naked-house' },
+              { url: 'https://i0.wp.com/archeyes.com/wp-content/uploads/2016/02/naked-house-shigeru-ban-9.jpg?resize=1024%2C696&ssl=1', caption: 'Naked House section, credited to Shigeru Ban.', imageReference: '#ref-archeyes-naked-house' }
+            ]
+          }
         ]
       }
     ]
@@ -2056,25 +2233,51 @@ const PROJECT_MATRIX_DATA = [
     name: 'The Crystal (ROM) & Kihoku Astronomical Museum',
     architect: 'Daniel Libeskind & Masaharu Takasaki',
     year: '2007 / 1996',
-    summaryTitle: 'Arrangement of Fractured Spaces & Spaces Between',
-    expandedDetails: 'Both projects examine fractured geometries and interstitial spaces created between overlapping volumes. In both cases, structure becomes an active, expressive feature that dictates spatial experience.',
+    summaryTitle: 'House X, House VI & The Crystal · Volumes and Renovation',
+    expandedDetails: 'House X offers a comparison for the quadrant-like subdivision and spatial interstices of Libeskind’s and Takasaki’s work. House VI supplies a comparison in which formal history shapes the interior; Gehry House and the ROM extend that question through renovation and addition, retaining a prior structure whose history influences the final interior.',
+    caseConclusion: 'Deconstructivist projects are not complete until they have considered and integrated the interior design of the building in relation to the deconstructivist structural and architectural elements that impact it.',
     analysisGroups: [
       {
-        text: '<strong>The Crystal, Royal Ontario Museum (2007):</strong> The project begins as a juxtaposing addition of large overlapping volumes intersecting existing historic masonry.',
+        text: '<strong>The Crystal, Royal Ontario Museum (2007):</strong> Four crystalline volumes intersect and overlap the historic museum. Their collision creates volumetric space both within each crystal and in the spaces between them. The renovation’s functional interior elements—clear circulation, stairs, services, and gallery enclosures—help visitors read and use those fractured spaces without erasing the older building.',
         imageLayout: 'masonry',
         images: [
           { url: 'assets/images/crystal-rom-interior.png', frameColor: 'black', caption: 'The Crystal, Royal Ontario Museum - Interior stair.', imageReference: '#ref-libeskind-royal-ontario-museum', citationAuthor: 'Studio Libeskind', citationTitle: 'Royal Ontario Museum', citationTitleInQuotes: true },
           { url: 'assets/images/crystal-rom-exterior-1.jpg', frameColor: 'black', caption: 'The Crystal, Royal Ontario Museum - Exterior view.', imageReference: '#ref-libeskind-royal-ontario-museum', citationAuthor: 'Studio Libeskind', citationTitle: 'Royal Ontario Museum', citationTitleInQuotes: true },
           { url: 'assets/images/crystal-rom-exterior-2.jpg', frameColor: 'black', caption: 'The Crystal, Royal Ontario Museum - Facade and historic context.', imageReference: '#ref-libeskind-royal-ontario-museum', citationAuthor: 'Studio Libeskind', citationTitle: 'Royal Ontario Museum', citationTitleInQuotes: true }
+        ],
+        planAnalysis: [
+          {
+            title: 'The Crystal · interlocking galleries',
+            text: 'The four crystals make the plan discontinuous: galleries, stairs, and landings negotiate the angled envelope, while the volumetric spaces within and between the crystals extend the museum’s historic plan rather than replace it.',
+            images: [
+              { url: 'assets/images/rom-crystal-plan-clean.png', caption: 'Royal Ontario Museum Crystal plan, with numbered callouts removed.', imageReference: '#ref-rom-crystal-plan' }
+            ]
+          },
+          {
+            title: 'OpenROM · renovation plan',
+            text: 'This later Level One renovation is presented with the Crystal introduction because it clarifies how functional interior elements—entrance, foyer, flexible commons, and circulation—make the museum’s layered spaces legible and usable.',
+            images: [
+              { url: 'https://cdn.prod.website-files.com/67dad124930e6770d64e9036/686fce1b577b4c2fb8f385ae_Level_One_Plan_xl2.jpg', caption: 'OpenROM Level One floor plan, Hariri Pontarini Architects.', imageReference: '#ref-hariri-openrom' }
+            ]
+          }
         ]
       },
       {
-        text: '<strong>Kihoku Astronomical Museum (1996):</strong> Its form responds to two dominant cylindrical volumes, creating intricate interstitial spaces within, under, and between them. Because of the compact interior area, structure becomes an expressive feature rather than a normative condition.',
+        text: '<strong>Kihoku Astronomical Museum (1996):</strong> Its sculptural form responds to intersecting cylindrical volumes, creating interstitial spaces within, under, and between them. As in House X, the plan’s differentiated parts resist a single axial center; as at the ROM, structure becomes an active feature of the interior experience.',
         imageLayout: 'masonry',
         images: [
           { url: 'assets/images/kihoku-museum-axonometric.jpg', frameColor: 'red', caption: 'Kihoku Astronomical Museum - Axonometric drawing.', imageReference: '#ref-hiddenarchitecture-kihoku', citationAuthor: 'Hidden Architecture', citationTitle: 'Kihoku Astronomical Museum', citationTitleInQuotes: true },
           { url: 'assets/images/kihoku-museum-exterior.jpg', frameColor: 'red', caption: 'Kihoku Astronomical Museum - Exterior view.', imageReference: '#ref-hiddenarchitecture-kihoku', citationAuthor: 'Hidden Architecture', citationTitle: 'Kihoku Astronomical Museum', citationTitleInQuotes: true },
           { url: 'assets/images/kihoku-museum-interior.jpg', frameColor: 'red', caption: 'Kihoku Astronomical Museum - Interior view.', imageReference: '#ref-hiddenarchitecture-kihoku', citationAuthor: 'Hidden Architecture', citationTitle: 'Kihoku Astronomical Museum', citationTitleInQuotes: true }
+        ],
+        planAnalysis: [
+          {
+            title: 'Kihoku Astronomical Museum · plan drawing',
+            text: 'The published plan relates the museum’s internal organization to its intersecting cylindrical forms, clarifying how circulation and residual spaces gather between them.',
+            images: [
+              { url: 'https://images.architizer.com/media/1452672050458Kihoku_plans.jpg?width=1680&quality=60', caption: 'Kihoku Astronomical Museum plans, Takasaki Architects.', imageReference: '#ref-architizer-kihoku' }
+            ]
+          }
         ]
       }
     ]
@@ -2084,11 +2287,11 @@ const PROJECT_MATRIX_DATA = [
     name: 'Nemausus I',
     architect: 'Jean Nouvel',
     year: '1988',
-    summaryTitle: 'Flexible Plans Due to Interior Structure',
-    expandedDetails: '<strong>Comparison with MoMA:</strong> The 1988 Deconstructivist Architecture exhibition foregrounded challenges to conventional geometry and formal order. Nemausus shares that impulse to question architectural norms, but directs it toward housing’s social and programmatic conventions rather than a visibly fragmented form.',
+    summaryTitle: 'Nemausus I · Flexible Plans, Industrial Materials',
+    expandedDetails: 'Nemausus takes the comparison from formal fragmentation to housing as a social and programmatic system. Its industrial character and generous open areas loosen the expected apartment plan; unlike House III or House X, its disruption is expressed primarily through choice, adaptability, and everyday use.',
     analysisGroups: [
       {
-        text: 'Designed as affordable housing, Nemausus uses unconventional, cost-conscious materials and fixtures to create large, open-plan lofts. Residents can choose a layout suited to individual needs instead of receiving one of a set of identical apartments. The project also aims to bring daylight into every unit.',
+        text: 'Designed as experimental housing, Nemausus uses an industrial palette of exposed concrete, galvanized steel, metal grating, and large openings. All-through apartments, generous terraces, and open living areas make the most of daylight and cross-ventilation. Rather than delivering identical room divisions, the project offers distinct single-level, duplex, and triplex types and a choice of stairs, partitions, and doors.',
         imageLayout: 'nemausus-gallery',
         images: [
           { url: 'assets/images/nemausus-interior.png', frameColor: 'red', caption: 'Nemausus I - Interior view of the flexible living space.', imageReference: '#ref-mattie-2015', citationAuthor: 'Erik Mattie, Sophie Roulet, Bert de Muynck, and Cees de Jong', citationTitle: 'The Colours of . . .: Frank O. Gehry, Jean Nouvel, Wang Shu, and Other Architects' },
@@ -2096,15 +2299,90 @@ const PROJECT_MATRIX_DATA = [
         ]
       },
       {
-        text: 'Each dwelling is treated as a customizable loft: spaces are not rigidly assigned, units are not repetitive, and openings loosen the boundary between indoors and outdoors. Rather than visually distorting the building, the project challenges expectations of apartment living by rethinking dwelling size and organization around spaciousness, choice, and cost efficiency.<br><br><strong>Spatial placement:</strong> Unlike the Gehry House’s offset, intersecting volumes or the Naked House’s movable room boxes within a shared envelope, Nemausus offers open lofts with resident-selected layouts. All three unsettle fixed spatial expectations; Nemausus does so at the scale of affordable everyday housing.',
+        text: 'Each dwelling is treated as a customizable loft: the nearly 60 m² open living area does not rigidly separate kitchen and dining, and residents can select components that shape their own layout. The affordable-housing project challenges the standard apartment type through spaciousness, choice, and cost-conscious construction. Unlike Gehry’s collision of additions or Ban’s movable room boxes, Nemausus makes flexibility an everyday housing offer.',
         imageLayout: 'nemausus-section',
         images: [
           { url: 'assets/images/nemausus-sections.png', frameColor: 'red', caption: 'Nemausus I - Section drawings showing the building layouts.', imageReference: '#ref-mattie-2015', citationAuthor: 'Erik Mattie, Sophie Roulet, Bert de Muynck, and Cees de Jong', citationTitle: 'The Colours of . . .: Frank O. Gehry, Jean Nouvel, Wang Shu, and Other Architects' }
+        ],
+        planAnalysis: [
+          {
+            title: 'Nemausus I · apartment plans',
+            text: 'The plan sheet compares multiple apartment organizations across Buildings A and B. Repetition of the structural bay allows stairs, partitions, and service areas to shift while the open living areas remain connected to terraces and opposing facades, making flexibility legible in the built plans.',
+            images: [
+              { url: 'assets/images/nemausus-plans.png', caption: 'Nemausus I apartment plans, Buildings A and B.', imageReference: '#ref-global-housing-projects' }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'cozy-collection',
+    name: 'Cozy Collection',
+    architect: 'Hannes Grebin',
+    year: '2013',
+    summaryTitle: 'Furniture Typology as Interior Generator',
+    expandedDetails: 'The Cozy Collection brings the argument inside-out: recognizable furniture archetypes are fractured and reassembled, yet remain usable. Like the Crystal, the pieces gather fragments into new volumetric compositions; unlike a building-scale intervention, the furniture can become the first force that organizes the room. Compared with House X, the collection relocates geometric disruption from the plan of the building to the objects that direct a room’s use.',
+    caseConclusion: 'Furniture can be a point of origin for Deconstructivist interior space: its placement may redirect circulation, viewpoints, and use, and architecture can respond to the functional demands of the objects within it.',
+    analysisGroups: [
+      {
+        text: 'Grebin redesigns familiar living-room typologies by breaking and recombining their expected geometry. Sofa, armchair, sideboard, and rug remain recognizable through their materials and details even as their forms depart from the familiar grid. The pieces are intended to remain ergonomic, not merely become abstract objects.',
+        imageLayout: 'cozy-collection',
+        images: [
+          { url: 'https://cdn.myportfolio.com/3afa904258b6f08dd50f727d63fad2d5/0812306e-8e44-4b06-8e37-d5c42c49b300_rw_1920.jpg?h=33eb84a8bf2c256578bdce75b4ac723d', frameColor: 'red', caption: 'Cozy Collection - Sofa, Hannes Grebin.', imageReference: '#ref-hannes-grebin-cozy', citationAuthor: 'Hannes Grebin', citationTitle: 'Cozy Collection Original', citationTitleInQuotes: true },
+          { url: 'https://cdn.myportfolio.com/3afa904258b6f08dd50f727d63fad2d5/c6c9c410-37a3-4922-b743-dd73c89839a5_rw_1920.jpg?h=2929a008c0416d4891352ba6a380d20b', frameColor: 'red', caption: 'Cozy Collection - Armchair, Hannes Grebin.', imageReference: '#ref-hannes-grebin-cozy', citationAuthor: 'Hannes Grebin', citationTitle: 'Cozy Collection Original', citationTitleInQuotes: true },
+          { url: 'https://cdn.myportfolio.com/3afa904258b6f08dd50f727d63fad2d5/0a80aeaa-8059-4857-be08-b820fc1d479b_rw_1920.jpg?h=ca04516a3b8aa830d0cdba16e4029e93', frameColor: 'red', caption: 'Cozy Collection - Sideboard, Hannes Grebin.', imageReference: '#ref-hannes-grebin-cozy', citationAuthor: 'Hannes Grebin', citationTitle: 'Cozy Collection Original', citationTitleInQuotes: true },
+          { url: 'https://cdn.myportfolio.com/3afa904258b6f08dd50f727d63fad2d5/ea397a3c-fb34-41e2-a6c5-1a7216f19cca_rw_1920.jpg?h=a0280f5955a95e7ffb77d9735db35771', frameColor: 'red', caption: 'Cozy Collection - Rug, Hannes Grebin.', imageReference: '#ref-hannes-grebin-cozy', citationAuthor: 'Hannes Grebin', citationTitle: 'Cozy Collection Original', citationTitleInQuotes: true }
+        ],
+        planAnalysis: [
+          { title: 'Furniture as a room-scale operation', text: 'The pieces do not sit as neutral objects inside an expected grid. Their fractured arrangements can establish focal points, redirect circulation, control viewpoints, or define zones without conventional partitions. This is closest to the Crystal’s volumetric collisions, but asks a further question: how would a room’s architecture change in response to the furniture’s function and placement?' }
         ]
       }
     ]
   }
 ];
+
+const MATRIX_IMAGE_CITATIONS = {
+  '#ref-eisenman-house-iii-1971': 'Eisenman Architects. “House III 1971.” Accessed November 14, 2026. https://eisenmanarchitects.com/House-III-1971.',
+  '#ref-wikiarquitectura-gehry-house': 'WikiArquitectura. “Gehry House.” Last modified July 8, 2020. https://en.wikiarquitectura.com/building/gehry-house/.',
+  '#ref-shigeru-ban-naked-house': 'Shigeru Ban Architects. “Naked House.” Accessed November 14, 2026. https://shigerubanarchitects.com/works/timber-and-bamboo/naked-house/.',
+  '#ref-archeyes-naked-house': 'ArchEyes Team. “Naked House / Shigeru Ban.” Accessed November 16, 2026. https://archeyes.com/naked-house-shigeru-ban/.',
+  '#ref-libeskind-royal-ontario-museum': 'Studio Libeskind. “Royal Ontario Museum.” Accessed November 14, 2026. https://libeskind.com/work/royal-ontario-museum/.',
+  '#ref-hiddenarchitecture-kihoku': 'Hidden Architecture. “Kihoku Astronomical Museum.” Accessed November 14, 2026. https://hiddenarchitecture.net/kihoku-astronomical-museu/.',
+  '#ref-architizer-kihoku': 'Architizer. “Kihoku Astronomical Museum / Takasaki Architects.” Accessed November 16, 2026. https://architizer.com/idea/1444160/.',
+  '#ref-hariri-openrom': 'Hariri Pontarini Architects. “OpenROM.” Accessed November 16, 2026. https://www.hariripontarini.com/projects/openrom.',
+  '#ref-mattie-2015': 'Mattie, Erik, Sophie Roulet, Bert de Muynck, and Cees de Jong. The Colours of . . .: Frank O. Gehry, Jean Nouvel, Wang Shu, and Other Architects. Translated by Textcase. 1st ed. Basel: Birkhäuser, 2015.',
+  '#ref-jean-nouvel-nemausus': 'Nouvel, Jean. “Nemausus.” Accessed November 16, 2026. https://www.jeannouvel.com/en/projects/nemausus/.',
+  '#ref-global-housing-projects': 'Steinemann, Ramias. Global Housing Projects: 25 Buildings since 1980. ETH Actar, 2008.',
+  '#ref-rom-crystal-plan': '“ROM Crystal Plans.” PDF. Google Drive. Accessed November 16, 2026. https://drive.google.com/file/d/1YGVnhK-KSU11kM5ylW0F55GeiH_vVpa3/view.',
+  '#ref-hannes-grebin-cozy': 'Grebin, Hannes. “Cozy Collection Original.” Accessed November 16, 2026. https://hannesgrebin.com/cozy-furniture-collection.'
+};
+
+function renderPlanAnalysis(plans) {
+  if (!plans || !plans.length) return '';
+  return `
+    <div class="matrix-plan-analysis">
+      <h4>Plan analysis</h4>
+      ${plans.map(plan => `
+        <div class="matrix-plan-entry">
+          <h5>${plan.title}</h5>
+          <p>${plan.text}</p>
+          ${plan.sourceReference && MATRIX_IMAGE_CITATIONS[plan.sourceReference] ? `<p class="matrix-image-citation"><span>Source: </span><a href="${plan.sourceReference}">${MATRIX_IMAGE_CITATIONS[plan.sourceReference]}</a></p>` : ''}
+          ${plan.images && plan.images.length ? `
+            <div class="matrix-plan-images">
+              ${plan.images.map(image => `
+                <figure class="matrix-plan-image">
+                  <img src="${image.url}" alt="${image.caption}" loading="lazy">
+                  <figcaption>${image.caption}<span class="matrix-image-credit">Source: <a href="${image.imageReference}">${MATRIX_IMAGE_CITATIONS[image.imageReference]}</a></span></figcaption>
+                </figure>
+              `).join('')}
+            </div>
+          ` : ''}
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
 
 function renderProjectMatrix() {
   const tbody = document.getElementById('projectMatrixBody');
@@ -2131,17 +2409,20 @@ function renderProjectMatrix() {
           ${p.analysisGroups.map(group => `
             <div class="matrix-analysis-group${group.imageLayout === 'beside-text' ? ' matrix-analysis-group--image-aside' : ''}" style="margin-bottom: 1rem;">
               <p style="margin: 0 0 1rem 0; font-size: 0.9rem; color: var(--ink);">${group.text}</p>
-              <div class="matrix-analysis-images${group.imageLayout === 'masonry' ? ' matrix-analysis-images--masonry' : ''}${group.imageLayout === 'nemausus-gallery' ? ' matrix-analysis-images--nemausus-gallery' : ''}${group.imageLayout === 'nemausus-section' ? ' matrix-analysis-images--nemausus-section' : ''}${group.images.some(img => img.imageReference) ? ' matrix-analysis-images--with-citations' : ''}">
+              <div class="matrix-analysis-images${group.imageLayout === 'masonry' ? ' matrix-analysis-images--masonry' : ''}${group.imageLayout === 'nemausus-gallery' ? ' matrix-analysis-images--nemausus-gallery' : ''}${group.imageLayout === 'nemausus-section' ? ' matrix-analysis-images--nemausus-section' : ''}${group.imageLayout === 'cozy-collection' ? ' matrix-analysis-images--cozy-collection' : ''}${group.images.some(img => img.imageReference) ? ' matrix-analysis-images--with-citations' : ''}">
                 ${group.images.map(img => `
                   <div class="matrix-image-frame matrix-image-frame--${img.frameColor}${img.imageReference ? ' matrix-image-frame--cited' : ''}">
                     <img src="${img.url}" alt="${img.caption}" style="width: 100%; height: 140px; object-fit: cover; background: #fff;" onerror="this.src='https://placehold.co/600x400/111111/e53e3e?text=Architectural+Drawing'">
-                    ${img.imageReference ? `<p class="matrix-image-citation"><a href="${img.imageReference}">${img.citationAuthor}, ${img.citationTitleInQuotes ? `“${img.citationTitle}”` : `<i>${img.citationTitle}</i>`}</a></p>` : ''}
+                    ${group.imageLayout === 'cozy-collection' ? `<p class="matrix-image-caption">${img.caption}</p>` : ''}
+                    ${img.imageReference && MATRIX_IMAGE_CITATIONS[img.imageReference] ? `<p class="matrix-image-citation"><span>Source: </span><a href="${img.imageReference}">${MATRIX_IMAGE_CITATIONS[img.imageReference]}</a></p>` : ''}
                   </div>
                 `).join('')}
               </div>
+              ${renderPlanAnalysis(group.planAnalysis)}
             </div>
           `).join('')}
-          <p style="margin: 0 0 1rem 0; font-size: 0.9rem; color: var(--ink-soft);">${p.expandedDetails}</p>
+          ${p.caseConclusion ? `<p class="matrix-case-conclusion"><strong>Case-study conclusion</strong>${p.caseConclusion}</p>` : ''}
+          <p style="margin: 1rem 0 0; font-size: 0.9rem; color: var(--ink-soft);"><strong>Comparison:</strong> ${p.expandedDetails}</p>
         </div>
       </td>
     `;
