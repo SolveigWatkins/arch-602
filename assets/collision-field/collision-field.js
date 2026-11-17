@@ -43,9 +43,9 @@
   const mouse = new THREE.Vector2();
   const floorPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const config = {
-    museum: { w: 10, d: 8, h: 4.5, name: 'Museum', floors: 1 }
+    building: { w: 10, d: 8, h: 4.5, name: 'Building', floors: 1 }
   };
-  let state = { building: 'museum', view: 'iso', behaviors: [], points: [], selected: null, selectedFragment: null, selectedBasePanel: null, selectedFragmentPanel: null, foldTargets: [], selectedFoldTarget: null, foldTargetsByPanel: {}, foldSettingsByTarget: {}, fragmentLevels: {}, fragmentLevel: 0, fragmentHinges: {}, dragging: null, intensity: 65, stickiness: 55, foldDirection: 'inward', foldEdge: 'top', centerHinge: false, centerAxis: 'vertical', activeOperation: null };
+  let state = { building: 'building', view: 'iso', behaviors: [], points: [], selected: null, selectedFragment: null, selectedBasePanel: null, selectedFragmentPanel: null, foldTargets: [], selectedFoldTarget: null, foldTargetsByPanel: {}, foldSettingsByTarget: {}, fragmentLevels: {}, fragmentLevel: 0, fragmentHinges: {}, dragging: null, intensity: 65, stickiness: 55, foldDirection: 'inward', foldEdge: 'top', centerHinge: false, centerAxis: 'vertical', activeOperation: null };
 
   function drawFallback(ctx, width, height) {
     if (!ctx || !width || !height) return;
@@ -56,7 +56,22 @@
       ctx.beginPath(); points.forEach(function (p, i) { const q = project(p[0], p[1], p[2]); if (i) ctx.lineTo(q[0], q[1]); else ctx.moveTo(q[0], q[1]); }); ctx.closePath();
       ctx.fillStyle = fill; ctx.fill(); if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lineWidth || 1; ctx.stroke(); }
     }
-    function line(points, color, width, dash) { ctx.beginPath(); points.forEach(function (p, i) { const q = project(p[0], p[1], p[2]); if (i) ctx.lineTo(q[0], q[1]); else ctx.moveTo(q[0], q[1]); }); ctx.strokeStyle = color; ctx.lineWidth = width || 1; ctx.setLineDash(dash || []); ctx.stroke(); ctx.setLineDash([]); }    function transformIntersectPanel(points,key){if(!state.behaviors.includes('intersect'))return points;const type=String(key||''),xs=points.map(function(p){return p[0];}),zs=points.map(function(p){return p[2];}),cx=xs.reduce(function(a,b){return a+b/xs.length;},0),cz=zs.reduce(function(a,b){return a+b/zs.length;},0),axis=(Math.max.apply(null,xs)-Math.min.apply(null,xs))<(Math.max.apply(null,zs)-Math.min.apply(null,zs))?'x':'z',plane=axis==='x'?cx:cz,rate=type.indexOf('fallback-partition')>=0?1:.68,extent=axis==='x'?config[state.building].w/2:config[state.building].d/2,distance=extent*rate*state.intensity/100,direction=plane>=0?-1:1;return points.map(function(p){return axis==='x'?[p[0]+direction*distance,p[1],p[2]]:[p[0],p[1],p[2]+direction*distance];});}
+    function line(points, color, width, dash) { ctx.beginPath(); points.forEach(function (p, i) { const q = project(p[0], p[1], p[2]); if (i) ctx.lineTo(q[0], q[1]); else ctx.moveTo(q[0], q[1]); }); ctx.strokeStyle = color; ctx.lineWidth = width || 1; ctx.setLineDash(dash || []); ctx.stroke(); ctx.setLineDash([]); }
+    function transformIntersectPanel(points) {
+      if (!state.behaviors.includes('intersect')) return points;
+      const xs = points.map(function (p) { return p[0]; });
+      const zs = points.map(function (p) { return p[2]; });
+      const cx = xs.reduce(function (a, b) { return a + b / xs.length; }, 0);
+      const cz = zs.reduce(function (a, b) { return a + b / zs.length; }, 0);
+      const axis = (Math.max.apply(null, xs) - Math.min.apply(null, xs)) < (Math.max.apply(null, zs) - Math.min.apply(null, zs)) ? 'x' : 'z';
+      const plane = axis === 'x' ? cx : cz;
+      const extent = axis === 'x' ? config[state.building].w / 2 : config[state.building].d / 2;
+      const distance = extent * .68 * state.intensity / 100;
+      const direction = plane >= 0 ? -1 : 1;
+      return points.map(function (p) {
+        return axis === 'x' ? [p[0] + direction * distance, p[1], p[2]] : [p[0], p[1], p[2] + direction * distance];
+      });
+    }
     ctx.clearRect(0, 0, width, height); ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, width, height);
     // Fixed drafting grid, projected in the current view.
     for (let i = -18; i <= 18; i++) { line([[-18, 0, i], [18, 0, i]], '#d8e2f0', .65); line([[i, 0, -18], [i, 0, 18]], '#d8e2f0', .65); }
@@ -73,8 +88,8 @@
         return;
       }
       const savedFragmentPanels=Array.from({length:3},function(_,panelIndex){const u0=a0+(a1-a0)*panelIndex,u1=u0+(a1-a0)/3,level=state.fragmentLevels[basePanelKey({face:'exterior',axis:axis,plane:plane,panelIndex:panelIndex})]||0;return {u0:u0,u1:u1,level:level,panelIndex:panelIndex};});
-      if(!state.behaviors.includes('folding')&&savedFragmentPanels.some(function(panel){return panel.level>0;})){savedFragmentPanels.forEach(function(panel){const polygons=panel.level>0?fragmentPolygons(panel.u0,panel.u1,h,panel.level,axis+':'+plane+':'+panel.panelIndex).polygons:[[{x:panel.u0,y:-h/2},{x:panel.u1,y:-h/2},{x:panel.u1,y:h/2},{x:panel.u0,y:h/2}]];polygons.forEach(function(poly){const points=poly.map(function(point){return axis==='z'?[point.x,point.y+h/2,plane]:[plane,point.y+h/2,point.x];});polygon(transformIntersectPanel(points,'fallback-saved-fragment-'+axis+'-'+plane.toFixed(2)+'-'+panel.panelIndex),'rgba(247,246,241,.82)','#292a27',1.4);});});return;}
-      if (!fragmentPoint) { if(state.behaviors.includes('intersect')){const segment=(a1-a0)/3;for(let panelIndex=0;panelIndex<3;panelIndex++){const u0=a0+segment*panelIndex,u1=u0+segment,surface={axis:axis,plane:plane,face:'exterior',panelIndex:panelIndex,panelCount:3,len:segment,height:h},pts=axis==='z'?[[u0,0,plane],[u1,0,plane],[u1,h,plane],[u0,h,plane]]:[[plane,0,u0],[plane,0,u1],[plane,h,u1],[plane,h,u0]],transformed=transformIntersectPoints(pts.map(function(p){return new THREE.Vector3(p[0],p[1],p[2]);}),surface).map(function(p){return [p.x,p.y,p.z];});polygon(transformed,'rgba(247,246,241,.78)','#292a27',1.7);}return;}polygon(transformIntersectPanel(base,'fallback-envelope-'+axis+'-'+plane.toFixed(2)), 'rgba(247,246,241,.78)', '#292a27', 1.7);for(let i=1;i<3;i++){const u=a0+(a1-a0)*i/3,seam=axis==='z'?[[u,0,plane+.012],[u,h,plane+.012]]:[[plane+.012,0,u],[plane+.012,h,u]];line(seam,'rgba(41,42,39,.62)',1.2);}return; }
+      if(!state.behaviors.includes('folding')&&savedFragmentPanels.some(function(panel){return panel.level>0;})){savedFragmentPanels.forEach(function(panel){const polygons=panel.level>0?fragmentPolygons(panel.u0,panel.u1,h,panel.level,axis+':'+plane+':'+panel.panelIndex).polygons:[[{x:panel.u0,y:-h/2},{x:panel.u1,y:-h/2},{x:panel.u1,y:h/2},{x:panel.u0,y:h/2}]];polygons.forEach(function(poly){const points=poly.map(function(point){return axis==='z'?[point.x,point.y+h/2,plane]:[plane,point.y+h/2,point.x];});polygon(transformIntersectPanel(points),'rgba(247,246,241,.82)','#292a27',1.4);});});return;}
+      if (!fragmentPoint) { if(state.behaviors.includes('intersect')){const segment=(a1-a0)/3;for(let panelIndex=0;panelIndex<3;panelIndex++){const u0=a0+segment*panelIndex,u1=u0+segment,surface={axis:axis,plane:plane,face:'exterior',panelIndex:panelIndex,panelCount:3,len:segment,height:h},pts=axis==='z'?[[u0,0,plane],[u1,0,plane],[u1,h,plane],[u0,h,plane]]:[[plane,0,u0],[plane,0,u1],[plane,h,u1],[plane,h,u0]],transformed=transformIntersectPoints(pts.map(function(p){return new THREE.Vector3(p[0],p[1],p[2]);}),surface).map(function(p){return [p.x,p.y,p.z];});polygon(transformed,'rgba(247,246,241,.78)','#292a27',1.7);}return;}polygon(transformIntersectPanel(base), 'rgba(247,246,241,.78)', '#292a27', 1.7);for(let i=1;i<3;i++){const u=a0+(a1-a0)*i/3,seam=axis==='z'?[[u,0,plane+.012],[u,h,plane+.012]]:[[plane+.012,0,u],[plane+.012,h,u]];line(seam,'rgba(41,42,39,.62)',1.2);}return; }
       const target = 6.2;
       const cols = fragmentPoint ? Math.max(1, Math.min(18, Math.ceil((a1-a0)/target))) : 5;
       const rows = fragmentPoint ? Math.max(1, Math.min(14, Math.ceil(h/target))) : 3;
@@ -88,17 +103,15 @@
           if (fragmentAmount > .15 && (r+c)%4===0) continue;
           const jitter=(r*3+c*5)%4, inset=(u1-u0)*(.04+jitter*.045), quad=axis==='z'?[[u0+inset,y0,plane],[u1-inset*.5,y0,plane],[u1,y1-(y1-y0)*.08,plane],[u0,y1,plane]]:[[plane,y0,u0+inset],[plane,y0,u1-inset*.5],[plane,y1,u1],[plane,y1-(y1-y0)*.08,u0]];
           if(foldPoint&&amount>.12){const hinge={bottom:0,right:1,top:2,left:3}[state.foldEdge],direction=state.foldDirection==='inward'?(axis==='z'?-Math.sign(plane||1):Math.sign(plane||1)):(axis==='z'?Math.sign(plane||1):-Math.sign(plane||1)),lift=Math.sin(foldAngleAt(foldPoint,center[0],center[1],center[2]))*((y1-y0)*.9+fragmentAmount*.7)*direction,a=(hinge+2)%4,b=(hinge+3)%4;[a,b].forEach(function(i){if(axis==='z')quad[i][2]+=lift;else quad[i][0]+=lift;});if(state.centerHinge){const cx=quad.reduce(function(s,p){return s+p[0]/4;},0),cy=quad.reduce(function(s,p){return s+p[1]/4;},0),cz=quad.reduce(function(s,p){return s+p[2]/4;},0),theta=-foldAngleAt(foldPoint,center[0],center[1],center[2])*direction,cos=Math.cos(theta),sin=Math.sin(theta);quad.forEach(function(p){if(state.centerAxis==='vertical'){const dx=p[0]-cx,dz=p[2]-cz;p[0]=cx+dx*cos+dz*sin;p[2]=cz-dx*sin+dz*cos;}else{const dx=p[0]-cx,dy=p[1]-cy;p[0]=cx+dx*cos-dy*sin;p[1]=cy+dx*sin+dy*cos;}});}}
-          polygon(transformIntersectPanel(quad,'fallback-fragment-'+axis+'-'+plane.toFixed(2)+'-'+c+'-'+r), '#e8e4da', '#292a27', 1.1);
+          polygon(transformIntersectPanel(quad), '#e8e4da', '#292a27', 1.1);
         } else {
           const quad=axis==='z'?[[u0,y0,plane],[u1,y0,plane],[u1,y1,plane],[u0,y1,plane]]:[[plane,y0,u0],[plane,y0,u1],[plane,y1,u1],[plane,y1,u0]];
-          polygon(transformIntersectPanel(quad,'fallback-panel-'+axis+'-'+plane.toFixed(2)+'-'+c+'-'+r), 'rgba(247,246,241,.76)', '#292a27', 1.1);
+          polygon(transformIntersectPanel(quad), 'rgba(247,246,241,.76)', '#292a27', 1.1);
         }
       }
     }
     wall('z',z0,x0,x1,-1); wall('x',x0,z0,z1,-1); wall('z',z1,x0,x1,1); wall('x',x1,z0,z1,1);
     const selectedPanel=state.activeOperation==='fragmentation'&&state.selectedBasePanel;if(selectedPanel){const total=selectedPanel.axis==='z'?b.w:b.d,len=total/(selectedPanel.panelCount||3),u0=-total/2+len*selectedPanel.panelIndex,u1=u0+len,plane=selectedPanel.plane,axis=selectedPanel.axis,offset=Math.sign(plane||1)*.035,pts=axis==='z'?[[u0,0,plane+offset],[u1,0,plane+offset],[u1,b.h,plane+offset],[u0,b.h,plane+offset]]:[[plane+offset,0,u0],[plane+offset,0,u1],[plane+offset,b.h,u1],[plane+offset,b.h,u0]];polygon(pts,'rgba(217,50,50,.5)','#252623',1.5);const cuts=fragmentPolygons(u0,u1,b.h,state.fragmentLevel,axis+':'+plane+':'+selectedPanel.panelIndex).cuts;cuts.forEach(function(cut){const seam=axis==='z'?[[cut[0].x,cut[0].y+b.h/2,plane+offset*1.1],[cut[1].x,cut[1].y+b.h/2,plane+offset*1.1]]:[[plane+offset*1.1,cut[0].y+b.h/2,cut[0].x],[plane+offset*1.1,cut[1].y+b.h/2,cut[1].x]];line(seam,'#080807',5);});}
-    const w=b.w,d=b.d,walls=[[.13,3.2,d*.56,0,1.6,-.15],[w*.35,2.8,.13,w*.22,1.4,.25]];
-    walls.forEach(function(v,index){const x=v[3],y=v[4],z=v[5],ex=v[0]/2,ez=v[2]/2;polygon(transformIntersectPanel([[x-ex,y-v[1]/2,z-ez],[x+ex,y-v[1]/2,z-ez],[x+ex,y+v[1]/2,z+ez],[x-ex,y+v[1]/2,z+ez]],'fallback-partition-'+index),'rgba(190,188,180,.72)','#454640',1.2);});
   }
 
   function clear(group) {
@@ -290,9 +303,6 @@
     facade('x',-b.w/2,b.d,b.h,'exterior');
     facade('z',b.d/2,b.w,b.h,'exterior');
     facade('x',b.w/2,b.d,b.h,'exterior');
-    // Interior partitions keep the base geometry legible in both views.
-    wallSlab(model,'z',-.15,b.w*.56,3.2,.34,null,'interior');
-    wallSlab(model,'x',b.w*.22,b.d*.35,2.8,.34,null,'interior');
     drawFragmentBaseGrid();
   }
   function cameraMode() {
@@ -306,14 +316,27 @@
     camera.lookAt(0,2,0);
   }
   function syncBehaviors() { const b=config[state.building], radius=Math.hypot(b.w,b.d,b.h)*.78; state.points=state.behaviors.filter(function(behavior){return behavior!=='fragmentation'||state.behaviors.includes('folding');}).map(function(behavior){return {id:'global-'+behavior,x:0,z:0,height:b.h*.48,radius:radius,intensity:state.intensity,behavior:behavior,on:true};}); }
-  function drawEmergencyModel(){const canvas=renderer.domElement,ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height;if(!ctx)return;ctx.clearRect(0,0,w,h);ctx.fillStyle='#f5f1e7';ctx.fillRect(0,0,w,h);const scale=Math.min(w/24,h/17),cx=w*.5,cy=h*.58;function pt(x,y,z){return state.view==='plan'?[cx+x*scale,cy+z*scale]:[cx+(x-z)*scale*.72,cy+(x+z)*scale*.38-y*scale*.9];}function face(points,fill){ctx.beginPath();points.forEach(function(p,i){const q=pt(p[0],p[1],p[2]);if(i)ctx.lineTo(q[0],q[1]);else ctx.moveTo(q[0],q[1]);});ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle='#343530';ctx.lineWidth=2;ctx.stroke();}const b=config[state.building],x0=-b.w/2,x1=b.w/2,z0=-b.d/2,z1=b.d/2;face([[x0,0,z0],[x1,0,z0],[x1,0,z1],[x0,0,z1]],'#e7e3d9');face([[x0,0,z0],[x1,0,z0],[x1,b.h,z0],[x0,b.h,z0]],'rgba(247,246,241,.85)');face([[x1,0,z0],[x1,0,z1],[x1,b.h,z1],[x1,b.h,z0]],'rgba(231,228,219,.8)');face([[x0,0,z1],[x1,0,z1],[x1,b.h,z1],[x0,b.h,z1]],'rgba(247,246,241,.64)');face([[x0,0,z0],[x0,0,z1],[x0,b.h,z1],[x0,b.h,z0]],'rgba(231,228,219,.55)');face([[-.15,0,-1.9],[2.65,0,-1.9],[2.65,2.8,-1.9],[-.15,2.8,-1.9]],'rgba(190,188,180,.72)');}
+  function drawEmergencyModel() {
+    const canvas=renderer.domElement,ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height;
+    if(!ctx)return;
+    ctx.clearRect(0,0,w,h);ctx.fillStyle='#f5f1e7';ctx.fillRect(0,0,w,h);
+    const scale=Math.min(w/24,h/17),cx=w*.5,cy=h*.58;
+    function pt(x,y,z){return state.view==='plan'?[cx+x*scale,cy+z*scale]:[cx+(x-z)*scale*.72,cy+(x+z)*scale*.38-y*scale*.9];}
+    function face(points,fill){ctx.beginPath();points.forEach(function(p,i){const q=pt(p[0],p[1],p[2]);if(i)ctx.lineTo(q[0],q[1]);else ctx.moveTo(q[0],q[1]);});ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle='#343530';ctx.lineWidth=2;ctx.stroke();}
+    const b=config[state.building],x0=-b.w/2,x1=b.w/2,z0=-b.d/2,z1=b.d/2;
+    face([[x0,0,z0],[x1,0,z0],[x1,0,z1],[x0,0,z1]],'#e7e3d9');
+    face([[x0,0,z0],[x1,0,z0],[x1,b.h,z0],[x0,b.h,z0]],'rgba(247,246,241,.85)');
+    face([[x1,0,z0],[x1,0,z1],[x1,b.h,z1],[x1,b.h,z0]],'rgba(231,228,219,.8)');
+    face([[x0,0,z1],[x1,0,z1],[x1,b.h,z1],[x0,b.h,z1]],'rgba(247,246,241,.64)');
+    face([[x0,0,z0],[x0,0,z1],[x0,b.h,z1],[x0,b.h,z0]],'rgba(231,228,219,.55)');
+  }
   function render() {
     try {
       if (!fallback) build();
       cameraMode();
       const label = state.behaviors.length ? state.behaviors.join(' + ') : 'conventional grid';
       const foldWaiting = state.behaviors.includes('folding') && !state.behaviors.includes('fragmentation');
-      document.getElementById('view-title').textContent = (state.view === 'plan' ? 'PLAN' : 'ISOMETRIC') + ' · EXTERIOR + INTERIOR' + (fallback ? ' · 2D FALLBACK' : '');
+      document.getElementById('view-title').textContent = (state.view === 'plan' ? 'PLAN' : 'ISOMETRIC') + ' · EXTERIOR' + (fallback ? ' · 2D FALLBACK' : '');
       document.getElementById('drawing-title').textContent = config[state.building].name + ' / ' + label;
       document.getElementById('status').textContent = state.activeOperation === 'fragmentation'
         ? 'Fragment operation active.'
@@ -328,7 +351,7 @@
     } catch (error) {
       if (!fallback) {
         activateFallback();
-        document.getElementById('view-title').textContent = (state.view === 'plan' ? 'PLAN' : 'ISOMETRIC') + ' · EXTERIOR + INTERIOR · 2D FALLBACK';
+        document.getElementById('view-title').textContent = (state.view === 'plan' ? 'PLAN' : 'ISOMETRIC') + ' · EXTERIOR · 2D FALLBACK';
         render();
       } else {
         console.error('Collision Field could not render the building.', error);
